@@ -1,0 +1,121 @@
+
+% engine ----------------------------------
+% -----------------------------------------
+
+subclass(C1,C2) :- subclass(C1,C3),
+                   subclass(C3,C2).
+
+% isA implies the entity E is a member of the klass K
+memberOf(E,K) :- isA(E,K).
+
+% an entity is member of parent klasses of its klass
+memberOf(E,K1) :- isA(E,K2),
+               subclass(K2,K1).
+
+%instances
+instance(E) :- instanceOf(E,K).
+isA(E,K) :- instanceOf(E,K).
+
+% A klass can not be an instance
+:- instanceOf(E,_), klass(E).
+
+% properties
+property(P) :- hasProperty(_,P).
+propertyOf(P,E) :- hasProperty(E,P).
+hasProperty(E,P) :- propertyOf(P,E).
+
+% If a klass has a property, every member of that klass has that property
+hasProperty(E,A) :- memberOf(E,K),
+                    hasProperty(K,A).
+
+% Property values for instances
+propertyValueOf(V,P,I) :- hasPropertyValue(I,P,V).
+hasPropertyValue(I,P,V) :- propertyValueOf(V,P,I).
+
+% Only instances can have a property value
+:- hasPropertyValue(E,_,_), klass(E).
+
+% states
+state(S) :- hasState(_,S).
+stateOf(S,E) :- hasState(E,S).
+hasState(E,S) :- stateOf(S,E).
+
+% hasAttribute implies A is a attribute
+attribute(A) :- hasAttribute(_,A).
+attributeOf(A,E) :- hasAttribute(E,A).
+hasAttribute(E,A) :- attributeOf(A,E).
+
+% If a klass has an attribute, every member of that klass has that attribute
+hasAttribute(E,A) :- memberOf(E,K),
+                     hasAttribute(K,A).
+
+% A state only can be part of one attribute
+:- 2 { hasState(A,S) : attribute(A) }, state(S).
+
+% When an entity has an attribute, the entity can be characterized by any state of that attribute
+canBe(E,S) :- hasAttribute(E,A), hasState(A,S).
+
+% An instance (not klass) only can be in one state of the same attribute
+1 { is(I,S) : hasState(A,S) } 1 :- hasAttribute(I,A), instance(I).
+
+% Instances only can be in states defined by its properties.
+:- is(E,S), hasAttribute(E,A), not hasState(A,S).
+
+% Klasses don't have states
+:- is(K,_), klass(K).
+
+% knowledge -------------------------------
+% -----------------------------------------
+
+attribute(lightable).
+hasState(lightable, lit).
+hasState(lightable, unlit).
+
+attribute(switchable).
+hasState(switchable, on).
+hasState(switchable, off).
+
+klass(location).
+hasAttribute(location, lightable).
+
+klass(device).
+hasAttribute(device, switchable).
+hasProperty(device, location).
+
+klass(smart_bulb).
+subclass(smart_bulb, device).
+
+% transition
+is(L, lit) :- instanceOf(I, smart_bulb),
+              is(I, on),
+              propertyValueOf(L, location, I).
+
+
+% scenario --------------------------------
+% -----------------------------------------
+
+instanceOf(kitchen, location).
+is(kitchen, unlit).
+
+instanceOf(bathroom, location).
+is(bathroom, lit).
+
+instanceOf(lamp1, smart_bulb).
+is(lamp1, off).
+hasPropertyValue(lamp1, location, kitchen).
+
+instanceOf(lamp2, smart_bulb).
+is(lamp2, off).
+hasPropertyValue(lamp2, location, bathroom).
+
+#show is/2.
+
+
+
+
+% APUNTES
+% isA vs memberOf:
+% - isA represents the enetity klass
+% - memberOf represents also entity klass parents
+
+% add T (time) for transition derivations
