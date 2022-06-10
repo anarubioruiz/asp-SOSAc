@@ -8,4 +8,5 @@ instanceOf(bathroom, location).
 instanceOf(lamp2, smart_bulb).
 hasPropertyValue(lamp2, location, bathroom).
 
-#show is/2.
+#show transition/2.
+#show instruction/2.

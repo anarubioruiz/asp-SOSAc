@@ -9,3 +9,15 @@ is(L, lit) :- instanceOf(L, location), is(L, occupied).
 :- not lighting_n(L),
    is(context, daylighted),
    propertyValueOf(L, location, W), instanceOf(W, window).
+
+
+
+
+% TESTING -------------------------------------------------
+
+g1_trigger(L) :- instanceOf(L, location), is(L, occupied).
+goal(is(L, lit)) :- g1_trigger(L).
+
+instruction(W,G) :- transition(W, then(G)), goal(G).
+% We need a method to determine what complex facts derive the simple fact to achieve
+% simple(lamp, on) -> complex(lighting_a(lamp.location)) -> means(lighting_a(lamp.location), is(lamp.location, lit))
