@@ -9,7 +9,7 @@ is(L, lit) :- instanceOf(L, location), is(L, occupied).
 :- not lighting_n(L),
    is(context, daylighted),
    propertyValueOf(L, location, W), instanceOf(W, window).
-
+% Falta modelar el estado de la ventana
 
 
 
