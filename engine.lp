@@ -30,6 +30,7 @@ hasPropertyValue(I,P,V) :- propertyValueOf(V,P,I).
 
 % Only instances can have a property value
 :- hasPropertyValue(E,_,_), klass(E).
+% :- hasPropertyValue(E,_,_), not instance(E).
 
 % states
 state(S) :- hasState(_,S).
