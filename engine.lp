@@ -36,11 +36,13 @@ hasPropertyValue(I,P,V) :- propertyValueOf(V,P,I).
 state(S) :- hasState(_,S).
 stateOf(S,E) :- hasState(E,S).
 hasState(E,S) :- stateOf(S,E).
+% NOTE: no se indica quién puede tener estados. ¿Sería necesario?
 
 % hasAttribute implies A is a attribute
 attribute(A) :- hasAttribute(_,A).
 attributeOf(A,E) :- hasAttribute(E,A).
 hasAttribute(E,A) :- attributeOf(A,E).
+% NOTE: no se indica quién puede tener atributos. ¿Sería necesario?
 
 % If a klass has an attribute, every member of that klass has that attribute
 hasAttribute(E,A) :- memberOf(E,K),
@@ -59,3 +61,4 @@ canBe(E,S) :- hasAttribute(E,A),
 
 % Klasses don't have states
 :- is(K,_), klass(K).
+% :- is(I,_) not instance(I). --> solo las sintancias tienen estados.
