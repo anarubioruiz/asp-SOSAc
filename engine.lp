@@ -6,7 +6,7 @@ memberOf(E,K) :- isA(E,K).
 
 % an entity is member of parent klasses of its klass
 memberOf(E,K1) :- isA(E,K2),
-               subclass(K2,K1).
+                  subclass(K2,K1).
 
 %instances
 instance(E) :- instanceOf(E,K).
@@ -21,8 +21,8 @@ propertyOf(P,E) :- hasProperty(E,P).
 hasProperty(E,P) :- propertyOf(P,E).
 
 % If a klass has a property, every member of that klass has that property
-hasProperty(E,A) :- memberOf(E,K),
-                    hasProperty(K,A).
+hasProperty(E,P) :- memberOf(E,K),
+                    hasProperty(K,P).
 
 % Property values for instances
 propertyValueOf(V,P,I) :- hasPropertyValue(I,P,V).
@@ -30,16 +30,19 @@ hasPropertyValue(I,P,V) :- propertyValueOf(V,P,I).
 
 % Only instances can have a property value
 :- hasPropertyValue(E,_,_), klass(E).
+% :- hasPropertyValue(E,_,_), not instance(E).
 
 % states
 state(S) :- hasState(_,S).
 stateOf(S,E) :- hasState(E,S).
 hasState(E,S) :- stateOf(S,E).
+% NOTE: no se indica quién puede tener estados. ¿Sería necesario?
 
 % hasAttribute implies A is a attribute
 attribute(A) :- hasAttribute(_,A).
 attributeOf(A,E) :- hasAttribute(E,A).
 hasAttribute(E,A) :- attributeOf(A,E).
+% NOTE: no se indica quién puede tener atributos. ¿Sería necesario?
 
 % If a klass has an attribute, every member of that klass has that attribute
 hasAttribute(E,A) :- memberOf(E,K),
@@ -58,3 +61,4 @@ canBe(E,S) :- hasAttribute(E,A),
 
 % Klasses don't have states
 :- is(K,_), klass(K).
+% :- is(I,_) not instance(I). --> solo las sintancias tienen estados.

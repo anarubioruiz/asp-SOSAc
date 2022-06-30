@@ -10,6 +10,10 @@ is(L, unlit) :- not lighting_n(L), not lighting_a(L),
 is(L, lit) :- { lighting_n(L);lighting_a(L) } = 1,
               instanceOf(L, location).
 
+% Comrpobar si es lo mismo
+% is(L, lit) :- 1{ lighting_n(L);lighting_a(L) }1,
+            %   instanceOf(L, location).
+
 attribute(switchable).
 hasState(switchable, on).
 hasState(switchable, off).
