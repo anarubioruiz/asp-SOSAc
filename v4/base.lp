@@ -1,4 +1,4 @@
-attribute(ocupancy).
+attribute(occupancy).
 x_attr_value_for_y(occupied, occupancy).
 x_attr_value_for_y(unoccupied, occupancy).
 
