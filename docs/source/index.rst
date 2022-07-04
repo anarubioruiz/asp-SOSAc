@@ -10,6 +10,7 @@ Prueba de concepto.
 
    core
    kb
+   engine
 
 Indices and tables
 ==================
