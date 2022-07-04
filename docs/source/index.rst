@@ -1,12 +1,19 @@
-Welcome to ASP-scott's documentation! 
+ASP-scott's documentation!
 =======================================
 
 Prueba de concepto.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    :caption: Contents:
 
    core
    kb
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
