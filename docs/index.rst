@@ -21,7 +21,7 @@ is to model the problem domain as a statically written ASP program, but then to
 generate problem instances and process the results dynamically. Clorm makes this
 integration cleaner, both in terms of code readability but also by making it
 easier to refactor the python code as the ASP program evolves.
-
+  
 - Works with Python 3.7+ and Clingo 5.4+ (developed on Python 3.9 and Clingo 5.5) 
 
 .. note::
