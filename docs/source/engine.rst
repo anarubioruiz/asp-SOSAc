@@ -3,13 +3,12 @@ Engine
 
 TODO
 
-.. currentmodule:: engine
 
 
 Basic Engine
 -------------
 
-.. py:function:: memberOf(Individual, Klass)
+.. py:method:: memberOf(Individual, Klass)
 
    Send a message to a recipient
 
