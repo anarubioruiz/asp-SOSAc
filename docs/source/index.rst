@@ -1,11 +1,12 @@
 Welcome to ASP-scott's documentation! 
-===================================
+=======================================
 
-Prueba de concepto
+Prueba de concepto.
+
 
 .. toctree::
-   .. :maxdepth: 2
+   :maxdepth: 2
    :caption: Contents:
-   
+
    core
    kb

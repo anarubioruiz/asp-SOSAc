@@ -4,10 +4,10 @@
 
 project = 'ASP-Scott'
 copyright = '2022, ARCO Group'
-author = 'Ana Rubio/Ruben Cantarero'
+author = 'Ana Rubio, Ruben Cantarero'
 
-release = '0.1'
-version = '0.1.0'
+# release = '0.1'
+# version = '0.1.0'
 
 # -- General configuration
 
