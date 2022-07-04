@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from clorm import monkey; monkey.patch() # must call this before importing clingo
-from clorm import Predicate, ConstantField, ComplexTerm, FactBase, StringField, IntegerField
+from clorm import Predicate, ConstantField, ComplexTerm, FactBase, IntegerField
 from clingo import Control
 import argparse
 
