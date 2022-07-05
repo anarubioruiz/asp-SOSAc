@@ -33,14 +33,14 @@ subclassOf(K1, K3) :- subclassOf(K1, K2),
 %     transitionChange(T_ID, DEVICE_KLASS, TARGET_CLASS, _).
 
 instruction(@concatenateStr(G_ID, THING, DEVICE), if, stateOf(DEVICE_STATE, DEVICE)) :-
-    goal(G_ID, if, stateOf(THING_STATE, THING_KLASS), DESCRIPTION),
+    goal(G_ID, if, stateOf(THING_STATE, THING_KLASS)),
     instanceOf(THING, THING_KLASS),
     memberOf(DEVICE, DEVICE_KLASS),
     transitionTrigger(ID, DEVICE_KLASS, DEVICE_STATE),
     transitionChange(ID, THING_KLASS, THING_STATE).
 
 instruction(@concatenateStr(G_ID, THING, DEVICE), then, stateOf(DEVICE_STATE, DEVICE)) :-
-    goal(G_ID, then, stateOf(THING_STATE, THING_KLASS), DESCRIPTION),
+    goal(G_ID, then, stateOf(THING_STATE, THING_KLASS)),
     instanceOf(THING, THING_KLASS),
     memberOf(DEVICE, DEVICE_KLASS),
     propertyValueOf(THING_KLASS, THING, DEVICE),
