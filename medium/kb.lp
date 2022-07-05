@@ -22,6 +22,4 @@ transitionChange(2, location, lit).  % The change always refers to a trigger pro
 
 transition(3).
 transitionTrigger(3, smart_bulb, on).
-% transitionCondition(3, context, daylighted). % ¿Sólo cuando no haya luz natural? -> de noche o no hay ventana
 transitionChange(3, location, lit).
-
