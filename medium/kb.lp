@@ -3,18 +3,27 @@ klass(location).
 klass(sensor).
 
 subclassOf(motion_sensor, sensor).
-targetPropertyOf(occupancy, location, motion_sensor).
-deviceStateImplies(motion_sensor, true, occupied).
+% targetPropertyOf(occupancy, location, motion_sensor).
+% deviceStateImplies(motion_sensor, true, occupied). %REMOVE
 
 transition(1).
-antecedent(1, motion_sensor, true).
-consecuent(1, location, occupied).
+transitionTrigger(1, motion_sensor, true).
+transitionChange(1, location, occupied).
 
 subclassOf(blind_motor, actuator).
-targetPropertyOf(lighting, location, blind_motor).
-deviceStateImplies(blind_motor, up, lit).
+% targetPropertyOf(lighting, location, blind_motor).
+% deviceStateImplies(blind_motor, up, lit). %REMOVE
 
 transition(2).
-antecedent(2, blind_motor, up).
-antecedent(2, context, daylighted).
-consecuent(2, location, lit).
+transitionTrigger(2, blind_motor, up).
+transitionCondition(2, context, daylighted).
+transitionChange(2, location, lit).  % The change always refers to a trigger property
+
+
+
+
+
+
+
+
+%
