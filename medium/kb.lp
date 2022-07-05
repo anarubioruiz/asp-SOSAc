@@ -11,6 +11,7 @@ transitionTrigger(1, motion_sensor, true).
 transitionChange(1, location, occupied).
 
 subclassOf(blind_motor, actuator).
+subclassOf(smart_bulb, actuator).
 % targetPropertyOf(lighting, location, blind_motor).
 % deviceStateImplies(blind_motor, up, lit). %REMOVE
 
@@ -19,11 +20,8 @@ transitionTrigger(2, blind_motor, up).
 transitionCondition(2, context, daylighted).
 transitionChange(2, location, lit).  % The change always refers to a trigger property
 
+transition(3).
+transitionTrigger(3, smart_bulb, on).
+% transitionCondition(3, context, daylighted). % ¿Sólo cuando no haya luz natural? -> de noche o no hay ventana
+transitionChange(3, location, lit).
 
-
-
-
-
-
-
-%

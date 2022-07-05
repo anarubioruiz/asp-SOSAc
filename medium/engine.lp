@@ -32,37 +32,20 @@ subclassOf(K1, K3) :- subclassOf(K1, K2),
 %     transitionTrigger(T_ID, DEVICE_KLASS, _),
 %     transitionChange(T_ID, DEVICE_KLASS, TARGET_CLASS, _).
 
-instruction(ID, if, stateOf(DEVICE_STATE, DEVICE)) :-
-    goal(ID, if, stateOf(THING_STATE, THING_KLASS)),
+instruction(@concatenateStr(G_ID, THING, DEVICE), if, stateOf(DEVICE_STATE, DEVICE)) :-
+    goal(G_ID, if, stateOf(THING_STATE, THING_KLASS), DESCRIPTION),
     instanceOf(THING, THING_KLASS),
     memberOf(DEVICE, DEVICE_KLASS),
     transitionTrigger(ID, DEVICE_KLASS, DEVICE_STATE),
     transitionChange(ID, THING_KLASS, THING_STATE).
 
-% instruction(ID, then, stateOf(THING_STATE, THING)) :-
-%     goal(ID, then, stateOf(THING_STATE, THING_KLASS)),
-%     instanceOf(THING, THING_KLASS),
-%     memberOf(DEVICE, DEVICE_KLASS),
-%     transitionTrigger(ID, DEVICE_KLASS, DEVICE_STATE),
-%     transitionChange(ID, THING_KLASS, THING_STATE).
-
-% instruction(ID, then, stateOf(up, blind_motor1)) :-
-%     goal(ID, then, stateOf(lit, location)),
-%     instanceOf(kitchen, location),
-%     transitionChange(ID, location, lit),
-%     transitionTrigger(ID, blind_motor, up),
-%     memberOf(blind_motor1, blind_motor).
-
-instruction(THING, then, stateOf(DEVICE_STATE, DEVICE)) :-
-    goal(_, then, stateOf(THING_STATE, THING_KLASS)),
+instruction(@concatenateStr(G_ID, THING, DEVICE), then, stateOf(DEVICE_STATE, DEVICE)) :-
+    goal(G_ID, then, stateOf(THING_STATE, THING_KLASS), DESCRIPTION),
     instanceOf(THING, THING_KLASS),
     memberOf(DEVICE, DEVICE_KLASS),
     propertyValueOf(THING_KLASS, THING, DEVICE),
     transitionTrigger(T_ID, DEVICE_KLASS, DEVICE_STATE),
     transitionChange(T_ID, THING_KLASS, THING_STATE).
-
-    % instruction(G_ID, if, stateOf(D_S, D)),
-    % propertyValueOf(THING_KLASS, THING, D).
 
 
 
@@ -91,14 +74,3 @@ instruction(THING, then, stateOf(DEVICE_STATE, DEVICE)) :-
 %     instanceOf(DEVICE, DEVICE_KLASS),
 %     propertyValueOf(THING_KLASS, TARGET, DEVICE).
 
-
-
-
-% instruction(1, if, stateOf(true, motion_sensor1))
-% instruction(1, then, stateOf(up, blind_motor1))
-
-% instruction(1, if, stateOf(true, motion_sensor1))
-% instruction(1, then, stateOf(up, blind_motor2))
-
-% instruction(1, if, stateOf(true, motion_sensor1))
-% instruction(1, then, stateOf(up, smart_bulb1))
