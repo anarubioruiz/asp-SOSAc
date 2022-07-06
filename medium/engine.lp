@@ -26,7 +26,7 @@ instruction(ID, if, stateOf(DEVICE_STATE, DEVICE)) :-
     transitionTrigger(T_ID, DEVICE_KLASS, DEVICE_STATE),
     transitionChange(T_ID, THING_KLASS, THING_STATE),
 
-    ID = instructionId(G_ID, THING, DEVICE).
+    ID = instructionId(G_ID, THING).
 
 instruction(ID, then, stateOf(DEVICE_STATE, DEVICE)) :-
     goal(G_ID, then, stateOf(THING_STATE, THING_KLASS)),
@@ -36,4 +36,4 @@ instruction(ID, then, stateOf(DEVICE_STATE, DEVICE)) :-
     transitionTrigger(T_ID, DEVICE_KLASS, DEVICE_STATE),
     transitionChange(T_ID, THING_KLASS, THING_STATE),
     instruction(ID, if, stateOf(_, SENSOR)),
-    ID = instructionId(G_ID, THING, SENSOR).
+    ID = instructionId(G_ID, THING).
