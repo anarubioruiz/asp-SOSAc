@@ -19,31 +19,39 @@ class stateOf(ComplexTerm):
     attr_value = ConstantField
     klass_ = ConstantField
 
+class instructionId(ComplexTerm):
+    goal_id = ConstantField
+    thing = ConstantField
+    device = ConstantField
+
 # example: instruction(1,then,stateOf(up,blind_motor1))
 class Instruction(Predicate):
-    id_ = IntegerField
+    id_ = instructionId.Field
     type_ = ConstantField
     stateOf_ = stateOf.Field
 
 def check_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f",
-                        "--files",
-                        required=True,
-                        nargs="+",
-                        help="ASP file programs")
+    parser.add_argument(
+        "-f",
+        "--files",
+        required=True,
+        nargs="+",
+        help="ASP file programs"
+    )
+
     return parser.parse_args()
 
 def main():
     args = check_args()
 
-    ctrl = Control(unifier=[InstanceOf, PropertyValueOf, Instruction, stateOf])
+    ctrl = Control(unifier=[InstanceOf, PropertyValueOf, Instruction, stateOf, instructionId])
 
     for file in args.files:
         ctrl.load(file)
 
-    instance = FactBase([InstanceOf(instance="kitchen", klass="location"), 
-                        InstanceOf(instance="motion_sensor1", klass="motion_sensor"), 
+    instance = FactBase([InstanceOf(instance="kitchen", klass="location"),
+                        InstanceOf(instance="motion_sensor1", klass="motion_sensor"),
                         InstanceOf(instance="blind_motor1", klass="blind_motor"),
                         PropertyValueOf(property_="location", value="kitchen", instance="motion_sensor1"),
                         PropertyValueOf(property_="location", value="kitchen", instance="blind_motor1")])
@@ -64,6 +72,7 @@ def main():
 
     query = solution.query(Instruction)
 
+    print("RESULTS:")
     for instruction in query.all():
         print(instruction)
 
