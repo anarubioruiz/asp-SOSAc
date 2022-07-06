@@ -10,7 +10,7 @@ from terms import InstanceOf, SubclassOf, MemberOf
 class Clingo:
     def clingo_setup(self):
         self.ctrl = Control(unifier=[InstanceOf, SubclassOf, MemberOf])
-        self.ctrl.load("medium/engine.lp")
+        self.ctrl.load("src/engine.lp")
 
     def load_knowledge(self, facts):
         self.ctrl.add_facts(facts)
