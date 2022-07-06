@@ -3,8 +3,6 @@ klass(location).
 klass(sensor).
 
 subclassOf(motion_sensor, sensor).
-% targetPropertyOf(occupancy, location, motion_sensor).
-% deviceStateImplies(motion_sensor, true, occupied). %REMOVE
 
 transition(1).
 transitionTrigger(1, motion_sensor, true).
@@ -12,8 +10,6 @@ transitionChange(1, location, occupied).
 
 subclassOf(blind_motor, actuator).
 subclassOf(smart_bulb, actuator).
-% targetPropertyOf(lighting, location, blind_motor).
-% deviceStateImplies(blind_motor, up, lit). %REMOVE
 
 transition(2).
 transitionTrigger(2, blind_motor, up).

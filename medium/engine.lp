@@ -35,6 +35,5 @@ instruction(ID, then, stateOf(DEVICE_STATE, DEVICE)) :-
     propertyValueOf(THING_KLASS, THING, DEVICE),
     transitionTrigger(T_ID, DEVICE_KLASS, DEVICE_STATE),
     transitionChange(T_ID, THING_KLASS, THING_STATE),
-
     instruction(ID, if, stateOf(_, SENSOR)),
     ID = instructionId(G_ID, THING, SENSOR).
