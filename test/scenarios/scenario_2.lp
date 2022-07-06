@@ -1,4 +1,4 @@
-% 1 location / 2 instructions (2 possible antecents)
+% 1 location ~ 2 instructions (2 possible antecents)
 instanceOf(kitchen, location).
 instanceOf(motion_sensor1, motion_sensor).
 instanceOf(motion_sensor2, motion_sensor).

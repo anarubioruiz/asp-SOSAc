@@ -1,4 +1,4 @@
-% 1 location / 1 instruction
+% 1 location ~ 1 instruction
 instanceOf(kitchen, location).
 instanceOf(motion_sensor1, motion_sensor).
 instanceOf(blind_motor1, blind_motor).
