@@ -37,3 +37,12 @@ instruction(ID, then, stateOf(DEVICE_STATE, DEVICE)) :-
     transitionChange(T_ID, THING_KLASS, THING_STATE),
     instruction(ID, if, stateOf(_, SENSOR)),
     ID = instructionId(G_ID, THING).
+
+i_transitionTrigger(ID, DEVICE, DEVICE_STATE) :- transitionTrigger(ID, DEVICE_KLASS, DEVICE_STATE),
+                                                 memberOf(DEVICE, DEVICE_KLASS).
+
+i_transitionChange(ID, TARGET, TARGET_STATE) :- transitionChange(ID, TARGET_KLASS, TARGET_STATE),
+                                                memberOf(TARGET, TARGET_KLASS),
+                                                i_transitionTrigger(ID, DEVICE, _),
+                                                propertyValueOf(TARGET_KLASS, TARGET, DEVICE).
+
