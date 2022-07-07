@@ -1,4 +1,3 @@
-instanceOf(kitchen, location).
 instanceOf(motion_sensor1, motion_sensor).
 instanceOf(motion_sensor3, motion_sensor).
 instanceOf(blind_motor1, blind_motor).
@@ -19,5 +18,5 @@ propertyValueOf(location, bathroom, blind_motor2).
 % #show instruction/3.
 % #show transitionTriggersCount/2.
 % #show transitionChangesCount/2.
-% #show i_transitionTrigger/3.
-#show i_transitionChange/3.
+% #show _transitionTrigger/3.
+#show _transitionChange/3.
