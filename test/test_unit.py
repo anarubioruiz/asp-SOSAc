@@ -1,7 +1,9 @@
 from unittest import TestCase, skip
 
 from clorm import FactBase
-from clorm import monkey; monkey.patch() # must call this before importing clingo
+from clorm import monkey
+
+monkey.patch() # must call this before importing clingo
 from clingo import Control
 
 import terms
@@ -17,7 +19,11 @@ class Clingo:
             terms.TransitionTrigger,
             terms._TransitionTrigger,
             terms.TransitionChange,
-            terms._TransitionChange
+            terms._TransitionChange,
+            terms.instructionId,
+            terms.stateOf,
+            terms.Instruction,
+            terms.Goal
         ])
 
         self.ctrl.load("src/engine.lp")

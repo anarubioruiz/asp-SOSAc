@@ -1,4 +1,4 @@
-from clorm import Predicate, ConstantField, IntegerField
+from clorm import ComplexTerm, Predicate, ConstantField, IntegerField
 
 class InstanceOf(Predicate):
     instance = ConstantField
@@ -36,3 +36,22 @@ class _TransitionChange(Predicate):
     id = IntegerField
     target = ConstantField
     state = ConstantField
+
+class instructionId(ComplexTerm):
+    goalID = ConstantField
+    target = ConstantField
+
+class stateOf(ComplexTerm):
+    thing_state = ConstantField
+    thing = ConstantField
+
+class Instruction(Predicate):
+    id = instructionId.Field
+    type = ConstantField
+    stateOf = stateOf.Field
+
+class Goal(Predicate):
+    id = ConstantField
+    type = ConstantField
+    stateOf = stateOf.Field
+    
