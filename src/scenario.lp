@@ -15,7 +15,7 @@ instanceOf(blind_motor2, blind_motor).
 propertyValueOf(location, bathroom, motion_sensor2).
 propertyValueOf(location, bathroom, blind_motor2).
 
-% #show instruction/3.
+#show instruction/3.
 % #show transitionTriggersCount/2.
 % #show transitionChangesCount/2.
 #show _transitionTrigger/3.

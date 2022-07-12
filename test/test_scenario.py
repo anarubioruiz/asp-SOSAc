@@ -37,7 +37,7 @@ class Clingo:
         def on_model(model):
             nonlocal solution
             solution = model.facts(atoms=True)
-            for item in solution.query(terms._TransitionChange).all():
+            for item in solution.query(terms.Instruction).all():
                 print(item)
 
         self.ctrl.solve(on_model=on_model)
@@ -83,5 +83,48 @@ class Instruction(TestCase, Clingo):
         facts = FactBase(goals+transition+scenario)
         self.load_knowledge(facts)
 
-    def test_(self):
+    def test_bathroom_lit_with_bulb(self):
         solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .where(terms.Instruction.id==terms.instructionId(goalID="goal_1", target="bathroom"))
+            .all())
+
+        expected = [
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", target="bathroom"),
+                type="if", 
+                stateOf=terms.stateOf(thing_state="true", thing="motion_sensor1")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", target="bathroom"),
+                type="then", 
+                stateOf=terms.stateOf(thing_state="on", thing="smart_bulb1"))
+        ]
+
+        self.assertCountEqual(expected, query)
+
+    def test_kitchen_lit_with_bulb_and_blind_motor(self):
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .where(terms.Instruction.id==terms.instructionId(goalID="goal_1", target="kitchen"))
+            .all())
+
+        expected = [
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", target="kitchen"),
+                type="if", 
+                stateOf=terms.stateOf(thing_state="true", thing="motion_sensor2")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", target="kitchen"),
+                type="then", 
+                stateOf=terms.stateOf(thing_state="on", thing="smart_bulb2")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", target="kitchen"),
+                type="then", 
+                stateOf=terms.stateOf(thing_state="up", thing="blind_motor1"))
+        ]
+
+        self.assertCountEqual(expected, query)
