@@ -22,7 +22,9 @@ class Clingo:
             terms.instructionId,
             terms.stateOf,
             terms.Instruction,
-            terms.Goal
+            terms.Goal,
+            terms.TransitionCondition,
+            terms._TransitionCondition
         ])
 
         self.ctrl.load("src/engine.lp")
@@ -97,6 +99,7 @@ class Inheritance(TestCase, Clingo):
 
         query = list(solution.query(terms.MemberOf).all())
         expected = [
+            terms.MemberOf(instance="_context", klass="context"),
             terms.MemberOf(instance="lamp1", klass="smart_bulb"),
             terms.MemberOf(instance="lamp1", klass="actuator"),
             terms.MemberOf(instance="lamp1", klass="device")
@@ -113,6 +116,7 @@ class Transition(TestCase, Clingo):
             terms.TransitionChange(id=1, target_klass="location", state="occupied"),
 
             terms.TransitionTrigger(id=2, device_klass="blind_motor", state="up"),
+            terms.TransitionCondition(id=2, thing_klass="context", state="daylighted"),
             terms.TransitionChange(id=2, target_klass="location", state="lit"),
 
             terms.TransitionTrigger(id=3, device_klass="smart_bulb", state="on"),
@@ -175,7 +179,27 @@ class Transition(TestCase, Clingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_not_instance_of_transition_change_when_not_apropiate_trigger(self):
+    def test_instance_of_transition_condition(self):
+        solution = self.get_solution()
+
+        klass_query = list(solution
+            .query(terms.TransitionCondition)
+            .all())
+
+        instance_query = list(solution
+            .query(terms._TransitionCondition)
+            .all())
+
+        query = klass_query + instance_query
+        expected = [
+            terms.TransitionCondition(id=2, thing_klass="context", state="daylighted"),
+            terms._TransitionCondition(id=2, thing="_context", state="daylighted")
+        ]
+
+        self.assertCountEqual(expected, query)
+
+
+    def test_not_instance_of_transition_change_when_not_appropiate_trigger(self):
         solution = self.get_solution()
 
         query = list(solution

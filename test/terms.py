@@ -55,3 +55,12 @@ class Goal(Predicate):
     type = ConstantField
     stateOf = stateOf.Field
     
+class _TransitionCondition(Predicate):
+    id = IntegerField
+    thing = ConstantField
+    state = ConstantField
+
+class TransitionCondition(Predicate):
+    id = IntegerField
+    thing_klass = ConstantField
+    state = ConstantField

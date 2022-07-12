@@ -10,6 +10,7 @@ subclassOf(KLASS_1, KLASS_3) :- subclassOf(KLASS_1, KLASS_2),
 
 instanceOf(VALUE, PROPERTY) :- propertyValueOf(PROPERTY, VALUE, _).
 
+
 % ------ RULES ENGINE
 
 % transitionTriggersCount(TRANSITION_ID, COUNT) :-
@@ -20,6 +21,7 @@ instanceOf(VALUE, PROPERTY) :- propertyValueOf(PROPERTY, VALUE, _).
 %     transition(TRANSITION_ID),
 %     #count { A, B : transitionChange(TRANSITION_ID, A, B) } = COUNT.
 
+instanceOf(_context, context).
 
 _transitionTrigger(ID, DEVICE, DEVICE_STATE) :- transitionTrigger(ID, DEVICE_KLASS, DEVICE_STATE),
                                                  memberOf(DEVICE, DEVICE_KLASS).
@@ -28,6 +30,11 @@ _transitionChange(ID, TARGET, TARGET_STATE) :- transitionChange(ID, TARGET_KLASS
                                                 memberOf(TARGET, TARGET_KLASS),
                                                 _transitionTrigger(ID, DEVICE, _),
                                                 propertyValueOf(TARGET_KLASS, TARGET, DEVICE).
+
+_transitionCondition(ID, THING, STATE) :- transitionCondition(ID, THING_KLASS, STATE),
+                                          memberOf(THING, THING_KLASS),
+                                          _transitionTrigger(ID, _, _).
+                                          
 
 
 % NUEVA VERSION: INSTANCIAS DE TRANSITIONS
