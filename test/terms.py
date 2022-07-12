@@ -39,7 +39,8 @@ class _TransitionChange(Predicate):
 
 class instructionId(ComplexTerm):
     goalID = ConstantField
-    target = ConstantField
+    if_device = ConstantField
+    then_device = ConstantField
 
 class stateOf(ComplexTerm):
     thing_state = ConstantField

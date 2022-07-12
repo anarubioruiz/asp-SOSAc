@@ -22,7 +22,9 @@ class Clingo:
             terms.instructionId,
             terms.stateOf,
             terms.Instruction,
-            terms.Goal
+            terms.Goal,
+            terms.TransitionCondition,
+            terms._TransitionCondition
         ])
 
         self.ctrl.load("src/engine.lp")
@@ -57,6 +59,7 @@ class Instruction(TestCase, Clingo):
             terms.TransitionChange(id=1, target_klass="location", state="occupied"),
 
             terms.TransitionTrigger(id=2, device_klass="blind_motor", state="up"),
+            terms.TransitionCondition(id=2, thing_klass="context", state="daylighted"),
             terms.TransitionChange(id=2, target_klass="location", state="lit"),
 
             terms.TransitionTrigger(id=3, device_klass="smart_bulb", state="on"),
@@ -88,17 +91,17 @@ class Instruction(TestCase, Clingo):
 
         query = list(solution
             .query(terms.Instruction)
-            .where(terms.Instruction.id==terms.instructionId(goalID="goal_1", target="bathroom"))
+            .where(terms.Instruction.id.goalID=="goal_1", terms.Instruction.id.if_device=="motion_sensor1")
             .all())
 
         expected = [
             terms.Instruction(
-                id=terms.instructionId(goalID="goal_1", target="bathroom"),
-                type="if", 
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="none"),
+                type="if",
                 stateOf=terms.stateOf(thing_state="true", thing="motion_sensor1")),
             terms.Instruction(
-                id=terms.instructionId(goalID="goal_1", target="bathroom"),
-                type="then", 
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="smart_bulb1"),
+                type="then",
                 stateOf=terms.stateOf(thing_state="on", thing="smart_bulb1"))
         ]
 
@@ -107,24 +110,34 @@ class Instruction(TestCase, Clingo):
     def test_kitchen_lit_with_bulb_and_blind_motor(self):
         solution = self.get_solution()
 
+        # query = list(solution
+        #     .query(terms.Instruction)
+        #     .where(terms.Instruction.id==terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device=""))
+        #     .all())
+
         query = list(solution
             .query(terms.Instruction)
-            .where(terms.Instruction.id==terms.instructionId(goalID="goal_1", target="kitchen"))
+            .where(terms.Instruction.id.goalID=="goal_1", terms.Instruction.id.if_device=="motion_sensor2")
             .all())
 
         expected = [
             terms.Instruction(
-                id=terms.instructionId(goalID="goal_1", target="kitchen"),
-                type="if", 
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="none"),
+                type="if",
                 stateOf=terms.stateOf(thing_state="true", thing="motion_sensor2")),
             terms.Instruction(
-                id=terms.instructionId(goalID="goal_1", target="kitchen"),
-                type="then", 
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="smart_bulb2"),
+                type="then",
                 stateOf=terms.stateOf(thing_state="on", thing="smart_bulb2")),
             terms.Instruction(
-                id=terms.instructionId(goalID="goal_1", target="kitchen"),
-                type="then", 
-                stateOf=terms.stateOf(thing_state="up", thing="blind_motor1"))
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="blind_motor1"),
+                type="then",
+                stateOf=terms.stateOf(thing_state="up", thing="blind_motor1")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="blind_motor1"),
+                type="when",
+                stateOf=terms.stateOf(thing_state="daylighted", thing="_context"))
         ]
 
+        print(query)
         self.assertCountEqual(expected, query)
