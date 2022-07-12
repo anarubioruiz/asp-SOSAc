@@ -141,3 +141,26 @@ class Instruction(TestCase, Clingo):
 
         print(query)
         self.assertCountEqual(expected, query)
+
+
+# Basics TestCase:
+# 1 GOAL:
+# 1 location, 1 motion_sensor
+# 1 location, 1 smart_bulb, 1 blind_motor
+# 1 location, 1 motion_sensor, 1 smart_bulb, 1 blind_motor
+
+# ScenarioA TestCase
+# 1 GOAL:
+# 2 location:
+#    (el escenario que ya tenemos)
+
+# ScenarioB TestCase
+# 1 GOAL:
+# 2 location:
+#   - bathroom: 1 motion_sensor, 1 smart_bulb
+#   - kitchen: 1 door_sensor, 1 smart_bulb
+
+# Scenario C TestCase
+# 2 GOAL:
+#   - lit location when it is occupied
+#   - notify user when location insecure
