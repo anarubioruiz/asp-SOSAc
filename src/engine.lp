@@ -27,7 +27,6 @@ instruction(ID, if, stateOf(DEVICE_STATE, DEVICE)) :-
     propertyValueOf(THING_KLASS, THING, DEVICE),
     transitionTrigger(T_ID, DEVICE_KLASS, DEVICE_STATE),
     transitionChange(T_ID, THING_KLASS, THING_STATE),
-
     ID = instructionId(G_ID, THING).
 
 instruction(ID, then, stateOf(DEVICE_STATE, DEVICE)) :-
@@ -47,3 +46,12 @@ _transitionChange(ID, TARGET, TARGET_STATE) :- transitionChange(ID, TARGET_KLASS
                                                 memberOf(TARGET, TARGET_KLASS),
                                                 _transitionTrigger(ID, DEVICE, _),
                                                 propertyValueOf(TARGET_KLASS, TARGET, DEVICE).
+
+
+% % NUEVA VERSION: INSTANCIAS DE TRANSITIONS
+% instruction(ID, if, stateOf(DEVICE_STATE, DEVICE)) :-
+%     goal(G_ID, if, stateOf(TARGET_STATE, THING_KLASS)),
+%     _transitionTrigger(T_ID, DEVICE, DEVICE_STATE),
+%     _transitionChange(T_ID, TARGET, TARGET_STATE),
+%     propertyValueOf(THING_KLASS, TARGET, DEVICE),
+%     ID = instructionId(G_ID, TARGET).
