@@ -17,6 +17,6 @@ propertyValueOf(location, kitchen, smart_bulb2).
 #show instruction/3.
 % #show transitionTriggersCount/2.
 % #show transitionChangesCount/2.
-% #show _transitionTrigger/3.
-% #show _transitionChange/3.
-#show _transitionCondition/3.
+#show _transitionTrigger/3.
+#show _transitionChange/3.
+% #show _transitionCondition/3.

@@ -24,12 +24,12 @@ instanceOf(VALUE, PROPERTY) :- propertyValueOf(PROPERTY, VALUE, _).
 instanceOf(_context, context).
 
 _transitionTrigger(ID, DEVICE, DEVICE_STATE) :- transitionTrigger(ID, DEVICE_KLASS, DEVICE_STATE),
-                                                 memberOf(DEVICE, DEVICE_KLASS).
+                                                memberOf(DEVICE, DEVICE_KLASS).
 
 _transitionChange(ID, TARGET, TARGET_STATE) :- transitionChange(ID, TARGET_KLASS, TARGET_STATE),
-                                                memberOf(TARGET, TARGET_KLASS),
-                                                _transitionTrigger(ID, DEVICE, _),
-                                                propertyValueOf(TARGET_KLASS, TARGET, DEVICE).
+                                               memberOf(TARGET, TARGET_KLASS),
+                                               _transitionTrigger(ID, DEVICE, _),
+                                               propertyValueOf(TARGET_KLASS, TARGET, DEVICE).
 
 _transitionCondition(ID, THING, STATE) :- transitionCondition(ID, THING_KLASS, STATE),
                                           memberOf(THING, THING_KLASS),

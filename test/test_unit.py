@@ -3,49 +3,12 @@ from unittest import TestCase, skip
 from clorm import FactBase
 from clorm import monkey
 monkey.patch() # must call this before importing clingo
-from clingo import Control
 
+from utils import ClingoTest
 import terms
 
 
-class Clingo:
-    def clingo_setup(self):
-        self.ctrl = Control(unifier=[
-            terms.InstanceOf,
-            terms.SubclassOf,
-            terms.PropertyValueOf,
-            terms.MemberOf,
-            terms.TransitionTrigger,
-            terms._TransitionTrigger,
-            terms.TransitionChange,
-            terms._TransitionChange,
-            terms.instructionId,
-            terms.stateOf,
-            terms.Instruction,
-            terms.Goal,
-            terms.TransitionCondition,
-            terms._TransitionCondition
-        ])
-
-        self.ctrl.load("src/engine.lp")
-
-    def load_knowledge(self, facts):
-        self.ctrl.add_facts(facts)
-        self.ctrl.ground([("base", [])])
-
-    def get_solution(self):
-        solution = None
-
-        def on_model(model):
-            nonlocal solution
-            solution = model.facts(atoms=True)
-            for item in solution.query(terms._TransitionChange).all():
-                print(item)
-
-        self.ctrl.solve(on_model=on_model)
-        return solution
-
-class BasicEngine(TestCase, Clingo):
+class BasicEngine(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 
@@ -66,7 +29,7 @@ class BasicEngine(TestCase, Clingo):
 
         self.assertEqual(expected, query)
 
-class Inheritance(TestCase, Clingo):
+class Inheritance(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 
@@ -107,7 +70,7 @@ class Inheritance(TestCase, Clingo):
 
         self.assertCountEqual(expected, query)
 
-class Transition(TestCase, Clingo):
+class Transition(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 

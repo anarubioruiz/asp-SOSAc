@@ -3,50 +3,12 @@ from unittest import TestCase, skip
 from clorm import FactBase
 from clorm import monkey
 monkey.patch() # must call this before importing clingo
-from clingo import Control
 
+from utils import ClingoTest
 import terms
 
 
-class Clingo:
-    def clingo_setup(self):
-        self.ctrl = Control(unifier=[
-            terms.InstanceOf,
-            terms.SubclassOf,
-            terms.PropertyValueOf,
-            terms.MemberOf,
-            terms.TransitionTrigger,
-            terms._TransitionTrigger,
-            terms.TransitionChange,
-            terms._TransitionChange,
-            terms.instructionId,
-            terms.stateOf,
-            terms.Instruction,
-            terms.Goal,
-            terms.TransitionCondition,
-            terms._TransitionCondition
-        ])
-
-        self.ctrl.load("src/engine.lp")
-
-    def load_knowledge(self, facts):
-        self.ctrl.add_facts(facts)
-        self.ctrl.ground([("base", [])])
-
-    def get_solution(self):
-        solution = None
-
-        def on_model(model):
-            nonlocal solution
-            solution = model.facts(atoms=True)
-            for item in solution.query(terms.Instruction).all():
-                print(item)
-            # print(solution)
-
-        self.ctrl.solve(on_model=on_model)
-        return solution
-
-class ScenarioA(TestCase, Clingo):
+class ScenarioA(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 
@@ -138,7 +100,8 @@ class ScenarioA(TestCase, Clingo):
         print(query)
         self.assertCountEqual(expected, query)
 
-class One_location_one_goal(TestCase, Clingo):
+
+class OneLocationOneGoal(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 
@@ -163,6 +126,13 @@ class One_location_one_goal(TestCase, Clingo):
         self.load_knowledge(facts)
 
     def test_no_devices(self):
+        scenario = [
+            terms.InstanceOf(instance="kitchen", klass="location")
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
         solution = self.get_solution()
 
         query = list(solution
@@ -366,6 +336,54 @@ class One_location_one_goal(TestCase, Clingo):
         ]
 
         self.assertCountEqual(expected, query)
+
+
+class TwoLocationOneGoal(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup()
+
+        goals = [
+            terms.Goal(id="goal_1", type="if", stateOf=terms.stateOf(thing_state="occupied", thing="location")),
+            terms.Goal(id="goal_1", type="then", stateOf=terms.stateOf(thing_state="lit", thing="location")),
+        ]
+
+        transitions = [
+            terms.TransitionTrigger(id=1, device_klass="motion_sensor", state="true"),
+            terms.TransitionChange(id=1, target_klass="location", state="occupied"),
+
+            terms.TransitionTrigger(id=2, device_klass="blind_motor", state="up"),
+            terms.TransitionCondition(id=2, thing_klass="context", state="daylighted"),
+            terms.TransitionChange(id=2, target_klass="location", state="lit"),
+
+            terms.TransitionTrigger(id=3, device_klass="smart_bulb", state="on"),
+            terms.TransitionChange(id=3, target_klass="location", state="lit")
+        ]
+
+        facts = FactBase(goals+transitions)
+        self.load_knowledge(facts)
+
+    @skip
+    def test_location1_sensor_location2_actuator_with_condition(self):
+        scenario = [
+            terms.InstanceOf(instance="motion_sensor1", klass="motion_sensor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="motion_sensor1"),
+
+            terms.InstanceOf(instance="blind_motor1", klass="blind_motor"),
+            terms.PropertyValueOf(property="location", value="bathroom", owner="blind_motor1")
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        self.assertCountEqual([], query)
+
 
 
 
