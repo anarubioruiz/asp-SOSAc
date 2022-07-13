@@ -41,11 +41,12 @@ class Clingo:
             solution = model.facts(atoms=True)
             for item in solution.query(terms.Instruction).all():
                 print(item)
+            # print(solution)
 
         self.ctrl.solve(on_model=on_model)
         return solution
 
-class Instruction(TestCase, Clingo):
+class ScenarioA(TestCase, Clingo):
     def setUp(self):
         self.clingo_setup()
 
@@ -110,11 +111,6 @@ class Instruction(TestCase, Clingo):
     def test_kitchen_lit_with_bulb_and_blind_motor(self):
         solution = self.get_solution()
 
-        # query = list(solution
-        #     .query(terms.Instruction)
-        #     .where(terms.Instruction.id==terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device=""))
-        #     .all())
-
         query = list(solution
             .query(terms.Instruction)
             .where(terms.Instruction.id.goalID=="goal_1", terms.Instruction.id.if_device=="motion_sensor2")
@@ -141,6 +137,236 @@ class Instruction(TestCase, Clingo):
 
         print(query)
         self.assertCountEqual(expected, query)
+
+class One_location_one_goal(TestCase, Clingo):
+    def setUp(self):
+        self.clingo_setup()
+
+        goals = [
+            terms.Goal(id="goal_1", type="if", stateOf=terms.stateOf(thing_state="occupied", thing="location")),
+            terms.Goal(id="goal_1", type="then", stateOf=terms.stateOf(thing_state="lit", thing="location")),
+        ]
+
+        transitions = [
+            terms.TransitionTrigger(id=1, device_klass="motion_sensor", state="true"),
+            terms.TransitionChange(id=1, target_klass="location", state="occupied"),
+
+            terms.TransitionTrigger(id=2, device_klass="blind_motor", state="up"),
+            terms.TransitionCondition(id=2, thing_klass="context", state="daylighted"),
+            terms.TransitionChange(id=2, target_klass="location", state="lit"),
+
+            terms.TransitionTrigger(id=3, device_klass="smart_bulb", state="on"),
+            terms.TransitionChange(id=3, target_klass="location", state="lit")
+        ]
+
+        facts = FactBase(goals+transitions)
+        self.load_knowledge(facts)
+
+    def test_no_devices(self):
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        self.assertEqual([], query)
+
+    @skip
+    def test_sensor_and_no_actuator(self):
+        scenario = [
+            terms.InstanceOf(instance="motion_sensor1", klass="motion_sensor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="motion_sensor1")
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        self.assertEqual([], query)
+
+    def test_actuator_without_condition_and_no_sensor(self):
+        scenario = [
+            terms.InstanceOf(instance="smart_bulb1", klass="smart_bulb"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="smart_bulb1")
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        self.assertEqual([], query)
+
+    def test_actuator_with_condition_and_no_sensor(self):
+        scenario = [
+            terms.InstanceOf(instance="blind_motor1", klass="blind_motor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="blind_motor1")
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        self.assertEqual([], query)
+
+    def test_sensor_and_actuator_without_condition(self):
+        scenario = [
+            terms.InstanceOf(instance="motion_sensor1", klass="motion_sensor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="motion_sensor1"),
+
+            terms.InstanceOf(instance="smart_bulb1", klass="smart_bulb"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="smart_bulb1")
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        expected = [
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="none"),
+                type="if",
+                stateOf=terms.stateOf(thing_state="true", thing="motion_sensor1")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="smart_bulb1"),
+                type="then",
+                stateOf=terms.stateOf(thing_state="on", thing="smart_bulb1"))
+        ]
+
+        self.assertCountEqual(expected, query)
+
+    def test_sensor_and_actuator_with_condition(self):
+        scenario = [
+            terms.InstanceOf(instance="motion_sensor1", klass="motion_sensor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="motion_sensor1"),
+
+            terms.InstanceOf(instance="blind_motor1", klass="blind_motor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="blind_motor1")
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        expected = [
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="none"),
+                type="if",
+                stateOf=terms.stateOf(thing_state="true", thing="motion_sensor1")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="blind_motor1"),
+                type="then",
+                stateOf=terms.stateOf(thing_state="up", thing="blind_motor1")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="blind_motor1"),
+                type="when",
+                stateOf=terms.stateOf(thing_state="daylighted", thing="_context"))
+        ]
+
+        self.assertCountEqual(expected, query)
+
+    def test_repeated_sensors_and_actuators(self):
+        scenario = [
+            terms.InstanceOf(instance="motion_sensor1", klass="motion_sensor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="motion_sensor1"),
+
+            terms.InstanceOf(instance="motion_sensor2", klass="motion_sensor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="motion_sensor2"),
+
+            terms.InstanceOf(instance="blind_motor1", klass="blind_motor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="blind_motor1"),
+
+            terms.InstanceOf(instance="blind_motor2", klass="blind_motor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="blind_motor2")
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        expected = [
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="none"),
+                type="if",
+                stateOf=terms.stateOf(thing_state="true", thing="motion_sensor1")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="none"),
+                type="if",
+                stateOf=terms.stateOf(thing_state="true", thing="motion_sensor2")),
+
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="blind_motor1"),
+                type="then",
+                stateOf=terms.stateOf(thing_state="up", thing="blind_motor1")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="blind_motor1"),
+                type="then",
+                stateOf=terms.stateOf(thing_state="up", thing="blind_motor1")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="blind_motor1"),
+                type="when",
+                stateOf=terms.stateOf(thing_state="daylighted", thing="_context")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="blind_motor1"),
+                type="when",
+                stateOf=terms.stateOf(thing_state="daylighted", thing="_context")),
+
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="blind_motor2"),
+                type="then",
+                stateOf=terms.stateOf(thing_state="up", thing="blind_motor2")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="blind_motor2"),
+                type="then",
+                stateOf=terms.stateOf(thing_state="up", thing="blind_motor2")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor2", then_device="blind_motor2"),
+                type="when",
+                stateOf=terms.stateOf(thing_state="daylighted", thing="_context")),
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="motion_sensor1", then_device="blind_motor2"),
+                type="when",
+                stateOf=terms.stateOf(thing_state="daylighted", thing="_context"))
+        ]
+
+        self.assertCountEqual(expected, query)
+
 
 
 # Basics TestCase:
