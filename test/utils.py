@@ -38,7 +38,7 @@ class ClingoTest:
             solution = model.facts(atoms=True)
             for item in solution.query(terms.Instruction).all():
                 print(item)
-            # print(solution)
+            print(solution)
 
         self.ctrl.solve(on_model=on_model)
         return solution

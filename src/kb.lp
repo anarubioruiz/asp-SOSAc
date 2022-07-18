@@ -19,3 +19,24 @@ transitionChange(2, location, lit).  % The change always refers to a trigger pro
 transition(3).
 transitionTrigger(3, smart_bulb, on).
 transitionChange(3, location, lit).
+
+transition(4).
+transitionTrigger(4, window_sensor, broken).
+transitionChange(4, location, insecure).
+
+transition(5).
+transitionTrigger(5, alarm_siren, on).
+transitionChange(5, location, in_alert).
+
+%
+
+% transition(4).
+% transitionTrigger(4, window_sensor, open).
+% transitionCondition(4, location, unoccupied).
+% transitionChange(4, location, insecure).
+
+% transition(5).
+% transitionTrigger(5, alarm_siren, on).
+% transitionChange(5, home, in_alert).
+
+%
