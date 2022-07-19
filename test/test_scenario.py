@@ -165,8 +165,41 @@ class SecurityAlertLocationIsInsecure(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
     def test_turn_on_alarm_siren_when_window_is_broken_in_different_location(self):
-        pass  # TODO: Alarm sirent and the broken window don't need to
-              # be in the same location
+        # TODO: Alarm sirent and the broken window don't need to
+        # be in the same location
+
+        scenario = [
+            terms.InstanceOf(instance="kitchen", klass="location"),
+            terms.InstanceOf(instance="corridor", klass="location"),
+            terms.InstanceOf(instance="window_sensor1", klass="window_sensor"),
+            terms.PropertyValueOf(property="location", value="kitchen", owner="window_sensor1"),
+            terms.InstanceOf(instance="alarm_siren1", klass="alarm_siren"),
+            terms.PropertyValueOf(property="location", value="corridor", owner="alarm_siren1"),
+        ]
+
+        facts = FactBase(scenario)
+        self.load_knowledge(facts)
+
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Instruction)
+            .all()
+        )
+
+        expected = [
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="window_sensor1", then_device="none"),
+                type="if",
+                stateOf=terms.stateOf(thing_state="broken", thing="window_sensor1")),
+
+            terms.Instruction(
+                id=terms.instructionId(goalID="goal_1", if_device="window_sensor1", then_device="alarm_siren1"),
+                type="then",
+                stateOf=terms.stateOf(thing_state="on", thing="alarm_siren1")),
+        ]
+
+        self.assertCountEqual(expected, query)
 
 
     # 2. Room's window is open when nobody is in the room.
