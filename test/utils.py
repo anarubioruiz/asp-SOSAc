@@ -10,8 +10,20 @@ class ClingoTest:
         self.ctrl = Control(unifier=[
             terms.Sensor,
             terms.ObservableProperty,
+            terms.Observation,
             terms.isObservedBy,
             terms.observes,
+            terms.makesObservation,
+            terms.madeBySensor,
+
+            terms.Actuator,
+            terms.Actuation,
+            terms.ActuatableProperty,
+            terms.makesActuation,
+            terms.isActedOnBy,
+            terms.madeByActuator,
+
+            terms.hasFeatureOfInterest,
         ])
 
         self.ctrl.load("src/engine.lp")
