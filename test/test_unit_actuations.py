@@ -12,7 +12,7 @@ class Actuator(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 
-    @skip # sosa:madeActuation - Domain: 	sosa:Actuation, Range: 	sosa:Actuator
+    # sosa:madeActuation - Domain: 	sosa:Actuation, Range: 	sosa:Actuator
     def test_sensor_makesActuation_actuation(self):
         facts = FactBase([
             terms.makesActuation(
@@ -59,13 +59,71 @@ class Actuator(TestCase, ClingoTest):
         ]
 
         query = list(solution
-            .query(terms.madeBySensor)
+            .query(terms.madeByActuator)
             .all()
         )
 
         self.assertEqual(expected, query)
 
-class ActuableProperty(TestCase, ClingoTest):
+class ActuatableProperty(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup()
+
+    # sosa:isActedOnBy - Domain: sosa:ActuatableProperty, Range: sosa:Actuation
+    def test_ActuatableProperty_isActedOnBy_Actuator(self):
+        facts = FactBase([
+            terms.isActedOnBy(
+                actuatable_property="lighting",
+                actuator="smart_bulb01")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        actuators_query = list(solution
+            .query(terms.Actuator)
+            .all()
+        )
+
+        actuable_properties_query = list(solution
+            .query(terms.ActuatableProperty)
+            .all()
+        )
+
+        query = actuators_query + actuable_properties_query
+        expected = [
+            terms.Actuator(id="smart_bulb01"),
+            terms.ActuatableProperty(id="lighting")
+        ]
+
+        self.assertCountEqual(expected, query)
+
+    # sosa:isActedOnBy invserse property of sosa:actsOnProperty
+    def test_isActedOnBy_inverse_actsOnProperty(self):
+        facts = FactBase([
+            terms.isActedOnBy(
+                actuatable_property="lighting",
+                actuator="smart_bulb01")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.actsOnProperty(
+                actuator="smart_bulb01",
+                actuatable_property="lighting")
+        ]
+
+        query = list(solution
+            .query(terms.actsOnProperty)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+
+class Actuation(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 
@@ -130,16 +188,6 @@ class ActuableProperty(TestCase, ClingoTest):
             terms.madeByActuator(
                 actuation="actuation01",
                 actuator="smart_bulb02")
-        ])
-
-        self.load_knowledge(facts)
-        solution = self.get_solution()
-
-        self.assertEqual(solution, None)
-
-    def test_no_less_than_1_madeByActuator(self):
-        facts = FactBase([
-            terms.Actuation(id="actuation01")
         ])
 
         self.load_knowledge(facts)

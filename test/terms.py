@@ -9,6 +9,12 @@ class ObservableProperty(Predicate):
 class Observation(Predicate):
     id = ConstantField
 
+class Act(Predicate):
+    id = ConstantField
+
+class FeatureOfInterest(Predicate):
+    id = ConstantField
+
 class isObservedBy(Predicate):
     observable_property = ConstantField
     sensor = ConstantField
@@ -41,22 +47,21 @@ class makesActuation(Predicate):
     actuation = ConstantField
 
 class isActedOnBy(Predicate):
-    actuable_property = ConstantField
+    actuatable_property = ConstantField
     actuator = ConstantField
 
 class madeByActuator(Predicate):
     actuation = ConstantField
     actuator = ConstantField
 
-# class actsOnProperty(Predicate):
-#     actuator = ConstantField
-#     actuable_property = ConstantField
-
-
-
-
-    # ---------------------
+class actsOnProperty(Predicate):
+    actuator = ConstantField
+    actuatable_property = ConstantField
 
 class hasFeatureOfInterest(Predicate):
-    entity = ConstantField
+    act = ConstantField
     feature_of_interest = ConstantField
+
+class isFeatureOfInterestOf(Predicate):
+    feature_of_interest = ConstantField
+    act = ConstantField

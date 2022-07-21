@@ -11,22 +11,24 @@ class ClingoTest:
             terms.Sensor,
             terms.ObservableProperty,
             terms.Observation,
+            terms.Act,
+            terms.Actuator,
+            terms.Actuation,
+            terms.ActuatableProperty,
+            terms.FeatureOfInterest,
+
             terms.isObservedBy,
             terms.observes,
             terms.makesObservation,
             terms.madeBySensor,
-
-            terms.Actuator,
-            terms.Actuation,
-            terms.ActuatableProperty,
             terms.makesActuation,
             terms.isActedOnBy,
             terms.madeByActuator,
-
+            terms.actsOnProperty,
             terms.hasFeatureOfInterest,
         ])
 
-        self.ctrl.load("src/engine.lp")
+        self.ctrl.load("src/ssn-engine.lp")
 
     def load_knowledge(self, facts):
         self.ctrl.add_facts(facts)

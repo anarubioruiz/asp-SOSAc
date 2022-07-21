@@ -152,7 +152,7 @@ class ObservableProperty(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    # sosa:ObservableProperty inverse property of sosa:observes
+    # sosa:isObservedBy inverse property of sosa:observes
     def test_isObservedBy_inverse_of_observes(self):
         facts = FactBase([
             terms.isObservedBy(
@@ -164,13 +164,13 @@ class ObservableProperty(TestCase, ClingoTest):
         solution = self.get_solution()
 
         expected = [
-            terms.isObservedBy(
+            terms.observes(
                 sensor="temp_sensor01",
                 observable_property="temperature")
         ]
 
         query = list(solution
-            .query(terms.isObservedBy)
+            .query(terms.observes)
             .all()
         )
 
