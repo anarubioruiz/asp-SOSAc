@@ -31,8 +31,6 @@ class madeBySensor(Predicate):
     observation = ConstantField
     sensor = ConstantField
 
-    # ---------------------
-
 class Actuator(Predicate):
     id = ConstantField
 

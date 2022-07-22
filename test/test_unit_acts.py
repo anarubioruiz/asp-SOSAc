@@ -41,6 +41,45 @@ class Act(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
+    # sosa:hasFeatureOfInterest inverse property of sosa:isFeatureOfInterestOf
+    def test_hasFeatureOfInterest_inverse_of_isFeatureOfInterestOf(self):
+        facts = FactBase([
+            terms.hasFeatureOfInterest(
+                act="actuation01",
+                feature_of_interest="bathroom")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.isFeatureOfInterestOf)
+            .all()
+        )
+        expected = [
+            terms.isFeatureOfInterestOf(
+                feature_of_interest="bathroom",
+                act="actuation01")
+        ]
+
+        self.assertCountEqual(expected, query)
+
+    # scott:Act  max 1 sosa:hasFeatureOfInterest
+    def test_no_more_than_1_hasFeatureOfInterest(self):
+        facts = FactBase([
+            terms.hasFeatureOfInterest(
+                act="observation01",
+                feature_of_interest="kitchen"),
+            terms.hasFeatureOfInterest(
+                act="observation01",
+                feature_of_interest="bathroom")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        self.assertEqual(solution, None)
+
 
 class FeatureOfInterest(TestCase, ClingoTest):
     def setUp(self):

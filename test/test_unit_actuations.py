@@ -127,6 +127,23 @@ class Actuation(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 
+    # sosa:Actuation sub class of scott:Act
+    def test_Actuations_are_Acts(self):
+        facts = FactBase([
+            terms.Actuation(id="actuation01")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [terms.Act(id="actuation01")]
+        query = list(solution
+            .query(terms.Act)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
     # sosa:madeByActuator - Domain: sosa:Actuation, Range: sosa:Actuator
     def test_Actuation_madeByActuator_Actuator(self):
         facts = FactBase([
@@ -180,6 +197,7 @@ class Actuation(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
+    # sosa:Actuation max 1 sosa:madeByActuator
     def test_no_more_than_1_madeByActuator(self):
         facts = FactBase([
             terms.madeByActuator(

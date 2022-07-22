@@ -180,6 +180,23 @@ class Observation(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup()
 
+    # sosa:Observation sub class of scott:Act
+    def test_Observations_are_Acts(self):
+        facts = FactBase([
+            terms.Observation(id="observation01")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [terms.Act(id="observation01")]
+        query = list(solution
+            .query(terms.Act)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
     # sosa:madeBySensor - Domain: sosa:Observation, Range: sosa:Sensor
     def test_Observation_madeBySensor_Sensor(self):
         facts = FactBase([
@@ -233,6 +250,7 @@ class Observation(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
+    # sosa:Observation max 1 sosa:madeBySensor
     def test_no_more_than_1_madeBySensor(self):
         facts = FactBase([
             terms.madeBySensor(

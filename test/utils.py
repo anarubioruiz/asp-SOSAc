@@ -26,6 +26,7 @@ class ClingoTest:
             terms.madeByActuator,
             terms.actsOnProperty,
             terms.hasFeatureOfInterest,
+            terms.isFeatureOfInterestOf
         ])
 
         self.ctrl.load("src/ssn-engine.lp")

@@ -20,6 +20,8 @@ observes(SENSOR, OBSERVABLE_PROPERTY) :- isObservedBy(OBSERVABLE_PROPERTY, SENSO
 
 % ---- Observation
 
+act(OBSERVATION) :- observation(OBSERVATION).
+
 sensor(SENSOR) :- madeBySensor(_, SENSOR).
 makesObservation(SENSOR, OBSERVATION) :- madeBySensor(OBSERVATION, SENSOR).
 
@@ -29,10 +31,6 @@ makesObservation(SENSOR, OBSERVATION) :- madeBySensor(OBSERVATION, SENSOR).
 
 act(ACT) :- isFeatureOfInterestOf(_, ACT).
 hasFeatureOfInterest(ACT, FEATURE) :- isFeatureOfInterestOf(FEATURE, ACT).
-
-
-% ----------------------------------------------------
-% ---- ACTUATIONS ------------------------------------
 
 % ---- Actuator
 
@@ -49,6 +47,8 @@ actsOnProperty(ACTUATOR, ACTUATABLE_PROPERTY) :- isActedOnBy(ACTUATABLE_PROPERTY
 
 
 % ---- Actuation
+
+act(OBSERVATION) :- actuation(OBSERVATION).
 
 actuator(ACTUATOR) :- madeByActuator(_, ACTUATOR).
 makesActuation(ACTUATOR, ACTUATION) :- madeByActuator(ACTUATION, ACTUATOR).
