@@ -1,5 +1,12 @@
 from clorm import ComplexTerm, Predicate, ConstantField, IntegerField
 
+
+class Act(Predicate):
+    id = ConstantField
+
+class FeatureOfInterest(Predicate):
+    id = ConstantField
+
 class Sensor(Predicate):
     id = ConstantField
 
@@ -9,10 +16,13 @@ class ObservableProperty(Predicate):
 class Observation(Predicate):
     id = ConstantField
 
-class Act(Predicate):
+class Actuator(Predicate):
     id = ConstantField
 
-class FeatureOfInterest(Predicate):
+class Actuation(Predicate):
+    id = ConstantField
+
+class ActuatableProperty(Predicate):
     id = ConstantField
 
 class isObservedBy(Predicate):
@@ -31,14 +41,9 @@ class madeBySensor(Predicate):
     observation = ConstantField
     sensor = ConstantField
 
-class Actuator(Predicate):
-    id = ConstantField
-
-class Actuation(Predicate):
-    id = ConstantField
-
-class ActuatableProperty(Predicate):
-    id = ConstantField
+class observedProperty(Predicate):
+    observation = ConstantField
+    observable_property = ConstantField
 
 class makesActuation(Predicate):
     actuator = ConstantField

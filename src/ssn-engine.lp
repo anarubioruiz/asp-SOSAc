@@ -5,6 +5,11 @@ isFeatureOfInterestOf(FEATURE, ACT) :- hasFeatureOfInterest(ACT, FEATURE).
 
 :- hasFeatureOfInterest(OBSERVATION, FEATURE_1), hasFeatureOfInterest(OBSERVATION, FEATURE_2), FEATURE_1 != FEATURE_2.
 
+% ---- FeatureOfInterest
+
+act(ACT) :- isFeatureOfInterestOf(_, ACT).
+hasFeatureOfInterest(ACT, FEATURE) :- isFeatureOfInterestOf(FEATURE, ACT).
+
 % ---- Sensor
 
 observableProperty(OBSERVABLE_PROPERTY) :- observes(_, OBSERVABLE_PROPERTY).
@@ -27,10 +32,8 @@ makesObservation(SENSOR, OBSERVATION) :- madeBySensor(OBSERVATION, SENSOR).
 
 :- madeBySensor(OBSERVATION, SENSOR_1), madeBySensor(OBSERVATION, SENSOR_2), SENSOR_1 != SENSOR_2.
 
-% ---- FeatureOfInterest
-
-act(ACT) :- isFeatureOfInterestOf(_, ACT).
-hasFeatureOfInterest(ACT, FEATURE) :- isFeatureOfInterestOf(FEATURE, ACT).
+observableProperty(OBSERVABLE_PROPERTY) :- observedProperty(OBSERVATION, OBSERVABLE_PROPERTY).
+observation(OBSERVATION) :- observedProperty(OBSERVATION, OBSERVABLE_PROPERTY).
 
 % ---- Actuator
 

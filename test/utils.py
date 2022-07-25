@@ -21,6 +21,7 @@ class ClingoTest:
             terms.observes,
             terms.makesObservation,
             terms.madeBySensor,
+            terms.observedProperty,
             terms.makesActuation,
             terms.isActedOnBy,
             terms.madeByActuator,
