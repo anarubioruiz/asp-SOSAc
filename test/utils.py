@@ -17,6 +17,7 @@ class ClingoTest:
             terms.ActuatableProperty,
             terms.FeatureOfInterest,
             terms.Result,
+            terms.Platform,
 
             terms.isObservedBy,
             terms.observes,
@@ -31,7 +32,9 @@ class ClingoTest:
             terms.isFeatureOfInterestOf,
             terms.hasResult,
             terms.isResultOf,
-            terms.hasSimpleResult
+            terms.hasSimpleResult,
+            terms.hosts,
+            terms.isHostedBy
         ])
 
         self.ctrl.load("src/ssn-engine.lp")

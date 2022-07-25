@@ -28,6 +28,9 @@ class ActuatableProperty(Predicate):
 class Result(Predicate):
     id = ConstantField
 
+class Platform(Predicate):
+    id = ConstantField
+
 class isObservedBy(Predicate):
     observable_property = ConstantField
     sensor = ConstantField
@@ -83,3 +86,11 @@ class hasResult(Predicate):
 class hasSimpleResult(Predicate):
     act = ConstantField
     result = ConstantField
+
+class hosts(Predicate):
+    platform = ConstantField
+    hosted = ConstantField
+
+class isHostedBy(Predicate):
+    hosted = ConstantField
+    platform = ConstantField

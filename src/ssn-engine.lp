@@ -69,3 +69,9 @@ hasResult(ACT, RESULT) :- isResultOf(RESULT, ACT).
 % ---- Simple Result
 
 act(ACT) :- hasSimpleResult(ACT, _).
+
+% ---- Platform
+
+platform(PLATFORM) :- isHostedBy(_, PLATFORM).
+hosts(PLATFORM, HOSTED) :- isHostedBy(HOSTED, PLATFORM).
+isHostedBy(HOSTED, PLATFORM) :- hosts(PLATFORM, HOSTED).
