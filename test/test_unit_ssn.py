@@ -80,6 +80,49 @@ class Act(TestCase, ClingoTest):
 
         self.assertEqual(solution, None)
 
+    # sosa:hasResult inverse property of sosa:isResultOf
+    def test_hasResult_inverse_of_isResultOf(self):
+        facts = FactBase([
+            terms.hasResult(
+                act="actuation01",
+                result="open")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.isResultOf(
+                result="open",
+                act="actuation01")
+        ]
+
+        query = list(solution
+            .query(terms.isResultOf)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+    # sosa:hasSimpleResult - Domain: scott:Act, Range: --
+    def test_Act_hasSimpleResult(self):
+        facts = FactBase([
+            terms.hasSimpleResult(
+                act="observation01",
+                result="true")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [terms.Act(id="observation01")]
+        query = list(solution
+            .query(terms.Act)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
 
 class FeatureOfInterest(TestCase, ClingoTest):
     def setUp(self):
@@ -630,3 +673,133 @@ class Actuation(TestCase, ClingoTest):
         solution = self.get_solution()
 
         self.assertEqual(solution, None)
+
+
+class Result(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup()
+
+    # sosa:isResultOf - Domain: sosa:Result, Range: scott:Act
+    def test_Result_isResultOf_Act(self):
+        facts = FactBase([
+            terms.isResultOf(
+                result="open",
+                act="actuation01")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        acts_query = list(solution
+            .query(terms.Act)
+            .all()
+        )
+
+        results_query = list(solution
+            .query(terms.Result)
+            .all()
+        )
+
+        query = acts_query + results_query
+        expected = [
+            terms.Act(id="actuation01"),
+            terms.Result(id="open")
+        ]
+
+        self.assertCountEqual(expected, query)
+
+    # sosa:isResultOf inverse property of sosa:hasResult
+    def test_isResultOf_inverse_of_hasResult(self):
+        facts = FactBase([
+            terms.isResultOf(
+                result="open",
+                act="actuation01")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasResult(
+                act="actuation01",
+                result="open")
+        ]
+
+        query = list(solution
+            .query(terms.hasResult)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+
+class Platform(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup()
+
+    # sosa:hosts - Domain: sosa:Platform, Range: --
+    def test_Platform_hosts(self):
+        facts = FactBase([
+            terms.hosts(
+                platform="Joey",
+                hosted="smart_watch01")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [terms.Platform(id="Joey")]
+        query = list(solution
+            .query(terms.Platform)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    # sosa:hosts inverse property of sosa:isHostedBy
+    def test_hosts_inverse_of_isHostedBy(self):
+        facts = FactBase([
+            terms.hosts(
+                platform="Joey",
+                hosted="smart_watch01")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.isHostedBy(
+                hosted="smart_watch01",
+                platform="Joey")
+        ]
+
+        query = list(solution
+            .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+    # sosa:isHostedBy inverse property of sosa:hosts
+    def test_isHostedBy_inverse_of_hosts(self):
+        facts = FactBase([
+            terms.isHostedBy(
+                hosted="smart_watch01",
+                platform="Joey")
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hosts(
+                platform="Joey",
+                hosted="smart_watch01")
+        ]
+
+        query = list(solution
+            .query(terms.hosts)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
