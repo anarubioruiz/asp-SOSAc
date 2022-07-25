@@ -25,6 +25,9 @@ class Actuation(Predicate):
 class ActuatableProperty(Predicate):
     id = ConstantField
 
+class Result(Predicate):
+    id = ConstantField
+
 class isObservedBy(Predicate):
     observable_property = ConstantField
     sensor = ConstantField
@@ -68,3 +71,15 @@ class hasFeatureOfInterest(Predicate):
 class isFeatureOfInterestOf(Predicate):
     feature_of_interest = ConstantField
     act = ConstantField
+
+class isResultOf(Predicate):
+    result = ConstantField
+    act = ConstantField
+
+class hasResult(Predicate):
+    act = ConstantField
+    result = ConstantField
+
+class hasSimpleResult(Predicate):
+    act = ConstantField
+    result = ConstantField
