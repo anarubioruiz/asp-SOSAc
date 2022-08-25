@@ -49,8 +49,6 @@ class ClingoTest:
         def on_model(model):
             nonlocal solution
             solution = model.facts(atoms=True)
-            # for item in solution.query(term...).all():
-            #     print(item)
             print(solution)
 
         self.ctrl.solve(on_model=on_model)
