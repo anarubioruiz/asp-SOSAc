@@ -1,6 +1,12 @@
 from clorm import ComplexTerm, Predicate, ConstantField, IntegerField
 
 
+class SubklassOf(Predicate):
+    child_klass = ConstantField
+    parent_klass = ConstantField
+
+# CLINGO TERMS --------------
+
 class Act(Predicate):
     id = ConstantField
 

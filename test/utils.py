@@ -6,8 +6,12 @@ import terms
 
 
 class ClingoTest:
-    def clingo_setup(self):
+    def clingo_setup(self, *files):
         self.ctrl = Control(unifier=[
+            terms.SubklassOf,
+
+            # CLINGO TERMS ---------
+
             terms.Sensor,
             terms.ObservableProperty,
             terms.Observation,
@@ -37,7 +41,14 @@ class ClingoTest:
             terms.isHostedBy
         ])
 
-        self.ctrl.load("src/ssn-engine.lp")
+        if not files:
+            self.ctrl.load("src/engine.lp")
+            self.ctrl.load("src/ssn-engine.lp")
+            return
+
+        for f in files:
+            self.ctrl.load(f)
+
 
     def load_knowledge(self, facts):
         self.ctrl.add_facts(facts)
