@@ -1,9 +1,12 @@
 from clorm import ComplexTerm, Predicate, ConstantField, IntegerField
 
 
-class SubklassOf(Predicate):
-    child_klass = ConstantField
-    parent_klass = ConstantField
+class MotionSensor(Predicate):
+    id = ConstantField
+
+class locatedAt(Predicate):
+    entity = ConstantField
+    location = ConstantField
 
 # CLINGO TERMS --------------
 
@@ -100,3 +103,7 @@ class hosts(Predicate):
 class isHostedBy(Predicate):
     hosted = ConstantField
     platform = ConstantField
+
+class hasProperty(Predicate):
+    feature_of_interest = ConstantField
+    property = ConstantField

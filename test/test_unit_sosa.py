@@ -10,7 +10,7 @@ import terms
 
 class Act(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:hasFeatureOfInterest - Domain: scott:Act, Range: sosa:FeatureOfInterest
     def test_Act_hasFeatureOfInterest_FeatureOfInterest(self):
@@ -126,7 +126,7 @@ class Act(TestCase, ClingoTest):
 
 class FeatureOfInterest(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:isFeatureOfInterestOf - Domain: sosa:FeatureOfInterest, Range: scott:Act
     def test_FeatureOfInterest_isFeatureOfInterestOf_Act(self):
@@ -183,7 +183,7 @@ class FeatureOfInterest(TestCase, ClingoTest):
 
 class Sensor(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:observes - Domain: sosa:Sensor, Range: sosa:ObservableProperty
     def test_sensor_observes_ObservableProperty(self):
@@ -294,7 +294,7 @@ class Sensor(TestCase, ClingoTest):
 
 class ObservableProperty(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:isObservedBy - Domain: sosa:ObservableProperty, Range: sosa:Sensor
     def test_ObservableProperty_isObservedBy_Sensor(self):
@@ -351,7 +351,7 @@ class ObservableProperty(TestCase, ClingoTest):
 
 class Observation(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:Observation sub class of scott:Act
     def test_Observations_are_Acts(self):
@@ -471,7 +471,7 @@ class Observation(TestCase, ClingoTest):
 
 class Actuator(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:madeActuation - Domain: sosa:Actuator, Range: sosa:Actuation
     def test_sensor_makesActuation_actuation(self):
@@ -528,7 +528,7 @@ class Actuator(TestCase, ClingoTest):
 
 class ActuatableProperty(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:isActedOnBy - Domain: sosa:ActuatableProperty, Range: sosa:Actuation
     def test_ActuatableProperty_isActedOnBy_Actuator(self):
@@ -586,7 +586,7 @@ class ActuatableProperty(TestCase, ClingoTest):
 
 class Actuation(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:Actuation sub class of scott:Act
     def test_Actuations_are_Acts(self):
@@ -677,7 +677,7 @@ class Actuation(TestCase, ClingoTest):
 
 class Result(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:isResultOf - Domain: sosa:Result, Range: scott:Act
     def test_Result_isResultOf_Act(self):
@@ -735,7 +735,7 @@ class Result(TestCase, ClingoTest):
 
 class Platform(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     # sosa:hosts - Domain: sosa:Platform, Range: --
     def test_Platform_hosts(self):
@@ -807,7 +807,7 @@ class Platform(TestCase, ClingoTest):
 
 class Inferences(TestCase, ClingoTest):
     def setUp(self):
-        self.clingo_setup('src/ssn-engine.lp')
+        self.clingo_setup('src/sosa_engine.lp')
 
     def test_observation_has_observedProperty_when_sensor_observes(self):
         facts = FactBase([
@@ -830,6 +830,36 @@ class Inferences(TestCase, ClingoTest):
 
         query = list(solution
             .query(terms.observedProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_observedProperty_is_a_property_of_the_sensor_featureOfInterest(self):
+        facts = FactBase([
+            terms.observes(
+                sensor="motion_sensor01",
+                observable_property="motion"),
+            terms.makesObservation(
+                sensor='motion_sensor01',
+                observation='observation01'),
+            terms.hasFeatureOfInterest(
+                act='observation01',
+                feature_of_interest='kitchen'
+            )
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasProperty(
+                feature_of_interest="kitchen",
+                property='motion')
+        ]
+
+        query = list(solution
+            .query(terms.hasProperty)
             .all()
         )
 

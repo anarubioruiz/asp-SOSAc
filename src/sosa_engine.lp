@@ -78,4 +78,10 @@ isHostedBy(HOSTED, PLATFORM) :- hosts(PLATFORM, HOSTED).
 
 % ---- Others
 
-observedProperty(OBSERVATION, OBSERVABLE_PROPERTY) :- observes(SENSOR, OBSERVABLE_PROPERTY), makesObservation(SENSOR, OBSERVATION).
+observedProperty(OBSERVATION, OBSERVABLE_PROPERTY)
+    :- observes(SENSOR, OBSERVABLE_PROPERTY),
+       makesObservation(SENSOR, OBSERVATION).
+
+hasProperty(FEATURE, OBSERVABLE_PROPERTY)
+    :- observedProperty(OBSERVATION, OBSERVABLE_PROPERTY),
+       hasFeatureOfInterest(OBSERVATION, FEATURE).

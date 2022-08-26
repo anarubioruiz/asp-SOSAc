@@ -8,7 +8,9 @@ import terms
 class ClingoTest:
     def clingo_setup(self, *files):
         self.ctrl = Control(unifier=[
-            terms.SubklassOf,
+            terms.MotionSensor,
+
+            terms.locatedAt,
 
             # CLINGO TERMS ---------
 
@@ -38,12 +40,13 @@ class ClingoTest:
             terms.isResultOf,
             terms.hasSimpleResult,
             terms.hosts,
-            terms.isHostedBy
+            terms.isHostedBy,
+            terms.hasProperty
         ])
 
         if not files:
             self.ctrl.load("src/engine.lp")
-            self.ctrl.load("src/ssn-engine.lp")
+            self.ctrl.load("src/sosa_engine.lp")
             return
 
         for f in files:
