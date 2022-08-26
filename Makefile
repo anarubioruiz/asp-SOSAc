@@ -1,11 +1,5 @@
 test-unit:
-	pytest-3 test/test_unit.py
-
-test-scenario:
-	pytest-3 test/test_scenario.py
-
-test-all:
-	pytest-3 test/
+	pytest-3 test/test_unit_sosa.py test/test_unit_kb.py
 
 run:
 	clingo src/*.lp 0
