@@ -1,8 +1,13 @@
 from clorm import ComplexTerm, Predicate, ConstantField, IntegerField
 
 
-class MotionSensor(Predicate):
+class ActID(Predicate):
+    device = ConstantField
+    act = ConstantField
+
+class Device(Predicate):
     id = ConstantField
+    klass = ConstantField
 
 class locatedAt(Predicate):
     entity = ConstantField
@@ -11,7 +16,7 @@ class locatedAt(Predicate):
 # CLINGO TERMS --------------
 
 class Act(Predicate):
-    id = ConstantField
+    id = ActID.Field
 
 class FeatureOfInterest(Predicate):
     id = ConstantField
@@ -23,13 +28,13 @@ class ObservableProperty(Predicate):
     id = ConstantField
 
 class Observation(Predicate):
-    id = ConstantField
+    id = ActID.Field
 
 class Actuator(Predicate):
     id = ConstantField
 
 class Actuation(Predicate):
-    id = ConstantField
+    id = ActID.Field
 
 class ActuatableProperty(Predicate):
     id = ConstantField
@@ -50,26 +55,26 @@ class observes(Predicate):
 
 class makesObservation(Predicate):
     sensor = ConstantField
-    observation = ConstantField
+    observation = ActID.Field
 
 class madeBySensor(Predicate):
-    observation = ConstantField
+    observation = ActID.Field
     sensor = ConstantField
 
 class observedProperty(Predicate):
-    observation = ConstantField
+    observation = ActID.Field
     observable_property = ConstantField
 
 class makesActuation(Predicate):
     actuator = ConstantField
-    actuation = ConstantField
+    actuation = ActID.Field
 
 class isActedOnBy(Predicate):
     actuatable_property = ConstantField
     actuator = ConstantField
 
 class madeByActuator(Predicate):
-    actuation = ConstantField
+    actuation = ActID.Field
     actuator = ConstantField
 
 class actsOnProperty(Predicate):
@@ -77,23 +82,23 @@ class actsOnProperty(Predicate):
     actuatable_property = ConstantField
 
 class hasFeatureOfInterest(Predicate):
-    act = ConstantField
+    act = ActID.Field
     feature_of_interest = ConstantField
 
 class isFeatureOfInterestOf(Predicate):
     feature_of_interest = ConstantField
-    act = ConstantField
+    act = ActID.Field
 
 class isResultOf(Predicate):
     result = ConstantField
-    act = ConstantField
+    act = ActID.Field
 
 class hasResult(Predicate):
-    act = ConstantField
+    act = ActID.Field
     result = ConstantField
 
 class hasSimpleResult(Predicate):
-    act = ConstantField
+    act = ActID.Field
     result = ConstantField
 
 class hosts(Predicate):

@@ -75,13 +75,3 @@ act(ACT) :- hasSimpleResult(ACT, _).
 platform(PLATFORM) :- isHostedBy(_, PLATFORM).
 hosts(PLATFORM, HOSTED) :- isHostedBy(HOSTED, PLATFORM).
 isHostedBy(HOSTED, PLATFORM) :- hosts(PLATFORM, HOSTED).
-
-% ---- Others
-
-observedProperty(OBSERVATION, OBSERVABLE_PROPERTY)
-    :- observes(SENSOR, OBSERVABLE_PROPERTY),
-       makesObservation(SENSOR, OBSERVATION).
-
-hasProperty(FEATURE, OBSERVABLE_PROPERTY)
-    :- observedProperty(OBSERVATION, OBSERVABLE_PROPERTY),
-       hasFeatureOfInterest(OBSERVATION, FEATURE).

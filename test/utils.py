@@ -8,7 +8,7 @@ import terms
 class ClingoTest:
     def clingo_setup(self, *files):
         self.ctrl = Control(unifier=[
-            terms.MotionSensor,
+            terms.Device,
 
             terms.locatedAt,
 

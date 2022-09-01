@@ -16,7 +16,7 @@ class Act(TestCase, ClingoTest):
     def test_Act_hasFeatureOfInterest_FeatureOfInterest(self):
         facts = FactBase([
             terms.hasFeatureOfInterest(
-                act="observation01",
+                act=terms.ActID(device="ANY", act="ANY"),
                 feature_of_interest="kitchen")
         ])
 
@@ -35,7 +35,7 @@ class Act(TestCase, ClingoTest):
 
         query = acts_query + features_of_interest_query
         expected = [
-            terms.Act(id="observation01"),
+            terms.Act(id=terms.ActID(device="ANY", act="ANY")),
             terms.FeatureOfInterest(id="kitchen")
         ]
 
@@ -45,7 +45,7 @@ class Act(TestCase, ClingoTest):
     def test_hasFeatureOfInterest_inverse_of_isFeatureOfInterestOf(self):
         facts = FactBase([
             terms.hasFeatureOfInterest(
-                act="actuation01",
+                act=terms.ActID(device="ANY", act="ANY"),
                 feature_of_interest="bathroom")
         ])
 
@@ -59,7 +59,7 @@ class Act(TestCase, ClingoTest):
         expected = [
             terms.isFeatureOfInterestOf(
                 feature_of_interest="bathroom",
-                act="actuation01")
+                act=terms.ActID(device="ANY", act="ANY"))
         ]
 
         self.assertCountEqual(expected, query)
@@ -68,10 +68,10 @@ class Act(TestCase, ClingoTest):
     def test_no_more_than_1_hasFeatureOfInterest(self):
         facts = FactBase([
             terms.hasFeatureOfInterest(
-                act="observation01",
+                act=terms.ActID(device="ANY", act="ANY"),
                 feature_of_interest="kitchen"),
             terms.hasFeatureOfInterest(
-                act="observation01",
+                act=terms.ActID(device="ANY", act="ANY"),
                 feature_of_interest="bathroom")
         ])
 
@@ -84,7 +84,7 @@ class Act(TestCase, ClingoTest):
     def test_hasResult_inverse_of_isResultOf(self):
         facts = FactBase([
             terms.hasResult(
-                act="actuation01",
+                act=terms.ActID(device="ANY", act="ANY"),
                 result="open")
         ])
 
@@ -94,7 +94,7 @@ class Act(TestCase, ClingoTest):
         expected = [
             terms.isResultOf(
                 result="open",
-                act="actuation01")
+                act=terms.ActID(device="ANY", act="ANY"))
         ]
 
         query = list(solution
@@ -108,14 +108,14 @@ class Act(TestCase, ClingoTest):
     def test_Act_hasSimpleResult(self):
         facts = FactBase([
             terms.hasSimpleResult(
-                act="observation01",
+                act=terms.ActID(device="ANY", act="ANY"),
                 result="true")
         ])
 
         self.load_knowledge(facts)
         solution = self.get_solution()
 
-        expected = [terms.Act(id="observation01")]
+        expected = [terms.Act(id=terms.ActID(device="ANY", act="ANY"))]
         query = list(solution
             .query(terms.Act)
             .all()
@@ -133,7 +133,7 @@ class FeatureOfInterest(TestCase, ClingoTest):
         facts = FactBase([
             terms.isFeatureOfInterestOf(
                 feature_of_interest="kitchen",
-                act="observation01")
+                act=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -151,7 +151,7 @@ class FeatureOfInterest(TestCase, ClingoTest):
 
         query = acts_query + features_of_interest_query
         expected = [
-            terms.Act(id="observation01"),
+            terms.Act(id=terms.ActID(device="ANY", act="ANY")),
             terms.FeatureOfInterest(id="kitchen")
         ]
 
@@ -162,7 +162,7 @@ class FeatureOfInterest(TestCase, ClingoTest):
         facts = FactBase([
             terms.isFeatureOfInterestOf(
                 feature_of_interest="kitchen",
-                act="observation01")
+                act=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -174,7 +174,7 @@ class FeatureOfInterest(TestCase, ClingoTest):
         )
         expected = [
             terms.hasFeatureOfInterest(
-                act="observation01",
+                act=terms.ActID(device="ANY", act="ANY"),
                 feature_of_interest="kitchen")
         ]
 
@@ -243,7 +243,7 @@ class Sensor(TestCase, ClingoTest):
         facts = FactBase([
             terms.makesObservation(
                 sensor="temp_sensor01",
-                observation="observation01")
+                observation=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -262,7 +262,7 @@ class Sensor(TestCase, ClingoTest):
         query = sensors_query + observations_query
         expected = [
             terms.Sensor(id="temp_sensor01"),
-            terms.Observation(id="observation01")
+            terms.Observation(id=terms.ActID(device="ANY", act="ANY"))
         ]
 
         self.assertCountEqual(expected, query)
@@ -272,7 +272,7 @@ class Sensor(TestCase, ClingoTest):
         facts = FactBase([
             terms.makesObservation(
                 sensor="temp_sensor01",
-                observation="observation01")
+                observation=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -280,7 +280,7 @@ class Sensor(TestCase, ClingoTest):
 
         expected = [
             terms.madeBySensor(
-                observation="observation01",
+                observation=terms.ActID(device="ANY", act="ANY"),
                 sensor="temp_sensor01")
         ]
 
@@ -356,13 +356,13 @@ class Observation(TestCase, ClingoTest):
     # sosa:Observation sub class of scott:Act
     def test_Observations_are_Acts(self):
         facts = FactBase([
-            terms.Observation(id="observation01")
+            terms.Observation(id=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
         solution = self.get_solution()
 
-        expected = [terms.Act(id="observation01")]
+        expected = [terms.Act(id=terms.ActID(device="ANY", act="ANY"))]
         query = list(solution
             .query(terms.Act)
             .all()
@@ -374,7 +374,7 @@ class Observation(TestCase, ClingoTest):
     def test_Observation_madeBySensor_Sensor(self):
         facts = FactBase([
             terms.madeBySensor(
-                observation="observation01",
+                observation=terms.ActID(device="ANY", act="ANY"),
                 sensor="temp_sensor01",)
         ])
 
@@ -394,7 +394,7 @@ class Observation(TestCase, ClingoTest):
         query = sensors_query + observations_query
         expected = [
             terms.Sensor(id="temp_sensor01"),
-            terms.Observation(id="observation01")
+            terms.Observation(id=terms.ActID(device="ANY", act="ANY"))
         ]
 
         self.assertCountEqual(expected, query)
@@ -403,7 +403,7 @@ class Observation(TestCase, ClingoTest):
     def test_madeBySensor_inverse_of_makesObservation(self):
         facts = FactBase([
             terms.madeBySensor(
-                observation="observation01",
+                observation=terms.ActID(device="ANY", act="ANY"),
                 sensor="temp_sensor01")
         ])
 
@@ -413,7 +413,7 @@ class Observation(TestCase, ClingoTest):
         expected = [
             terms.makesObservation(
                 sensor="temp_sensor01",
-                observation="observation01")
+                observation=terms.ActID(device="ANY", act="ANY"))
         ]
 
         query = list(solution
@@ -427,10 +427,10 @@ class Observation(TestCase, ClingoTest):
     def test_no_more_than_1_madeBySensor(self):
         facts = FactBase([
             terms.madeBySensor(
-                observation="observation01",
+                observation=terms.ActID(device="ANY", act="ANY"),
                 sensor="temp_sensor01"),
             terms.madeBySensor(
-                observation="observation01",
+                observation=terms.ActID(device="ANY", act="ANY"),
                 sensor="temp_sensor02")
         ])
 
@@ -443,7 +443,7 @@ class Observation(TestCase, ClingoTest):
     def test_Observation_observedProperty_ObservableProperty(self):
         facts = FactBase([
             terms.observedProperty(
-                observation="observation01",
+                observation=terms.ActID(device="ANY", act="ANY"),
                 observable_property="occupancy",)
         ])
 
@@ -463,7 +463,7 @@ class Observation(TestCase, ClingoTest):
         query = observable_properties_query + observations_query
         expected = [
             terms.ObservableProperty(id="occupancy"),
-            terms.Observation(id="observation01")
+            terms.Observation(id=terms.ActID(device="ANY", act="ANY"))
         ]
 
         self.assertCountEqual(expected, query)
@@ -478,7 +478,7 @@ class Actuator(TestCase, ClingoTest):
         facts = FactBase([
             terms.makesActuation(
                 actuator="smart_bulb01",
-                actuation="actuation01")
+                actuation=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -497,7 +497,7 @@ class Actuator(TestCase, ClingoTest):
         query = actuators_query + actuations_query
         expected = [
             terms.Actuator(id="smart_bulb01"),
-            terms.Actuation(id="actuation01")
+            terms.Actuation(id=terms.ActID(device="ANY", act="ANY"))
         ]
 
         self.assertCountEqual(expected, query)
@@ -507,7 +507,7 @@ class Actuator(TestCase, ClingoTest):
         facts = FactBase([
             terms.makesActuation(
                 actuator="smart_bulb01",
-                actuation="actuation01")
+                actuation=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -515,7 +515,7 @@ class Actuator(TestCase, ClingoTest):
 
         expected = [
             terms.madeByActuator(
-                actuation="actuation01",
+                actuation=terms.ActID(device="ANY", act="ANY"),
                 actuator="smart_bulb01")
         ]
 
@@ -591,13 +591,13 @@ class Actuation(TestCase, ClingoTest):
     # sosa:Actuation sub class of scott:Act
     def test_Actuations_are_Acts(self):
         facts = FactBase([
-            terms.Actuation(id="actuation01")
+            terms.Actuation(id=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
         solution = self.get_solution()
 
-        expected = [terms.Act(id="actuation01")]
+        expected = [terms.Act(id=terms.ActID(device="ANY", act="ANY"))]
         query = list(solution
             .query(terms.Act)
             .all()
@@ -609,7 +609,7 @@ class Actuation(TestCase, ClingoTest):
     def test_Actuation_madeByActuator_Actuator(self):
         facts = FactBase([
             terms.madeByActuator(
-                actuation="actuation01",
+                actuation=terms.ActID(device="ANY", act="ANY"),
                 actuator="smart_bulb01",)
         ])
 
@@ -629,7 +629,7 @@ class Actuation(TestCase, ClingoTest):
         query = actuators_query + actuations_query
         expected = [
             terms.Actuator(id="smart_bulb01"),
-            terms.Actuation(id="actuation01")
+            terms.Actuation(id=terms.ActID(device="ANY", act="ANY"))
         ]
 
         self.assertCountEqual(expected, query)
@@ -638,7 +638,7 @@ class Actuation(TestCase, ClingoTest):
     def test_madeByActuator_inverse_of_makesActuation(self):
         facts = FactBase([
             terms.madeByActuator(
-                actuation="actuation01",
+                actuation=terms.ActID(device="ANY", act="ANY"),
                 actuator="smart_bulb01",)
         ])
 
@@ -648,7 +648,7 @@ class Actuation(TestCase, ClingoTest):
         expected = [
             terms.makesActuation(
                 actuator="smart_bulb01",
-                actuation="actuation01")
+                actuation=terms.ActID(device="ANY", act="ANY"))
         ]
 
         query = list(solution
@@ -662,10 +662,10 @@ class Actuation(TestCase, ClingoTest):
     def test_no_more_than_1_madeByActuator(self):
         facts = FactBase([
             terms.madeByActuator(
-                actuation="actuation01",
+                actuation=terms.ActID(device="ANY", act="ANY"),
                 actuator="smart_bulb01"),
             terms.madeByActuator(
-                actuation="actuation01",
+                actuation=terms.ActID(device="ANY", act="ANY"),
                 actuator="smart_bulb02")
         ])
 
@@ -684,7 +684,7 @@ class Result(TestCase, ClingoTest):
         facts = FactBase([
             terms.isResultOf(
                 result="open",
-                act="actuation01")
+                act=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -702,7 +702,7 @@ class Result(TestCase, ClingoTest):
 
         query = acts_query + results_query
         expected = [
-            terms.Act(id="actuation01"),
+            terms.Act(id=terms.ActID(device="ANY", act="ANY")),
             terms.Result(id="open")
         ]
 
@@ -713,7 +713,7 @@ class Result(TestCase, ClingoTest):
         facts = FactBase([
             terms.isResultOf(
                 result="open",
-                act="actuation01")
+                act=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -721,7 +721,7 @@ class Result(TestCase, ClingoTest):
 
         expected = [
             terms.hasResult(
-                act="actuation01",
+                act=terms.ActID(device="ANY", act="ANY"),
                 result="open")
         ]
 
@@ -803,64 +803,3 @@ class Platform(TestCase, ClingoTest):
         )
 
         self.assertEqual(expected, query)
-
-
-class Inferences(TestCase, ClingoTest):
-    def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
-
-    def test_observation_has_observedProperty_when_sensor_observes(self):
-        facts = FactBase([
-            terms.observes(
-                sensor="motion_sensor01",
-                observable_property="motion"),
-            terms.makesObservation(
-                sensor='motion_sensor01',
-                observation='observation01')
-        ])
-
-        self.load_knowledge(facts)
-        solution = self.get_solution()
-
-        expected = [
-            terms.observedProperty(
-                observation="observation01",
-                observable_property='motion')
-        ]
-
-        query = list(solution
-            .query(terms.observedProperty)
-            .all()
-        )
-
-        self.assertCountEqual(expected, query)
-
-    def test_observedProperty_is_a_property_of_the_sensor_featureOfInterest(self):
-        facts = FactBase([
-            terms.observes(
-                sensor="motion_sensor01",
-                observable_property="motion"),
-            terms.makesObservation(
-                sensor='motion_sensor01',
-                observation='observation01'),
-            terms.hasFeatureOfInterest(
-                act='observation01',
-                feature_of_interest='kitchen'
-            )
-        ])
-
-        self.load_knowledge(facts)
-        solution = self.get_solution()
-
-        expected = [
-            terms.hasProperty(
-                feature_of_interest="kitchen",
-                property='motion')
-        ]
-
-        query = list(solution
-            .query(terms.hasProperty)
-            .all()
-        )
-
-        self.assertCountEqual(expected, query)
