@@ -107,6 +107,70 @@ class Sensor(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
+class Actuator(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup(
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+            'src/kb/actuation.lp'
+        )
+
+        facts = FactBase([
+            terms.makesActuationKlass(
+                klass='_smartBulb_',
+                actuation_klass='illuminate'
+            ),
+            terms.Device(
+                id="smart_bulb01",
+                klass="_smartBulb_"),
+            terms.locatedAt(
+                entity='smart_bulb01',
+                location='kitchen')
+        ])
+
+        self.load_knowledge(facts)
+
+    def test_actuation_actsOnProperty_equals_klassActsOnProperty(self):
+        solution = self.get_solution()
+
+        klass_property_query = list(solution
+            .query(terms.klassActsOnProperty)
+            .all()
+        )
+
+        self.assertEqual(len(klass_property_query), 1)
+        klassActsOnProperty = klass_property_query[0]
+
+        property_query = list(solution
+            .query(terms.actsOnProperty)
+            .all()
+        )
+
+        self.assertEqual(len(property_query), 1)
+        actsOnProperty = property_query[0]
+
+        self.assertEqual(
+            actsOnProperty.actuable_property,
+            klassActsOnProperty.actuable_property
+        )
+
+    def test_actsOnProperty_is_a_property_of_the_actuator_featureOfInterest(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasProperty(
+                feature_of_interest="kitchen",
+                property='illumination')
+        ]
+
+        query = list(solution
+            .query(terms.hasProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+
 class MotionSensor(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup(

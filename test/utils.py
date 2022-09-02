@@ -13,6 +13,8 @@ class ClingoTest:
             terms.locatedAt,
             terms.klassObservesProperty,
             terms.makesObservationKlass,
+            terms.klassActsOnProperty,
+            terms.makesActuationKlass,
 
             # CLINGO TERMS ---------
 

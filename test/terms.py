@@ -22,6 +22,14 @@ class makesObservationKlass(Predicate):
     klass = ConstantField
     observation_klass = ConstantField
 
+class klassActsOnProperty(Predicate):
+    klass = ConstantField
+    actuable_property = ConstantField
+
+class makesActuationKlass(Predicate):
+    klass = ConstantField
+    actuation_klass = ConstantField
+
 # CLINGO TERMS --------------
 
 class Act(Predicate):
