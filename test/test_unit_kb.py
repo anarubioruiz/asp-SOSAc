@@ -43,6 +43,70 @@ class Device(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
+class Sensor(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup(
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+            'src/kb/observation.lp'
+        )
+
+        facts = FactBase([
+            terms.makesObservationKlass(
+                klass='_motionSensor_',
+                observation_klass='movement'
+            ),
+            terms.Device(
+                id="motion_sensor01",
+                klass="_motionSensor_"),
+            terms.locatedAt(
+                entity='motion_sensor01',
+                location='kitchen')
+        ])
+
+        self.load_knowledge(facts)
+
+    def test_observation_observedProperty_equals_klassObservesProperty(self):
+        solution = self.get_solution()
+
+        klass_property_query = list(solution
+            .query(terms.klassObservesProperty)
+            .all()
+        )
+
+        self.assertEqual(len(klass_property_query), 1)
+        klassObservesProperty = klass_property_query[0]
+
+        property_query = list(solution
+            .query(terms.observedProperty)
+            .all()
+        )
+
+        self.assertEqual(len(property_query), 1)
+        observedProperty = property_query[0]
+
+        self.assertEqual(
+            observedProperty.observable_property,
+            klassObservesProperty.observable_property
+        )
+
+    def test_observedProperty_is_a_property_of_the_sensor_featureOfInterest(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasProperty(
+                feature_of_interest="kitchen",
+                property='motion')
+        ]
+
+        query = list(solution
+            .query(terms.hasProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+
 class MotionSensor(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup(
@@ -50,7 +114,6 @@ class MotionSensor(TestCase, ClingoTest):
             'src/engine.lp',
             'src/kb/sensor.lp',
             'src/kb/observation.lp',
-            # 'src/python.lp'
         )
 
         facts = FactBase([
@@ -78,15 +141,20 @@ class MotionSensor(TestCase, ClingoTest):
     def test_observes_motion(self):
         solution = self.get_solution()
 
+        expected = [
+            terms.observes(
+                sensor='motion_sensor01',
+                observable_property='motion')
+        ]
+
         query = list(solution
             .query(terms.observes)
-            .where(terms.observes.sensor == "motion_sensor01")
             .all()
         )
 
-        self.assertEqual(len(query), 1)
+        self.assertCountEqual(expected, query)
 
-    def test_makesObservation_of_the_type_related_to_klass(self):
+    def test_makesObservation_of_the_movement_klass(self):
         solution = self.get_solution()
 
         expected = [
@@ -103,9 +171,9 @@ class MotionSensor(TestCase, ClingoTest):
             .all()
         )
 
-        self.assertCountEqual(expected, query)
+        self.assertEqual(expected, query)
 
-    def test_observation_observedProperty_equals_property_observedBy_sensor(self):
+    def test_observation_observedProperty_is_motion(self):
         solution = self.get_solution()
 
         expected = [
@@ -194,6 +262,155 @@ class MotionSensor(TestCase, ClingoTest):
             terms.hasSimpleResult(
                 act=terms.ActID(device="motion_sensor01", act="movement"),
                 result="true")
+        ]
+
+        query = list(solution
+            .query(terms.hasSimpleResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+
+class SmartBulb(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup(
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+            'src/kb/actuator.lp',
+            'src/kb/actuation.lp',
+        )
+
+        facts = FactBase([
+            terms.Device(
+                id="smart_bulb01",
+                klass="_smartBulb_"),
+            terms.locatedAt(
+                entity='smart_bulb01',
+                location='kitchen')
+        ])
+
+        self.load_knowledge(facts)
+
+    def test_is_an_actuator(self):
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Actuator)
+            .where(terms.Actuator.id == "smart_bulb01")
+            .all()
+        )
+
+        self.assertEqual(len(query), 1)
+
+    def test_makesActuation_of_the_illuminate_klass(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.makesActuation(
+                actuator="smart_bulb01",
+                actuation=terms.ActID(
+                    device="smart_bulb01",
+                    act="illuminate")
+                )
+        ]
+
+        query = list(solution
+            .query(terms.makesActuation)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+    def test_actuation_actsOnProperty_illumination(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.actsOnProperty(
+                actuation=terms.ActID(
+                    device="smart_bulb01",
+                    act="illuminate"),
+                actuable_property="illumination")
+        ]
+
+        query = list(solution
+            .query(terms.actsOnProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isHostedBy_its_location_by_default(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.isHostedBy(
+                hosted="smart_bulb01",
+                platform='kitchen')
+        ]
+
+        query = list(solution
+            .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_host_is_the_actuation_featureOfInterest(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                act=terms.ActID(device="smart_bulb01", act="illuminate"),
+                feature_of_interest='kitchen')
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_illumination_is_a_host_property(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasProperty(
+                feature_of_interest='kitchen',
+                property='illumination')
+        ]
+
+        query = list(solution
+            .query(terms.hasProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_illuminate_actuation_hasResult_illuminating(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasResult(
+                act=terms.ActID(device="smart_bulb01", act="illuminate"),
+                result="illuminating")
+        ]
+
+        query = list(solution
+            .query(terms.hasResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_illuminate_actuation_hasSimpleResult_true(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasSimpleResult(
+                act=terms.ActID(device="smart_bulb01", act="illuminate"),
+                result="on")
         ]
 
         query = list(solution

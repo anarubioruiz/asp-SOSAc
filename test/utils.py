@@ -11,6 +11,8 @@ class ClingoTest:
             terms.Device,
 
             terms.locatedAt,
+            terms.klassObservesProperty,
+            terms.makesObservationKlass,
 
             # CLINGO TERMS ---------
 

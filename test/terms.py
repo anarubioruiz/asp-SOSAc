@@ -1,3 +1,4 @@
+from asyncio import constants
 from clorm import ComplexTerm, Predicate, ConstantField, StringField
 
 
@@ -12,6 +13,14 @@ class Device(Predicate):
 class locatedAt(Predicate):
     entity = ConstantField
     location = ConstantField
+
+class klassObservesProperty(Predicate):
+    klass = ConstantField
+    observable_property = ConstantField
+
+class makesObservationKlass(Predicate):
+    klass = ConstantField
+    observation_klass = ConstantField
 
 # CLINGO TERMS --------------
 
@@ -40,7 +49,7 @@ class ActuatableProperty(Predicate):
     id = ConstantField
 
 class Result(Predicate):
-    id = ConstantField
+    id = StringField
 
 class Platform(Predicate):
     id = ConstantField
@@ -78,8 +87,8 @@ class madeByActuator(Predicate):
     actuator = ConstantField
 
 class actsOnProperty(Predicate):
-    actuator = ConstantField
-    actuatable_property = ConstantField
+    actuation = ActID.Field
+    actuable_property = ConstantField
 
 class hasFeatureOfInterest(Predicate):
     act = ActID.Field
@@ -90,7 +99,7 @@ class isFeatureOfInterestOf(Predicate):
     act = ActID.Field
 
 class isResultOf(Predicate):
-    result = ConstantField
+    result = StringField
     act = ActID.Field
 
 class hasResult(Predicate):
