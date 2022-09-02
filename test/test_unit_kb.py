@@ -8,6 +8,41 @@ from utils import ClingoTest
 import terms
 
 
+class Device(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup(
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+        )
+
+        facts = FactBase([
+            terms.Device(
+                id="device01",
+                klass="ANY"),
+            terms.locatedAt(
+                entity='device01',
+                location='kitchen')
+        ])
+
+        self.load_knowledge(facts)
+
+    def test_isHostedBy_its_location_by_default(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.isHostedBy(
+                hosted="device01",
+                platform='kitchen')
+        ]
+
+        query = list(solution
+            .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+
 class MotionSensor(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup(
@@ -43,12 +78,6 @@ class MotionSensor(TestCase, ClingoTest):
     def test_observes_motion(self):
         solution = self.get_solution()
 
-        expected = [
-            terms.observes(
-                sensor="motion_sensor01",
-                observable_property='motion')
-        ]
-
         query = list(solution
             .query(terms.observes)
             .where(terms.observes.sensor == "motion_sensor01")
@@ -57,7 +86,44 @@ class MotionSensor(TestCase, ClingoTest):
 
         self.assertEqual(len(query), 1)
 
-    def test_hosted_by_its_location(self):
+    def test_makesObservation_of_the_type_related_to_klass(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.makesObservation(
+                sensor="motion_sensor01",
+                observation=terms.ActID(
+                    device="motion_sensor01",
+                    act="movement")
+                )
+        ]
+
+        query = list(solution
+            .query(terms.makesObservation)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_observation_observedProperty_equals_property_observedBy_sensor(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.observedProperty(
+                observation=terms.ActID(
+                    device="motion_sensor01",
+                    act="movement"),
+                observable_property="motion")
+        ]
+
+        query = list(solution
+            .query(terms.observedProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isHostedBy_its_location_by_default(self):
         solution = self.get_solution()
 
         expected = [
@@ -72,18 +138,6 @@ class MotionSensor(TestCase, ClingoTest):
         )
 
         self.assertCountEqual(expected, query)
-
-    def test_observation_created_when_host_is_known(self):
-        solution = self.get_solution()
-
-        query = list(solution
-            .query(terms.makesObservation)
-            .all()
-        )
-
-        self.assertEqual(len(query), 1)
-        makesObservation = query[0]
-        self.assertEqual(makesObservation.sensor, 'motion_sensor01')
 
     def test_host_is_the_observation_featureOfInterest(self):
         solution = self.get_solution()
@@ -112,6 +166,38 @@ class MotionSensor(TestCase, ClingoTest):
 
         query = list(solution
             .query(terms.hasProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_movement_observation_hasResult_thereIsMovement(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasResult(
+                act=terms.ActID(device="motion_sensor01", act="movement"),
+                result="there's movement")
+        ]
+
+        query = list(solution
+            .query(terms.hasResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_movement_observation_hasSimpleResult_true(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasSimpleResult(
+                act=terms.ActID(device="motion_sensor01", act="movement"),
+                result="true")
+        ]
+
+        query = list(solution
+            .query(terms.hasSimpleResult)
             .all()
         )
 

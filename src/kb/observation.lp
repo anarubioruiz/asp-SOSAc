@@ -6,5 +6,5 @@ observation(noMovement).
 hasResult(noMovement, "there's no movement").
 hasSimpleResult(noMovement, "false").
 
-observes(DEVICE, motion) :- makesObservation(DEVICE, movement).
-observes(DEVICE, motion) :- makesObservation(DEVICE, noMovement).
+klassObserves(SENSOR_KLASS, motion) :- makesObservationType(SENSOR_KLASS, movement).
+klassObserves(SENSOR_KLASS, motion) :- makesObservationType(SENSOR_KLASS, noMovement).

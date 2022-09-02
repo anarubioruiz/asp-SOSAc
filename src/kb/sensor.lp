@@ -1,2 +1,2 @@
 klass(_motionSensor_).
-makesObservation(_motionSensor_, movement).
+makesObservationType(_motionSensor_, movement).

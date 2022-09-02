@@ -1,4 +1,4 @@
-from clorm import ComplexTerm, Predicate, ConstantField, IntegerField
+from clorm import ComplexTerm, Predicate, ConstantField, StringField
 
 
 class ActID(Predicate):
@@ -95,11 +95,11 @@ class isResultOf(Predicate):
 
 class hasResult(Predicate):
     act = ActID.Field
-    result = ConstantField
+    result = StringField
 
 class hasSimpleResult(Predicate):
     act = ActID.Field
-    result = ConstantField
+    result = StringField
 
 class hosts(Predicate):
     platform = ConstantField
