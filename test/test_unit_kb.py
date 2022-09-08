@@ -17,8 +17,8 @@ class Device(TestCase, ClingoTest):
 
         self.facts = FactBase([
             terms.Device(
-                id="device01",
-                klass="ANY")
+                id='device01',
+                klass='ANY')
         ])
 
     def test_isHostedBy_its_location_by_default(self):
@@ -34,7 +34,7 @@ class Device(TestCase, ClingoTest):
 
         expected = [
             terms.isHostedBy(
-                hosted="device01",
+                hosted='device01',
                 platform='kitchen')
         ]
 
@@ -52,9 +52,9 @@ class Device(TestCase, ClingoTest):
                 property='location',
                 entity='device01'),
             terms.x_is_the_y_of_z(
-                value="window01",
-                property="host",
-                entity="device01")
+                value='window01',
+                property='host',
+                entity='device01')
         ])
 
         self.load_knowledge(self.facts)
@@ -62,7 +62,7 @@ class Device(TestCase, ClingoTest):
 
         expected = [
             terms.isHostedBy(
-                hosted="device01",
+                hosted='device01',
                 platform='window01')
         ]
 
@@ -76,13 +76,13 @@ class Device(TestCase, ClingoTest):
     def test_is_located_at_host_location(self):
         self.facts.add([
             terms.x_is_the_y_of_z(
-                value="window01",
-                property="host",
-                entity="device01"),
+                value='window01',
+                property='host',
+                entity='device01'),
             terms.x_is_the_y_of_z(
-                value="kitchen",
-                property="location",
-                entity="window01")
+                value='kitchen',
+                property='location',
+                entity='window01')
         ])
 
         self.load_knowledge(self.facts)
@@ -90,9 +90,9 @@ class Device(TestCase, ClingoTest):
 
         expected = [
             terms.x_is_the_y_of_z(
-                value="kitchen",
-                property="location",
-                entity="device01")
+                value='kitchen',
+                property='location',
+                entity='device01')
         ]
 
         query = list(solution
@@ -108,13 +108,13 @@ class Device(TestCase, ClingoTest):
     def test_host_is_located_at_device_location(self):
         self.facts.add([
             terms.x_is_the_y_of_z(
-                value="window01",
-                property="host",
-                entity="device01"),
+                value='window01',
+                property='host',
+                entity='device01'),
             terms.x_is_the_y_of_z(
-                value="kitchen",
-                property="location",
-                entity="device01")
+                value='kitchen',
+                property='location',
+                entity='device01')
         ])
 
         self.load_knowledge(self.facts)
@@ -122,9 +122,9 @@ class Device(TestCase, ClingoTest):
 
         expected = [
             terms.x_is_the_y_of_z(
-                value="kitchen",
-                property="location",
-                entity="window01")
+                value='kitchen',
+                property='location',
+                entity='window01')
         ]
 
         query = list(solution
@@ -151,8 +151,8 @@ class Sensor(TestCase, ClingoTest):
                 observation_klass='movement'
             ),
             terms.Device(
-                id="motion_sensor01",
-                klass="_motionSensor_"),
+                id='motion_sensor01',
+                klass='_motionSensor_'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -190,7 +190,7 @@ class Sensor(TestCase, ClingoTest):
 
         expected = [
             terms.hasProperty(
-                feature_of_interest="kitchen",
+                feature_of_interest='kitchen',
                 property='motion')
         ]
 
@@ -216,8 +216,8 @@ class Actuator(TestCase, ClingoTest):
                 actuation_klass='illuminate'
             ),
             terms.Device(
-                id="smart_bulb01",
-                klass="_smartBulb_"),
+                id='smart_bulb01',
+                klass='_smartBulb_'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -255,7 +255,7 @@ class Actuator(TestCase, ClingoTest):
 
         expected = [
             terms.hasProperty(
-                feature_of_interest="kitchen",
+                feature_of_interest='kitchen',
                 property='illumination')
         ]
 
@@ -278,8 +278,8 @@ class MotionSensor(TestCase, ClingoTest):
 
         facts = FactBase([
             terms.Device(
-                id="motion_sensor01",
-                klass="_motionSensor_"),
+                id='motion_sensor01',
+                klass='_motionSensor_'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -293,7 +293,7 @@ class MotionSensor(TestCase, ClingoTest):
 
         query = list(solution
             .query(terms.Sensor)
-            .where(terms.Sensor.id == "motion_sensor01")
+            .where(terms.Sensor.id == 'motion_sensor01')
             .all()
         )
 
@@ -320,10 +320,10 @@ class MotionSensor(TestCase, ClingoTest):
 
         expected = [
             terms.makesObservation(
-                sensor="motion_sensor01",
+                sensor='motion_sensor01',
                 observation=terms.ActID(
-                    device="motion_sensor01",
-                    act="movement")
+                    device='motion_sensor01',
+                    act='movement')
                 )
         ]
 
@@ -340,9 +340,9 @@ class MotionSensor(TestCase, ClingoTest):
         expected = [
             terms.observedProperty(
                 observation=terms.ActID(
-                    device="motion_sensor01",
-                    act="movement"),
-                observable_property="motion")
+                    device='motion_sensor01',
+                    act='movement'),
+                observable_property='motion')
         ]
 
         query = list(solution
@@ -357,7 +357,7 @@ class MotionSensor(TestCase, ClingoTest):
 
         expected = [
             terms.isHostedBy(
-                hosted="motion_sensor01",
+                hosted='motion_sensor01',
                 platform='kitchen')
         ]
 
@@ -373,7 +373,7 @@ class MotionSensor(TestCase, ClingoTest):
 
         expected = [
             terms.hasFeatureOfInterest(
-                act=terms.ActID(device="motion_sensor01", act="movement"),
+                act=terms.ActID(device='motion_sensor01', act='movement'),
                 feature_of_interest='kitchen')
         ]
 
@@ -405,7 +405,7 @@ class MotionSensor(TestCase, ClingoTest):
 
         expected = [
             terms.hasResult(
-                act=terms.ActID(device="motion_sensor01", act="movement"),
+                act=terms.ActID(device='motion_sensor01', act='movement'),
                 result="there's movement")
         ]
 
@@ -421,8 +421,8 @@ class MotionSensor(TestCase, ClingoTest):
 
         expected = [
             terms.hasSimpleResult(
-                act=terms.ActID(device="motion_sensor01", act="movement"),
-                result="true")
+                act=terms.ActID(device='motion_sensor01', act='movement'),
+                result='true')
         ]
 
         query = list(solution
@@ -444,8 +444,8 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         facts = FactBase([
             terms.Device(
-                id="broken_window_sensor01",
-                klass="_brokenWindowSensor_"),
+                id='broken_window_sensor01',
+                klass='_brokenWindowSensor_'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -463,7 +463,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         query = list(solution
             .query(terms.Sensor)
-            .where(terms.Sensor.id == "broken_window_sensor01")
+            .where(terms.Sensor.id == 'broken_window_sensor01')
             .all()
         )
 
@@ -490,10 +490,10 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         expected = [
             terms.makesObservation(
-                sensor="broken_window_sensor01",
+                sensor='broken_window_sensor01',
                 observation=terms.ActID(
-                    device="broken_window_sensor01",
-                    act="isBroken")
+                    device='broken_window_sensor01',
+                    act='isBroken')
                 )
         ]
 
@@ -510,9 +510,9 @@ class BrokenWindowSensor(TestCase, ClingoTest):
         expected = [
             terms.observedProperty(
                 observation=terms.ActID(
-                    device="broken_window_sensor01",
-                    act="isBroken"),
-                observable_property="integrity")
+                    device='broken_window_sensor01',
+                    act='isBroken'),
+                observable_property='integrity')
         ]
 
         query = list(solution
@@ -527,7 +527,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         expected = [
             terms.isHostedBy(
-                hosted="broken_window_sensor01",
+                hosted='broken_window_sensor01',
                 platform='window01')
         ]
 
@@ -543,7 +543,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         expected = [
             terms.hasFeatureOfInterest(
-                act=terms.ActID(device="broken_window_sensor01", act="isBroken"),
+                act=terms.ActID(device='broken_window_sensor01', act='isBroken'),
                 feature_of_interest='window01')
         ]
 
@@ -575,8 +575,8 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         expected = [
             terms.hasResult(
-                act=terms.ActID(device="broken_window_sensor01", act="isBroken"),
-                result="is broken")
+                act=terms.ActID(device='broken_window_sensor01', act='isBroken'),
+                result='is broken')
         ]
 
         query = list(solution
@@ -591,8 +591,8 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         expected = [
             terms.hasSimpleResult(
-                act=terms.ActID(device="broken_window_sensor01", act="isBroken"),
-                result="true")
+                act=terms.ActID(device='broken_window_sensor01', act='isBroken'),
+                result='true')
         ]
 
         query = list(solution
@@ -614,8 +614,8 @@ class SmartBulb(TestCase, ClingoTest):
 
         facts = FactBase([
             terms.Device(
-                id="smart_bulb01",
-                klass="_smartBulb_"),
+                id='smart_bulb01',
+                klass='_smartBulb_'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -629,7 +629,7 @@ class SmartBulb(TestCase, ClingoTest):
 
         query = list(solution
             .query(terms.Actuator)
-            .where(terms.Actuator.id == "smart_bulb01")
+            .where(terms.Actuator.id == 'smart_bulb01')
             .all()
         )
 
@@ -640,10 +640,10 @@ class SmartBulb(TestCase, ClingoTest):
 
         expected = [
             terms.makesActuation(
-                actuator="smart_bulb01",
+                actuator='smart_bulb01',
                 actuation=terms.ActID(
-                    device="smart_bulb01",
-                    act="illuminate")
+                    device='smart_bulb01',
+                    act='illuminate')
                 )
         ]
 
@@ -660,9 +660,9 @@ class SmartBulb(TestCase, ClingoTest):
         expected = [
             terms.actsOnProperty(
                 actuation=terms.ActID(
-                    device="smart_bulb01",
-                    act="illuminate"),
-                actuatable_property="illumination")
+                    device='smart_bulb01',
+                    act='illuminate'),
+                actuatable_property='illumination')
         ]
 
         query = list(solution
@@ -677,7 +677,7 @@ class SmartBulb(TestCase, ClingoTest):
 
         expected = [
             terms.isHostedBy(
-                hosted="smart_bulb01",
+                hosted='smart_bulb01',
                 platform='kitchen')
         ]
 
@@ -693,7 +693,7 @@ class SmartBulb(TestCase, ClingoTest):
 
         expected = [
             terms.hasFeatureOfInterest(
-                act=terms.ActID(device="smart_bulb01", act="illuminate"),
+                act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 feature_of_interest='kitchen')
         ]
 
@@ -725,8 +725,8 @@ class SmartBulb(TestCase, ClingoTest):
 
         expected = [
             terms.hasResult(
-                act=terms.ActID(device="smart_bulb01", act="illuminate"),
-                result="illuminating")
+                act=terms.ActID(device='smart_bulb01', act='illuminate'),
+                result='illuminating')
         ]
 
         query = list(solution
@@ -741,8 +741,8 @@ class SmartBulb(TestCase, ClingoTest):
 
         expected = [
             terms.hasSimpleResult(
-                act=terms.ActID(device="smart_bulb01", act="illuminate"),
-                result="on")
+                act=terms.ActID(device='smart_bulb01', act='illuminate'),
+                result='on')
         ]
 
         query = list(solution
