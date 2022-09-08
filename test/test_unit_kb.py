@@ -146,7 +146,7 @@ class Sensor(TestCase, ClingoTest):
         )
 
         facts = FactBase([
-            terms.makesObservationKlass(
+            terms.klass_makesObservation(
                 klass='_motionSensor_',
                 observation_klass='movement'
             ),
@@ -161,16 +161,16 @@ class Sensor(TestCase, ClingoTest):
 
         self.load_knowledge(facts)
 
-    def test_observation_observedProperty_equals_klassObservesProperty(self):
+    def test_observation_observedProperty_equals_klass_observesProperty(self):
         solution = self.get_solution()
 
         klass_property_query = list(solution
-            .query(terms.klassObservesProperty)
+            .query(terms.klass_observesProperty)
             .all()
         )
 
         self.assertEqual(len(klass_property_query), 1)
-        klassObservesProperty = klass_property_query[0]
+        klass_observesProperty = klass_property_query[0]
 
         property_query = list(solution
             .query(terms.observedProperty)
@@ -182,7 +182,7 @@ class Sensor(TestCase, ClingoTest):
 
         self.assertEqual(
             observedProperty.observable_property,
-            klassObservesProperty.observable_property
+            klass_observesProperty.observable_property
         )
 
     def test_observedProperty_is_a_property_of_the_sensor_featureOfInterest(self):
@@ -211,7 +211,7 @@ class Actuator(TestCase, ClingoTest):
         )
 
         facts = FactBase([
-            terms.makesActuationKlass(
+            terms.klass_makesActuation(
                 klass='_smartBulb_',
                 actuation_klass='illuminate'
             ),
@@ -226,16 +226,16 @@ class Actuator(TestCase, ClingoTest):
 
         self.load_knowledge(facts)
 
-    def test_actuation_actsOnProperty_equals_klassActsOnProperty(self):
+    def test_actuation_actsOnProperty_equals_klass_actsOnProperty(self):
         solution = self.get_solution()
 
         klass_property_query = list(solution
-            .query(terms.klassActsOnProperty)
+            .query(terms.klass_actsOnProperty)
             .all()
         )
 
         self.assertEqual(len(klass_property_query), 1)
-        klassActsOnProperty = klass_property_query[0]
+        klass_actsOnProperty = klass_property_query[0]
 
         property_query = list(solution
             .query(terms.actsOnProperty)
@@ -247,7 +247,7 @@ class Actuator(TestCase, ClingoTest):
 
         self.assertEqual(
             actsOnProperty.actuatable_property,
-            klassActsOnProperty.actuatable_property
+            klass_actsOnProperty.actuatable_property
         )
 
     def test_actsOnProperty_is_a_property_of_the_actuator_featureOfInterest(self):

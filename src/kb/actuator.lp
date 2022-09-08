@@ -1,5 +1,6 @@
 klass(_smartBulb_).
-makesActuationKlass(_smartBulb_, illuminate).
+klass_makesActuation(_smartBulb_, illuminate).
 
 klass(_alarmSiren_).
-makesActuationKlass(_alarmSiren_, warnOfDanger).
+klass_makesActuation(_alarmSiren_, warnOfDanger).
+klass_hasFeatureOfInterest(_alarmSiren_, home).

@@ -30,12 +30,12 @@ sensor(SENSOR) :- makesObservation(SENSOR, _).
 
 makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS))
     :- device(SENSOR, SENSOR_KLASS),
-       makesObservationKlass(SENSOR_KLASS, OBSERVATION_KLASS).
+       klass_makesObservation(SENSOR_KLASS, OBSERVATION_KLASS).
 
 observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY)
     :- device(SENSOR, SENSOR_KLASS),
        makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
-       klassObservesProperty(SENSOR_KLASS, OBSERVABLE_PROPERTY).
+       klass_observesProperty(SENSOR_KLASS, OBSERVABLE_PROPERTY).
 
 observes(SENSOR, OBSERVABLE_PROPERTY)
     :- observedProperty(actID(SENSOR, _), OBSERVABLE_PROPERTY).
@@ -64,17 +64,23 @@ actuator(ACTUATOR) :- makesActuation(ACTUATOR, _).
 
 makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS))
     :- device(ACTUATOR, ACTUATOR_KLASS),
-       makesActuationKlass(ACTUATOR_KLASS, ACTUATION_KLASS).
+       klass_makesActuation(ACTUATOR_KLASS, ACTUATION_KLASS).
 
 actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY)
     :- device(ACTUATOR, ACTUATOR_KLASS),
        makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
-       klassActsOnProperty(ACTUATOR_KLASS, ACTUATABLE_PROPERTY).
+       klass_actsOnProperty(ACTUATOR_KLASS, ACTUATABLE_PROPERTY).
 
 hasFeatureOfInterest(ACTUATION, HOST)
     :- device(ACTUATOR, ACTUATOR_KLASS),
        isHostedBy(ACTUATOR, HOST),
-       makesActuation(SENSOR, ACTUATION).
+       makesActuation(ACTUATOR, ACTUATION),
+       not klass_hasFeatureOfInterest(ACTUATOR_KLASS, _).
+
+hasFeatureOfInterest(ACTUATION, FEATURE)
+    :- device(ACTUATOR, ACTUATOR_KLASS),
+       makesActuation(ACTUATOR, ACTUATION),
+       klass_hasFeatureOfInterest(ACTUATOR_KLASS, FEATURE).
 
 hasProperty(FEATURE, ACTUATABLE_PROPERTY)
     :- actsOnProperty(ACTUATION, ACTUATABLE_PROPERTY),

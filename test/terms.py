@@ -15,19 +15,19 @@ class x_is_the_y_of_z(Predicate):
     property = ConstantField
     entity = ConstantField
 
-class klassObservesProperty(Predicate):
+class klass_observesProperty(Predicate):
     klass = ConstantField
     observable_property = ConstantField
 
-class makesObservationKlass(Predicate):
+class klass_makesObservation(Predicate):
     klass = ConstantField
     observation_klass = ConstantField
 
-class klassActsOnProperty(Predicate):
+class klass_actsOnProperty(Predicate):
     klass = ConstantField
     actuatable_property = ConstantField
 
-class makesActuationKlass(Predicate):
+class klass_makesActuation(Predicate):
     klass = ConstantField
     actuation_klass = ConstantField
 

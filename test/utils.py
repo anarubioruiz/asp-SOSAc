@@ -11,10 +11,10 @@ class ClingoTest:
             terms.Device,
             terms.x_is_the_y_of_z,
 
-            terms.klassObservesProperty,
-            terms.makesObservationKlass,
-            terms.klassActsOnProperty,
-            terms.makesActuationKlass,
+            terms.klass_observesProperty,
+            terms.klass_makesObservation,
+            terms.klass_actsOnProperty,
+            terms.klass_makesActuation,
 
             # CLINGO TERMS ---------
 

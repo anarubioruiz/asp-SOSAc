@@ -1,5 +1,5 @@
 klass(_motionSensor_).
-makesObservationKlass(_motionSensor_, movement).
+klass_makesObservation(_motionSensor_, movement).
 
 klass(_brokenWindowSensor_).
-makesObservationKlass(_brokenWindowSensor_, isBroken).
+klass_makesObservation(_brokenWindowSensor_, isBroken).
