@@ -751,3 +751,153 @@ class SmartBulb(TestCase, ClingoTest):
         )
 
         self.assertCountEqual(expected, query)
+
+
+class AlarmSiren(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup(
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+            'src/kb/actuator.lp',
+            'src/kb/actuation.lp',
+        )
+
+        facts = FactBase([
+            terms.Device(
+                id='alarm_siren01',
+                klass='_alarmSiren_'),
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='alarm_siren01')
+        ])
+
+        self.load_knowledge(facts)
+
+    def test_is_an_actuator(self):
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Actuator)
+            .where(terms.Actuator.id == 'alarm_siren01')
+            .all()
+        )
+
+        self.assertEqual(len(query), 1)
+
+    def test_makesActuation_of_the_warnOfDanger_klass(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.makesActuation(
+                actuator='alarm_siren01',
+                actuation=terms.ActID(
+                    device='alarm_siren01',
+                    act='warnOfDanger')
+                )
+        ]
+
+        query = list(solution
+            .query(terms.makesActuation)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+    def test_warnOfDanger_actuation_actsOnProperty_security(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.actsOnProperty(
+                actuation=terms.ActID(
+                    device='alarm_siren01',
+                    act='warnOfDanger'),
+                actuatable_property='security')
+        ]
+
+        query = list(solution
+            .query(terms.actsOnProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isHostedBy_its_location_by_default(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.isHostedBy(
+                hosted='alarm_siren01',
+                platform='kitchen')
+        ]
+
+        query = list(solution
+            .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_home_is_the_actuation_featureOfInterest(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
+                feature_of_interest='home')
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_security_is_a_home_property(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasProperty(
+                feature_of_interest='home',
+                property='security')
+        ]
+
+        query = list(solution
+            .query(terms.hasProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_warnOfDanger_actuation_hasResult_dangerAlert(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasResult(
+                act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
+                result='danger alert')
+        ]
+
+        query = list(solution
+            .query(terms.hasResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_warnOfDanger_actuation_hasSimpleResult_true(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasSimpleResult(
+                act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
+                result='on')
+        ]
+
+        query = list(solution
+            .query(terms.hasSimpleResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
