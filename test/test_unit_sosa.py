@@ -526,34 +526,34 @@ class Actuator(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-class ActuatableProperty(TestCase, ClingoTest):
+class actuatableProperty(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
-    # sosa:isActedOnBy - Domain: sosa:ActuatableProperty, Range: sosa:Actuation
-    def test_ActuatableProperty_isActedOnBy_Actuator(self):
+    # sosa:isActedOnBy - Domain: sosa:actuatableProperty, Range: sosa:Actuation
+    def test_actuatableProperty_isActedOnBy_Actuation(self):
         facts = FactBase([
             terms.isActedOnBy(
                 actuatable_property="lighting",
-                actuator="smart_bulb01")
+                actuation=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
         solution = self.get_solution()
 
-        actuators_query = list(solution
-            .query(terms.Actuator)
+        actuations_query = list(solution
+            .query(terms.Actuation)
             .all()
         )
 
-        actuable_properties_query = list(solution
+        actuatable_properties_query = list(solution
             .query(terms.ActuatableProperty)
             .all()
         )
 
-        query = actuators_query + actuable_properties_query
+        query = actuations_query + actuatable_properties_query
         expected = [
-            terms.Actuator(id="smart_bulb01"),
+            terms.Actuation(id=terms.ActID(device="ANY", act="ANY")),
             terms.ActuatableProperty(id="lighting")
         ]
 
@@ -564,7 +564,7 @@ class ActuatableProperty(TestCase, ClingoTest):
         facts = FactBase([
             terms.isActedOnBy(
                 actuatable_property="lighting",
-                actuator="smart_bulb01")
+                actuation=terms.ActID(device="ANY", act="ANY"))
         ])
 
         self.load_knowledge(facts)
@@ -572,7 +572,7 @@ class ActuatableProperty(TestCase, ClingoTest):
 
         expected = [
             terms.actsOnProperty(
-                actuator="smart_bulb01",
+                actuation=terms.ActID(device="ANY", act="ANY"),
                 actuatable_property="lighting")
         ]
 

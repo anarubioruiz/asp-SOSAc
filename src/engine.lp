@@ -3,7 +3,12 @@
 
 isHostedBy(DEVICE, LOCATION)
     :- device(DEVICE, _),
-       locatedAt(DEVICE, LOCATION).
+       x_is_the_y_of_z(LOCATION, location, DEVICE),
+       not x_is_the_y_of_z(_, host, DEVICE).
+
+isHostedBy(DEVICE, SPECIFIED_HOST)
+    :- device(DEVICE, _),
+       x_is_the_y_of_z(SPECIFIED_HOST, host, DEVICE).
 
 % ---- SENSOR INSTANCES
 
@@ -47,18 +52,18 @@ makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS))
     :- device(ACTUATOR, ACTUATOR_KLASS),
        makesActuationKlass(ACTUATOR_KLASS, ACTUATION_KLASS).
 
-actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUABLE_PROPERTY)
+actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY)
     :- device(ACTUATOR, ACTUATOR_KLASS),
        makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
-       klassActsOnProperty(ACTUATOR_KLASS, ACTUABLE_PROPERTY).
+       klassActsOnProperty(ACTUATOR_KLASS, ACTUATABLE_PROPERTY).
 
 hasFeatureOfInterest(ACTUATION, HOST)
     :- device(ACTUATOR, ACTUATOR_KLASS),
        isHostedBy(ACTUATOR, HOST),
        makesActuation(SENSOR, ACTUATION).
 
-hasProperty(FEATURE, ACTUABLE_PROPERTY)
-    :- actsOnProperty(ACTUATION, ACTUABLE_PROPERTY),
+hasProperty(FEATURE, ACTUATABLE_PROPERTY)
+    :- actsOnProperty(ACTUATION, ACTUATABLE_PROPERTY),
        hasFeatureOfInterest(ACTUATION, FEATURE).
 
 hasResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)

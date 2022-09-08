@@ -46,10 +46,10 @@ actuation(ACTUATION) :- makesActuation(_, ACTUATION).
 isActedOnBy(ACTUATABLE_PROPERTY, ACTUATOR) :- actsOnProperty(ACTUATOR, ACTUATABLE_PROPERTY).
 madeByActuator(ACTUATION, ACTUATOR) :- makesActuation(ACTUATOR, ACTUATION).
 
-% ---- ActuableProperty
+% ---- ActuatableProperty
 
-actuator(ACTUATOR) :- isActedOnBy(_, ACTUATOR).
-actsOnProperty(ACTUATOR, ACTUATABLE_PROPERTY) :- isActedOnBy(ACTUATABLE_PROPERTY, ACTUATOR).
+actuation(ACTUATION) :- isActedOnBy(_, ACTUATION).
+actsOnProperty(ACTUATION, ACTUATABLE_PROPERTY) :- isActedOnBy(ACTUATABLE_PROPERTY, ACTUATION).
 
 
 % ---- Actuation

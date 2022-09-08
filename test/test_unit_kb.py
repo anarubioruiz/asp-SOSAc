@@ -15,18 +15,18 @@ class Device(TestCase, ClingoTest):
             'src/engine.lp',
         )
 
-        facts = FactBase([
+        self.facts = FactBase([
             terms.Device(
                 id="device01",
                 klass="ANY"),
-            terms.locatedAt(
-                entity='device01',
-                location='kitchen')
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='device01')
         ])
 
-        self.load_knowledge(facts)
-
     def test_isHostedBy_its_location_by_default(self):
+        self.load_knowledge(self.facts)
         solution = self.get_solution()
 
         expected = [
@@ -42,6 +42,30 @@ class Device(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
+    def test_is_not_hosted_by_its_location_if_host_is_specified(self):
+        self.facts.add(
+            terms.x_is_the_y_of_z(
+                value="window01",
+                property="host",
+                entity="device01"
+            )
+        )
+
+        self.load_knowledge(self.facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.isHostedBy(
+                hosted="device01",
+                platform='window01')
+        ]
+
+        query = list(solution
+            .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
 
 class Sensor(TestCase, ClingoTest):
     def setUp(self):
@@ -59,9 +83,10 @@ class Sensor(TestCase, ClingoTest):
             terms.Device(
                 id="motion_sensor01",
                 klass="_motionSensor_"),
-            terms.locatedAt(
-                entity='motion_sensor01',
-                location='kitchen')
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='motion_sensor01')
         ])
 
         self.load_knowledge(facts)
@@ -123,9 +148,10 @@ class Actuator(TestCase, ClingoTest):
             terms.Device(
                 id="smart_bulb01",
                 klass="_smartBulb_"),
-            terms.locatedAt(
-                entity='smart_bulb01',
-                location='kitchen')
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='smart_bulb01')
         ])
 
         self.load_knowledge(facts)
@@ -150,8 +176,8 @@ class Actuator(TestCase, ClingoTest):
         actsOnProperty = property_query[0]
 
         self.assertEqual(
-            actsOnProperty.actuable_property,
-            klassActsOnProperty.actuable_property
+            actsOnProperty.actuatable_property,
+            klassActsOnProperty.actuatable_property
         )
 
     def test_actsOnProperty_is_a_property_of_the_actuator_featureOfInterest(self):
@@ -184,9 +210,10 @@ class MotionSensor(TestCase, ClingoTest):
             terms.Device(
                 id="motion_sensor01",
                 klass="_motionSensor_"),
-            terms.locatedAt(
-                entity='motion_sensor01',
-                location='kitchen')
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='motion_sensor01')
         ])
 
         self.load_knowledge(facts)
@@ -336,6 +363,176 @@ class MotionSensor(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
+class BrokenWindowSensor(TestCase, ClingoTest):
+    def setUp(self):
+        self.clingo_setup(
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+            'src/kb/sensor.lp',
+            'src/kb/observation.lp',
+        )
+
+        facts = FactBase([
+            terms.Device(
+                id="broken_window_sensor01",
+                klass="_brokenWindowSensor_"),
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='broken_window_sensor01'),
+            terms.x_is_the_y_of_z(
+                value='window01',
+                property='host',
+                entity='broken_window_sensor01')
+        ])
+
+        self.load_knowledge(facts)
+
+    def test_is_a_sensor(self):
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Sensor)
+            .where(terms.Sensor.id == "broken_window_sensor01")
+            .all()
+        )
+
+        self.assertEqual(len(query), 1)
+
+    def test_observes_integrity(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.observes(
+                sensor='broken_window_sensor01',
+                observable_property='integrity')
+        ]
+
+        query = list(solution
+            .query(terms.observes)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_makesObservation_of_the_isBroken_klass(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.makesObservation(
+                sensor="broken_window_sensor01",
+                observation=terms.ActID(
+                    device="broken_window_sensor01",
+                    act="isBroken")
+                )
+        ]
+
+        query = list(solution
+            .query(terms.makesObservation)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+    def test_observation_observedProperty_is_integrity(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.observedProperty(
+                observation=terms.ActID(
+                    device="broken_window_sensor01",
+                    act="isBroken"),
+                observable_property="integrity")
+        ]
+
+        query = list(solution
+            .query(terms.observedProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isHostedBy_a_window(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.isHostedBy(
+                hosted="broken_window_sensor01",
+                platform='window01')
+        ]
+
+        query = list(solution
+            .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_host_is_the_observation_featureOfInterest(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                act=terms.ActID(device="broken_window_sensor01", act="isBroken"),
+                feature_of_interest='window01')
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_integrity_is_a_host_property(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasProperty(
+                feature_of_interest='window01',
+                property='integrity')
+        ]
+
+        query = list(solution
+            .query(terms.hasProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isBroken_observation_hasResult_isBroken(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasResult(
+                act=terms.ActID(device="broken_window_sensor01", act="isBroken"),
+                result="is broken")
+        ]
+
+        query = list(solution
+            .query(terms.hasResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isBroken_observation_hasSimpleResult_true(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasSimpleResult(
+                act=terms.ActID(device="broken_window_sensor01", act="isBroken"),
+                result="true")
+        ]
+
+        query = list(solution
+            .query(terms.hasSimpleResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+
 class SmartBulb(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup(
@@ -349,9 +546,10 @@ class SmartBulb(TestCase, ClingoTest):
             terms.Device(
                 id="smart_bulb01",
                 klass="_smartBulb_"),
-            terms.locatedAt(
-                entity='smart_bulb01',
-                location='kitchen')
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='smart_bulb01')
         ])
 
         self.load_knowledge(facts)
@@ -394,7 +592,7 @@ class SmartBulb(TestCase, ClingoTest):
                 actuation=terms.ActID(
                     device="smart_bulb01",
                     act="illuminate"),
-                actuable_property="illumination")
+                actuatable_property="illumination")
         ]
 
         query = list(solution

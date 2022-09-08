@@ -9,8 +9,8 @@ class ClingoTest:
     def clingo_setup(self, *files):
         self.ctrl = Control(unifier=[
             terms.Device,
+            terms.x_is_the_y_of_z,
 
-            terms.locatedAt,
             terms.klassObservesProperty,
             terms.makesObservationKlass,
             terms.klassActsOnProperty,

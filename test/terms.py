@@ -10,9 +10,10 @@ class Device(Predicate):
     id = ConstantField
     klass = ConstantField
 
-class locatedAt(Predicate):
+class x_is_the_y_of_z(Predicate):
+    value = ConstantField
+    property = ConstantField
     entity = ConstantField
-    location = ConstantField
 
 class klassObservesProperty(Predicate):
     klass = ConstantField
@@ -24,7 +25,7 @@ class makesObservationKlass(Predicate):
 
 class klassActsOnProperty(Predicate):
     klass = ConstantField
-    actuable_property = ConstantField
+    actuatable_property = ConstantField
 
 class makesActuationKlass(Predicate):
     klass = ConstantField
@@ -88,7 +89,7 @@ class makesActuation(Predicate):
 
 class isActedOnBy(Predicate):
     actuatable_property = ConstantField
-    actuator = ConstantField
+    actuation = ActID.Field
 
 class madeByActuator(Predicate):
     actuation = ActID.Field
@@ -96,7 +97,7 @@ class madeByActuator(Predicate):
 
 class actsOnProperty(Predicate):
     actuation = ActID.Field
-    actuable_property = ConstantField
+    actuatable_property = ConstantField
 
 class hasFeatureOfInterest(Predicate):
     act = ActID.Field

@@ -1,3 +1,4 @@
+% ---- MOVEMENT
 observation(movement).
 hasResult(movement, "there's movement").
 hasSimpleResult(movement, "true").
@@ -11,3 +12,11 @@ hasSimpleResult(noMovement, "false").
 
 klassObservesProperty(SENSOR_KLASS, motion)
     :- makesObservationKlass(SENSOR_KLASS, noMovement).
+
+% ---- SOMETHING IS BROKEN
+observation(isBroken).
+hasResult(isBroken, "is broken").
+hasSimpleResult(isBroken, "true").
+
+klassObservesProperty(SENSOR_KLASS, integrity)
+    :- makesObservationKlass(SENSOR_KLASS, isBroken).
