@@ -334,7 +334,7 @@ class MotionSensor(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-    def test_observation_observedProperty_is_motion(self):
+    def test_movement_observation_observedProperty_is_motion(self):
         solution = self.get_solution()
 
         expected = [
@@ -368,7 +368,7 @@ class MotionSensor(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_host_is_the_observation_featureOfInterest(self):
+    def test_location_is_the_observation_featureOfInterest(self):
         solution = self.get_solution()
 
         expected = [
@@ -384,7 +384,7 @@ class MotionSensor(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_motion_is_a_host_property(self):
+    def test_motion_is_a_location_property(self):
         solution = self.get_solution()
 
         expected = [
@@ -504,7 +504,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-    def test_observation_observedProperty_is_integrity(self):
+    def test_isBroken_observation_observedProperty_is_integrity(self):
         solution = self.get_solution()
 
         expected = [
@@ -538,7 +538,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_host_is_the_observation_featureOfInterest(self):
+    def test_window_is_the_observation_featureOfInterest(self):
         solution = self.get_solution()
 
         expected = [
@@ -554,7 +554,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_integrity_is_a_host_property(self):
+    def test_integrity_is_a_window_property(self):
         solution = self.get_solution()
 
         expected = [
@@ -654,7 +654,7 @@ class SmartBulb(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-    def test_actuation_actsOnProperty_illumination(self):
+    def test_illuminate_actuation_actsOnProperty_illumination(self):
         solution = self.get_solution()
 
         expected = [
@@ -688,7 +688,7 @@ class SmartBulb(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_host_is_the_actuation_featureOfInterest(self):
+    def test_location_is_the_actuation_featureOfInterest(self):
         solution = self.get_solution()
 
         expected = [
@@ -704,7 +704,7 @@ class SmartBulb(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_illumination_is_a_host_property(self):
+    def test_illumination_is_a_location_property(self):
         solution = self.get_solution()
 
         expected = [
