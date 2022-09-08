@@ -18,14 +18,17 @@ class Device(TestCase, ClingoTest):
         self.facts = FactBase([
             terms.Device(
                 id="device01",
-                klass="ANY"),
+                klass="ANY")
+        ])
+
+    def test_isHostedBy_its_location_by_default(self):
+        self.facts.add(
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
                 entity='device01')
-        ])
+        )
 
-    def test_isHostedBy_its_location_by_default(self):
         self.load_knowledge(self.facts)
         solution = self.get_solution()
 
@@ -43,13 +46,16 @@ class Device(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
     def test_is_not_hosted_by_its_location_if_host_is_specified(self):
-        self.facts.add(
+        self.facts.add([
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='device01'),
             terms.x_is_the_y_of_z(
                 value="window01",
                 property="host",
-                entity="device01"
-            )
-        )
+                entity="device01")
+        ])
 
         self.load_knowledge(self.facts)
         solution = self.get_solution()
@@ -62,6 +68,70 @@ class Device(TestCase, ClingoTest):
 
         query = list(solution
             .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_is_located_at_host_location(self):
+        self.facts.add([
+            terms.x_is_the_y_of_z(
+                value="window01",
+                property="host",
+                entity="device01"),
+            terms.x_is_the_y_of_z(
+                value="kitchen",
+                property="location",
+                entity="window01")
+        ])
+
+        self.load_knowledge(self.facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.x_is_the_y_of_z(
+                value="kitchen",
+                property="location",
+                entity="device01")
+        ]
+
+        query = list(solution
+            .query(terms.x_is_the_y_of_z)
+            .where(
+                terms.x_is_the_y_of_z.entity == 'device01',
+                terms.x_is_the_y_of_z.property == 'location')
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_host_is_located_at_device_location(self):
+        self.facts.add([
+            terms.x_is_the_y_of_z(
+                value="window01",
+                property="host",
+                entity="device01"),
+            terms.x_is_the_y_of_z(
+                value="kitchen",
+                property="location",
+                entity="device01")
+        ])
+
+        self.load_knowledge(self.facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.x_is_the_y_of_z(
+                value="kitchen",
+                property="location",
+                entity="window01")
+        ]
+
+        query = list(solution
+            .query(terms.x_is_the_y_of_z)
+            .where(
+                terms.x_is_the_y_of_z.entity == 'window01',
+                terms.x_is_the_y_of_z.property == 'location')
             .all()
         )
 

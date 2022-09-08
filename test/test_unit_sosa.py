@@ -128,8 +128,6 @@ class FeatureOfInterest(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
-    # sosa:isFeatureOfInterestOf - Domain: sosa:FeatureOfInterest, Range: scott:Act
-    def test_FeatureOfInterest_isFeatureOfInterestOf_Act(self):
         facts = FactBase([
             terms.isFeatureOfInterestOf(
                 feature_of_interest="kitchen",
@@ -137,6 +135,9 @@ class FeatureOfInterest(TestCase, ClingoTest):
         ])
 
         self.load_knowledge(facts)
+
+    # sosa:isFeatureOfInterestOf - Domain: sosa:FeatureOfInterest, Range: scott:Act
+    def test_FeatureOfInterest_isFeatureOfInterestOf_Act(self):
         solution = self.get_solution()
 
         acts_query = list(solution
@@ -159,13 +160,6 @@ class FeatureOfInterest(TestCase, ClingoTest):
 
     # sosa:isFeatureOfInterestOf inverse property of sosa:hasFeatureOfInterest
     def test_isFeatureOfInterestOf_inverse_of_hasFeatureOfInterest(self):
-        facts = FactBase([
-            terms.isFeatureOfInterestOf(
-                feature_of_interest="kitchen",
-                act=terms.ActID(device="ANY", act="ANY"))
-        ])
-
-        self.load_knowledge(facts)
         solution = self.get_solution()
 
         query = list(solution
@@ -296,8 +290,6 @@ class ObservableProperty(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
-    # sosa:isObservedBy - Domain: sosa:ObservableProperty, Range: sosa:Sensor
-    def test_ObservableProperty_isObservedBy_Sensor(self):
         facts = FactBase([
             terms.isObservedBy(
                 observable_property="temperature",
@@ -305,6 +297,9 @@ class ObservableProperty(TestCase, ClingoTest):
         ])
 
         self.load_knowledge(facts)
+
+    # sosa:isObservedBy - Domain: sosa:ObservableProperty, Range: sosa:Sensor
+    def test_ObservableProperty_isObservedBy_Sensor(self):
         solution = self.get_solution()
 
         sensors_query = list(solution
@@ -327,13 +322,6 @@ class ObservableProperty(TestCase, ClingoTest):
 
     # sosa:isObservedBy inverse property of sosa:observes
     def test_isObservedBy_inverse_of_observes(self):
-        facts = FactBase([
-            terms.isObservedBy(
-                observable_property="temperature",
-                sensor="temp_sensor01")
-        ])
-
-        self.load_knowledge(facts)
         solution = self.get_solution()
 
         expected = [
@@ -473,8 +461,6 @@ class Actuator(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
-    # sosa:madeActuation - Domain: sosa:Actuator, Range: sosa:Actuation
-    def test_sensor_makesActuation_actuation(self):
         facts = FactBase([
             terms.makesActuation(
                 actuator="smart_bulb01",
@@ -482,6 +468,9 @@ class Actuator(TestCase, ClingoTest):
         ])
 
         self.load_knowledge(facts)
+
+    # sosa:madeActuation - Domain: sosa:Actuator, Range: sosa:Actuation
+    def test_sensor_makesActuation_actuation(self):
         solution = self.get_solution()
 
         actuators_query = list(solution
@@ -504,13 +493,6 @@ class Actuator(TestCase, ClingoTest):
 
     # sosa:madeActuation inverse property of sosa:madeByActuator
     def test_makesActuation_inverse_of_madeByActuator(self):
-        facts = FactBase([
-            terms.makesActuation(
-                actuator="smart_bulb01",
-                actuation=terms.ActID(device="ANY", act="ANY"))
-        ])
-
-        self.load_knowledge(facts)
         solution = self.get_solution()
 
         expected = [
@@ -526,12 +508,10 @@ class Actuator(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-class actuatableProperty(TestCase, ClingoTest):
+class ActuatableProperty(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
-    # sosa:isActedOnBy - Domain: sosa:actuatableProperty, Range: sosa:Actuation
-    def test_actuatableProperty_isActedOnBy_Actuation(self):
         facts = FactBase([
             terms.isActedOnBy(
                 actuatable_property="lighting",
@@ -539,6 +519,9 @@ class actuatableProperty(TestCase, ClingoTest):
         ])
 
         self.load_knowledge(facts)
+
+    # sosa:isActedOnBy - Domain: sosa:actuatableProperty, Range: sosa:Actuation
+    def test_actuatableProperty_isActedOnBy_Actuation(self):
         solution = self.get_solution()
 
         actuations_query = list(solution
@@ -561,13 +544,6 @@ class actuatableProperty(TestCase, ClingoTest):
 
     # sosa:isActedOnBy invserse property of sosa:actsOnProperty
     def test_isActedOnBy_inverse_actsOnProperty(self):
-        facts = FactBase([
-            terms.isActedOnBy(
-                actuatable_property="lighting",
-                actuation=terms.ActID(device="ANY", act="ANY"))
-        ])
-
-        self.load_knowledge(facts)
         solution = self.get_solution()
 
         expected = [
@@ -679,8 +655,6 @@ class Result(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
-    # sosa:isResultOf - Domain: sosa:Result, Range: scott:Act
-    def test_Result_isResultOf_Act(self):
         facts = FactBase([
             terms.isResultOf(
                 result="open",
@@ -688,6 +662,9 @@ class Result(TestCase, ClingoTest):
         ])
 
         self.load_knowledge(facts)
+
+    # sosa:isResultOf - Domain: sosa:Result, Range: scott:Act
+    def test_Result_isResultOf_Act(self):
         solution = self.get_solution()
 
         acts_query = list(solution
@@ -710,13 +687,6 @@ class Result(TestCase, ClingoTest):
 
     # sosa:isResultOf inverse property of sosa:hasResult
     def test_isResultOf_inverse_of_hasResult(self):
-        facts = FactBase([
-            terms.isResultOf(
-                result="open",
-                act=terms.ActID(device="ANY", act="ANY"))
-        ])
-
-        self.load_knowledge(facts)
         solution = self.get_solution()
 
         expected = [
