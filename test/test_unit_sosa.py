@@ -104,25 +104,6 @@ class Act(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-    # sosa:hasSimpleResult - Domain: scott:Act, Range: --
-    def test_Act_hasSimpleResult(self):
-        facts = FactBase([
-            terms.hasSimpleResult(
-                act=terms.ActID(device='ANY', act='ANY'),
-                result='true')
-        ])
-
-        self.load_knowledge(facts)
-        solution = self.get_solution()
-
-        expected = [terms.Act(id=terms.ActID(device='ANY', act='ANY'))]
-        query = list(solution
-            .query(terms.Act)
-            .all()
-        )
-
-        self.assertCountEqual(expected, query)
-
 
 class FeatureOfInterest(TestCase, ClingoTest):
     def setUp(self):

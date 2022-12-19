@@ -84,10 +84,10 @@ attr(edge, ((SENSOR, OBSERVATION_KLASS), FEATURE), label, "hasFeatureOfInterest"
 klass_makesObservation(_motionSensor_,movement).
 klass_makesObservation(_brokenWindowSensor_,isBroken).
 klass_observesProperty(_motionSensor_,motion).
-klass_observesProperty(_brokenWindowSensor_,integrity).
+klass_observesProperty(_brokenWindowSensor_,broken).
 klass_makesActuation(_smartBulb_,illuminate).
 klass_makesActuation(_alarmSiren_,warnOfDanger).
-klass_actsOnProperty(_smartBulb_,illumination).
+klass_actsOnProperty(_smartBulb_,illuminated).
 klass_actsOnProperty(_alarmSiren_,security).
 x_is_the_y_of_z(kitchen,location,ms1).
 isHostedBy(ms1,kitchen).
@@ -105,13 +105,6 @@ hasResult(illuminate,"illuminating").
 hasResult(notIlluminate,"not illuminating").
 hasResult(warnOfDanger,"danger alert").
 hasResult(actID(ms1,movement),"there's movement").
-hasSimpleResult(movement,"true").
-hasSimpleResult(noMovement,"false").
-hasSimpleResult(isBroken,"true").
-hasSimpleResult(illuminate,"on").
-hasSimpleResult(notIlluminate,"off").
-hasSimpleResult(warnOfDanger,"on").
-hasSimpleResult(actID(ms1,movement),"true").
 klass_hasFeatureOfInterest(_alarmSiren_,home).
 featureOfInterest(kitchen).
 isFeatureOfInterestOf(kitchen,actID(ms1,movement)).

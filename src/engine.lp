@@ -53,11 +53,6 @@ hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
     :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        hasResult(OBSERVATION_KLASS, RESULT).
 
-hasSimpleResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
-    :- device(SENSOR, SENSOR_KLASS),
-       makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
-       hasSimpleResult(OBSERVATION_KLASS, RESULT).
-
 % ---- ACTUATOR INSTANCES
 
 actuator(ACTUATOR) :- makesActuation(ACTUATOR, _).
@@ -89,7 +84,3 @@ hasProperty(FEATURE, ACTUATABLE_PROPERTY)
 hasResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
     :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        hasResult(ACTUATION_KLASS, RESULT).
-
-hasSimpleResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
-       hasSimpleResult(ACTUATION_KLASS, RESULT).

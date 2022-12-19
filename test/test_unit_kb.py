@@ -256,7 +256,7 @@ class Actuator(TestCase, ClingoTest):
         expected = [
             terms.hasProperty(
                 feature_of_interest='kitchen',
-                property='illumination')
+                property='illuminated')
         ]
 
         query = list(solution
@@ -406,27 +406,11 @@ class MotionSensor(TestCase, ClingoTest):
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='motion_sensor01', act='movement'),
-                result="there's movement")
+                result="true")
         ]
 
         query = list(solution
             .query(terms.hasResult)
-            .all()
-        )
-
-        self.assertCountEqual(expected, query)
-
-    def test_movement_observation_hasSimpleResult_true(self):
-        solution = self.get_solution()
-
-        expected = [
-            terms.hasSimpleResult(
-                act=terms.ActID(device='motion_sensor01', act='movement'),
-                result='true')
-        ]
-
-        query = list(solution
-            .query(terms.hasSimpleResult)
             .all()
         )
 
@@ -469,13 +453,13 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         self.assertEqual(len(query), 1)
 
-    def test_observes_integrity(self):
+    def test_observes_broken(self):
         solution = self.get_solution()
 
         expected = [
             terms.observes(
                 sensor='broken_window_sensor01',
-                observable_property='integrity')
+                observable_property='broken')
         ]
 
         query = list(solution
@@ -504,7 +488,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-    def test_isBroken_observation_observedProperty_is_integrity(self):
+    def test_isBroken_observation_observedProperty_is_broken(self):
         solution = self.get_solution()
 
         expected = [
@@ -512,7 +496,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
                 observation=terms.ActID(
                     device='broken_window_sensor01',
                     act='isBroken'),
-                observable_property='integrity')
+                observable_property='broken')
         ]
 
         query = list(solution
@@ -554,13 +538,13 @@ class BrokenWindowSensor(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_integrity_is_a_window_property(self):
+    def test_broken_is_a_window_property(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasProperty(
                 feature_of_interest='window01',
-                property='integrity')
+                property='broken')
         ]
 
         query = list(solution
@@ -576,27 +560,11 @@ class BrokenWindowSensor(TestCase, ClingoTest):
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='broken_window_sensor01', act='isBroken'),
-                result='is broken')
-        ]
-
-        query = list(solution
-            .query(terms.hasResult)
-            .all()
-        )
-
-        self.assertCountEqual(expected, query)
-
-    def test_isBroken_observation_hasSimpleResult_true(self):
-        solution = self.get_solution()
-
-        expected = [
-            terms.hasSimpleResult(
-                act=terms.ActID(device='broken_window_sensor01', act='isBroken'),
                 result='true')
         ]
 
         query = list(solution
-            .query(terms.hasSimpleResult)
+            .query(terms.hasResult)
             .all()
         )
 
@@ -654,7 +622,7 @@ class SmartBulb(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-    def test_illuminate_actuation_actsOnProperty_illumination(self):
+    def test_illuminate_actuation_actsOnProperty_illuminated(self):
         solution = self.get_solution()
 
         expected = [
@@ -662,7 +630,7 @@ class SmartBulb(TestCase, ClingoTest):
                 actuation=terms.ActID(
                     device='smart_bulb01',
                     act='illuminate'),
-                actuatable_property='illumination')
+                actuatable_property='illuminated')
         ]
 
         query = list(solution
@@ -704,13 +672,13 @@ class SmartBulb(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_illumination_is_a_location_property(self):
+    def test_illuminated_is_a_location_property(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasProperty(
                 feature_of_interest='kitchen',
-                property='illumination')
+                property='illuminated')
         ]
 
         query = list(solution
@@ -720,33 +688,17 @@ class SmartBulb(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_illuminate_actuation_hasResult_illuminating(self):
+    def test_illuminate_actuation_hasResult_true(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
-                result='illuminating')
+                result='true')
         ]
 
         query = list(solution
             .query(terms.hasResult)
-            .all()
-        )
-
-        self.assertCountEqual(expected, query)
-
-    def test_illuminate_actuation_hasSimpleResult_true(self):
-        solution = self.get_solution()
-
-        expected = [
-            terms.hasSimpleResult(
-                act=terms.ActID(device='smart_bulb01', act='illuminate'),
-                result='on')
-        ]
-
-        query = list(solution
-            .query(terms.hasSimpleResult)
             .all()
         )
 
@@ -804,7 +756,7 @@ class AlarmSiren(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-    def test_warnOfDanger_actuation_actsOnProperty_security(self):
+    def test_warnOfDanger_actuation_actsOnProperty_in_alert(self):
         solution = self.get_solution()
 
         expected = [
@@ -812,7 +764,7 @@ class AlarmSiren(TestCase, ClingoTest):
                 actuation=terms.ActID(
                     device='alarm_siren01',
                     act='warnOfDanger'),
-                actuatable_property='security')
+                actuatable_property='in_alert')
         ]
 
         query = list(solution
@@ -854,13 +806,13 @@ class AlarmSiren(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_security_is_a_home_property(self):
+    def test_in_alert_is_a_home_property(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasProperty(
                 feature_of_interest='home',
-                property='security')
+                property='in_alert')
         ]
 
         query = list(solution
@@ -876,27 +828,11 @@ class AlarmSiren(TestCase, ClingoTest):
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
-                result='danger alert')
+                result='true')
         ]
 
         query = list(solution
             .query(terms.hasResult)
-            .all()
-        )
-
-        self.assertCountEqual(expected, query)
-
-    def test_warnOfDanger_actuation_hasSimpleResult_true(self):
-        solution = self.get_solution()
-
-        expected = [
-            terms.hasSimpleResult(
-                act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
-                result='on')
-        ]
-
-        query = list(solution
-            .query(terms.hasSimpleResult)
             .all()
         )
 

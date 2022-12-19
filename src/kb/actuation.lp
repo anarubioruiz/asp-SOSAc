@@ -1,22 +1,19 @@
 % ---- ILLUMINATE
 actuation(illuminate).
-hasResult(illuminate, "illuminating").
-hasSimpleResult(illuminate, "on").
+hasResult(illuminate, "true").
 
-klass_actsOnProperty(ACTUATOR_KLASS, illumination)
+klass_actsOnProperty(ACTUATOR_KLASS, illuminated)
     :- klass_makesActuation(ACTUATOR_KLASS, illuminate).
 
 actuation(notIlluminate).
-hasResult(notIlluminate, "not illuminating").
-hasSimpleResult(notIlluminate, "off").
+hasResult(notIlluminate, "false").
 
-klass_actsOnProperty(ACTUATOR_KLASS, illumination)
+klass_actsOnProperty(ACTUATOR_KLASS, illuminated)
     :- klass_makesActuation(ACTUATOR_KLASS, notIlluminate).
 
 % ---- WARN OF DANGER
 actuation(warnOfDanger).
-hasResult(warnOfDanger, "danger alert").
-hasSimpleResult(warnOfDanger, "on").
+hasResult(warnOfDanger, "true").
 
-klass_actsOnProperty(ACTUATOR_KLASS, security)
+klass_actsOnProperty(ACTUATOR_KLASS, in_alert)
     :- klass_makesActuation(ACTUATOR_KLASS, warnOfDanger).

@@ -66,10 +66,6 @@ makesActuation(ACTUATOR, ACTUATION) :- madeByActuator(ACTUATION, ACTUATOR).
 act(ACT) :- isResultOf(_, ACT).
 hasResult(ACT, RESULT) :- isResultOf(RESULT, ACT).
 
-% ---- Simple Result
-
-act(ACT) :- hasSimpleResult(ACT, _).
-
 % ---- Platform
 
 platform(PLATFORM) :- isHostedBy(_, PLATFORM).
