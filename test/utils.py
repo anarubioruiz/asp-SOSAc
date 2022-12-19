@@ -15,6 +15,7 @@ class ClingoTest:
             terms.klass_makesObservation,
             terms.klass_actsOnProperty,
             terms.klass_makesActuation,
+            terms.klass_hasFeatureOfInterest,
 
             # CLINGO TERMS ---------
 

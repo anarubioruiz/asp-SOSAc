@@ -137,6 +137,26 @@ class Device(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
+    def test_property_value_must_exist_for_the_not_home_property_in_klass_hasFeatureOfInterest(self):
+        facts = FactBase([
+            terms.klass_makesActuation(
+                klass='_exampleDevice_',
+                actuation_klass='any'),
+            terms.Device(
+                id='actuator01',
+                klass='_exampleDevice_'),
+            terms.klass_hasFeatureOfInterest(
+                id=('_exampleDevice_', 'any'),
+                property='host')
+        ])
+
+        # fact x_is_the_y_of_z(PLATFORM, host, actuator01) does not exist
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        self.assertEqual(solution, None)
+
 class Sensor(TestCase, ClingoTest):
     def setUp(self):
         self.clingo_setup(
@@ -145,7 +165,7 @@ class Sensor(TestCase, ClingoTest):
             'src/kb/observation.lp'
         )
 
-        facts = FactBase([
+        self.facts = FactBase([
             terms.klass_makesObservation(
                 klass='_motionSensor_',
                 observation_klass='movement'
@@ -159,9 +179,8 @@ class Sensor(TestCase, ClingoTest):
                 entity='motion_sensor01')
         ])
 
-        self.load_knowledge(facts)
-
     def test_observation_observedProperty_equals_klass_observesProperty(self):
+        self.load_knowledge(self.facts)
         solution = self.get_solution()
 
         klass_property_query = list(solution
@@ -185,7 +204,108 @@ class Sensor(TestCase, ClingoTest):
             klass_observesProperty.observable_property
         )
 
+    def test_featureOfInterest_is_the_sensor_location_by_default(self):
+        self.load_knowledge(self.facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                feature_of_interest='kitchen',
+                act=terms.ActID(
+                    device='motion_sensor01',
+                    act='movement')
+                ),
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_featureOfInterest_is_the_property_in_klass_featureOfInterest(self):
+        facts = FactBase([
+            terms.klass_makesObservation(
+                klass='_brokenWindowSensor_',
+                observation_klass='isBroken'),
+            terms.Device(
+                id='window_sensor01',
+                klass='_brokenWindowSensor_'),
+            terms.klass_hasFeatureOfInterest(
+                id=('_brokenWindowSensor_', 'isBroken'),
+                property='host'),
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='window_sensor01'),
+            terms.x_is_the_y_of_z(
+                value='kitchen_window',
+                property='host',
+                entity='window_sensor01')
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                feature_of_interest='kitchen_window',
+                act=terms.ActID(
+                    device='window_sensor01',
+                    act='isBroken')
+                ),
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_featureOfInterest_is_home_if_its_property_in_klass_featureOfInterest(self):
+        facts = FactBase([
+            terms.klass_makesObservation(
+                klass='_exampleSensor_',
+                observation_klass='any'),
+            terms.Device(
+                id='sensor01',
+                klass='_exampleSensor_'),
+            terms.klass_hasFeatureOfInterest(
+                id=('_exampleSensor_', 'any'),
+                property='home'),
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='sensor01'),
+            terms.x_is_the_y_of_z(
+                value='kitchen_window',
+                property='host',
+                entity='sensor01')
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                feature_of_interest='home',
+                act=terms.ActID(
+                    device='sensor01',
+                    act='any')
+                ),
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
     def test_observedProperty_is_a_property_of_the_sensor_featureOfInterest(self):
+        self.load_knowledge(self.facts)
         solution = self.get_solution()
 
         expected = [
@@ -210,7 +330,7 @@ class Actuator(TestCase, ClingoTest):
             'src/kb/actuation.lp'
         )
 
-        facts = FactBase([
+        self.facts = FactBase([
             terms.klass_makesActuation(
                 klass='_smartBulb_',
                 actuation_klass='illuminate'
@@ -224,9 +344,9 @@ class Actuator(TestCase, ClingoTest):
                 entity='smart_bulb01')
         ])
 
-        self.load_knowledge(facts)
 
     def test_actuation_actsOnProperty_equals_klass_actsOnProperty(self):
+        self.load_knowledge(self.facts)
         solution = self.get_solution()
 
         klass_property_query = list(solution
@@ -250,7 +370,108 @@ class Actuator(TestCase, ClingoTest):
             klass_actsOnProperty.actuatable_property
         )
 
+    def test_featureOfInterest_is_the_actuator_location_by_default(self):
+        self.load_knowledge(self.facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                feature_of_interest='kitchen',
+                act=terms.ActID(
+                    device='smart_bulb01',
+                    act='illuminate')
+                ),
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_featureOfInterest_is_the_property_in_klass_featureOfInterest(self):
+        facts = FactBase([
+            terms.klass_makesActuation(
+                klass='_blindMotor_',
+                actuation_klass='open'),
+            terms.Device(
+                id='bm_motor01',
+                klass='_blindMotor_'),
+            terms.klass_hasFeatureOfInterest(
+                id=('_blindMotor_', 'open'),
+                property='host'),
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='bm_motor01'),
+            terms.x_is_the_y_of_z(
+                value='window01_blind',
+                property='host',
+                entity='bm_motor01')
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                feature_of_interest='window01_blind',
+                act=terms.ActID(
+                    device='bm_motor01',
+                    act='open')
+                ),
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_featureOfInterest_is_home_if_its_property_in_klass_featureOfInterest(self):
+        facts = FactBase([
+            terms.klass_makesActuation(
+                klass='_exampleActuator_',
+                actuation_klass='any'),
+            terms.Device(
+                id='actuator01',
+                klass='_exampleActuator_'),
+            terms.klass_hasFeatureOfInterest(
+                id=('_exampleActuator_', 'any'),
+                property='home'),
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='actuator01'),
+            terms.x_is_the_y_of_z(
+                value='kitchen_window',
+                property='host',
+                entity='actuator01')
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                feature_of_interest='home',
+                act=terms.ActID(
+                    device='actuator01',
+                    act='any')
+                ),
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
     def test_actsOnProperty_is_a_property_of_the_actuator_featureOfInterest(self):
+        self.load_knowledge(self.facts)
         solution = self.get_solution()
 
         expected = [
@@ -400,7 +621,7 @@ class MotionSensor(TestCase, ClingoTest):
 
         self.assertCountEqual(expected, query)
 
-    def test_movement_observation_hasResult_thereIsMovement(self):
+    def test_movement_observation_hasResult_true(self):
         solution = self.get_solution()
 
         expected = [

@@ -31,6 +31,17 @@ class klass_makesActuation(Predicate):
     klass = ConstantField
     actuation_klass = ConstantField
 
+class klass_hasFeatureOfInterest(Predicate):
+    class _id(Predicate):
+        device_klass = ConstantField
+        activity_klass = ConstantField
+        class Meta:
+            is_tuple = True
+
+    id = _id.Field
+    property = ConstantField
+
+
 # CLINGO TERMS --------------
 
 class Act(Predicate):
