@@ -11,8 +11,8 @@ import scott_terms as terms
 KB_NAMES = [
     '_motionSensor_',
     '_brokenWindowSensor_',
-    # '_smartBulb_',
-    # '_alarmSiren_'
+    '_smartBulb_',
+    '_alarmSiren_'
 ]
 
 NUM_DEVICES = len(KB_NAMES)
