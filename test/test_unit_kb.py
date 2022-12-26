@@ -1,14 +1,11 @@
 from unittest import TestCase, skip
-
 from clorm import FactBase
-from clorm import monkey
-monkey.patch() # must call this before importing clingo
 
-from utils import ClingoTest
-import terms
+from scott_clingo import ScottClingo
+import scott_terms as terms
 
 
-class Device(TestCase, ClingoTest):
+class Device(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosa_engine.lp',
@@ -157,7 +154,7 @@ class Device(TestCase, ClingoTest):
 
         self.assertEqual(solution, None)
 
-class Sensor(TestCase, ClingoTest):
+class Sensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosa_engine.lp',
@@ -322,7 +319,7 @@ class Sensor(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
-class Actuator(TestCase, ClingoTest):
+class Actuator(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosa_engine.lp',
@@ -488,7 +485,7 @@ class Actuator(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
-class MotionSensor(TestCase, ClingoTest):
+class MotionSensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosa_engine.lp',
@@ -638,7 +635,7 @@ class MotionSensor(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
-class BrokenWindowSensor(TestCase, ClingoTest):
+class BrokenWindowSensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosa_engine.lp',
@@ -792,7 +789,7 @@ class BrokenWindowSensor(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
-class SmartBulb(TestCase, ClingoTest):
+class SmartBulb(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosa_engine.lp',
@@ -926,7 +923,7 @@ class SmartBulb(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
-class AlarmSiren(TestCase, ClingoTest):
+class AlarmSiren(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosa_engine.lp',

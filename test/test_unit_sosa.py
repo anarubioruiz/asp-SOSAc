@@ -1,14 +1,11 @@
 from unittest import TestCase, skip
-
 from clorm import FactBase
-from clorm import monkey
-monkey.patch() # must call this before importing clingo
 
-from utils import ClingoTest
-import terms
+from scott_clingo import ScottClingo
+import scott_terms as terms
 
 
-class Act(TestCase, ClingoTest):
+class Act(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -105,7 +102,7 @@ class Act(TestCase, ClingoTest):
         self.assertEqual(expected, query)
 
 
-class FeatureOfInterest(TestCase, ClingoTest):
+class FeatureOfInterest(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -156,7 +153,7 @@ class FeatureOfInterest(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
-class Sensor(TestCase, ClingoTest):
+class Sensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -267,7 +264,7 @@ class Sensor(TestCase, ClingoTest):
         self.assertEqual(expected, query)
 
 
-class ObservableProperty(TestCase, ClingoTest):
+class ObservableProperty(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -318,7 +315,7 @@ class ObservableProperty(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-class Observation(TestCase, ClingoTest):
+class Observation(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -438,7 +435,7 @@ class Observation(TestCase, ClingoTest):
         self.assertCountEqual(expected, query)
 
 
-class Actuator(TestCase, ClingoTest):
+class Actuator(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -489,7 +486,7 @@ class Actuator(TestCase, ClingoTest):
 
         self.assertEqual(expected, query)
 
-class ActuatableProperty(TestCase, ClingoTest):
+class ActuatableProperty(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -541,7 +538,7 @@ class ActuatableProperty(TestCase, ClingoTest):
         self.assertEqual(expected, query)
 
 
-class Actuation(TestCase, ClingoTest):
+class Actuation(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -632,7 +629,7 @@ class Actuation(TestCase, ClingoTest):
         self.assertEqual(solution, None)
 
 
-class Result(TestCase, ClingoTest):
+class Result(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 
@@ -684,7 +681,7 @@ class Result(TestCase, ClingoTest):
         self.assertEqual(expected, query)
 
 
-class Platform(TestCase, ClingoTest):
+class Platform(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup('src/sosa_engine.lp')
 

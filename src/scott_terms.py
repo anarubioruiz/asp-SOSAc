@@ -1,4 +1,3 @@
-from asyncio import constants
 from clorm import ComplexTerm, Predicate, ConstantField, StringField
 
 

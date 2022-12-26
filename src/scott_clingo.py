@@ -2,10 +2,10 @@ from clorm import monkey
 monkey.patch() # must call this before importing clingo
 from clingo import Control
 
-import terms
+import scott_terms as terms
 
 
-class ClingoTest:
+class ScottClingo:
     def clingo_setup(self, *files):
         self.ctrl = Control(unifier=[
             terms.Device,
@@ -62,13 +62,15 @@ class ClingoTest:
         self.ctrl.add_facts(facts)
         self.ctrl.ground([("base", [])])
 
-    def get_solution(self):
+    def get_solution(self, print_solution=True):
         solution = None
 
         def on_model(model):
             nonlocal solution
             solution = model.facts(atoms=True)
-            print(solution)
+
+            if print_solution:
+                print(solution)
 
         self.ctrl.solve(on_model=on_model)
         return solution

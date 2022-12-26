@@ -4,13 +4,13 @@ from clorm import FactBase
 from clorm import monkey
 monkey.patch() # must call this before importing clingo
 
-from utils import ClingoTest
-import terms
+from scott_clingo import ScottClingo
+import scott_terms as terms
 
 
-class LitOccupiedLocations(TestCase, ClingoTest):
+class LitOccupiedLocations(TestCase, ScottClingo):
     pass
 
 
-class SecurityAlertLocationIsInsecure(TestCase, ClingoTest):
+class SecurityAlertLocationIsInsecure(TestCase, ScottClingo):
     pass

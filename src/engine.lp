@@ -1,4 +1,3 @@
-
 %  ---- DEVICE INSTANCES
 
 x_is_the_y_of_z(LOCATION, location, DEVICE)
@@ -82,17 +81,6 @@ actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY)
     :- device(ACTUATOR, ACTUATOR_KLASS),
        makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        klass_actsOnProperty(ACTUATOR_KLASS, ACTUATABLE_PROPERTY).
-
-% hasFeatureOfInterest(ACTUATION, HOST)
-%     :- device(ACTUATOR, ACTUATOR_KLASS),
-%        isHostedBy(ACTUATOR, HOST),
-%        makesActuation(ACTUATOR, ACTUATION),
-%        not klass_hasFeatureOfInterest((ACTUATOR_KLASS, ACTUATION_KLASS), _).
-
-% hasFeatureOfInterest(ACTUATION, FEATURE)
-%     :- device(ACTUATOR, ACTUATOR_KLASS),
-%        makesActuation(ACTUATOR, ACTUATION),
-%        klass_hasFeatureOfInterest(ACTUATOR_KLASS, FEATURE).
 
 hasFeatureOfInterest(actID(ACTUATOR, ACTUATION_KLASS), home)
     :- device(ACTUATOR, ACTUATOR_KLASS),
