@@ -17,3 +17,16 @@ hasResult(isBroken, "true").
 
 klass_observesProperty(SENSOR_KLASS, broken)
     :- klass_makesObservation(SENSOR_KLASS, isBroken).
+
+% ---- SOMETHING IS OPEN OR CLOSED
+observation(open).
+hasResult(open, "true").
+
+klass_observesProperty(SENSOR_KLASS, isOpen)
+    :- klass_makesObservation(SENSOR_KLASS, open).
+
+observation(closed).
+hasResult(closed, "false").
+
+klass_observesProperty(SENSOR_KLASS, isOpen)
+    :- klass_makesObservation(SENSOR_KLASS, closed).

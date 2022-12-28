@@ -1055,3 +1055,174 @@ class AlarmSiren(TestCase, ScottClingo):
         )
 
         self.assertCountEqual(expected, query)
+
+
+class DoorSensor(TestCase, ScottClingo):
+    def setUp(self):
+        self.clingo_setup(
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+            'src/kb/sensor.lp',
+            'src/kb/observation.lp',
+        )
+
+        facts = FactBase([
+            terms.Device(
+                id='door_sensor01',
+                klass='_doorSensor_'),
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='door_sensor01'),
+            terms.x_is_the_y_of_z(
+                value='door01',
+                property='host',
+                entity='door_sensor01')
+        ])
+
+        self.load_knowledge(facts)
+
+    def test_is_a_sensor(self):
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Sensor)
+            .where(terms.Sensor.id == 'door_sensor01')
+            .all()
+        )
+
+        self.assertEqual(len(query), 1)
+
+    def test_observes_isOpen(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.observes(
+                sensor='door_sensor01',
+                observable_property='isOpen')
+        ]
+
+        query = list(solution
+            .query(terms.observes)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_makesObservation_of_the_open_and_closed_klasses(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.makesObservation(
+                sensor='door_sensor01',
+                observation=terms.ActID(
+                    device='door_sensor01',
+                    act='open')
+            ),
+            terms.makesObservation(
+                sensor='door_sensor01',
+                observation=terms.ActID(
+                    device='door_sensor01',
+                    act='closed')
+            ),
+        ]
+
+        query = list(solution
+            .query(terms.makesObservation)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+    def test_open_and_close_observations_observedProperty_is_isOpen(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.observedProperty(
+                observation=terms.ActID(
+                    device='door_sensor01',
+                    act='open'),
+                observable_property='isOpen'),
+            terms.observedProperty(
+                observation=terms.ActID(
+                    device='door_sensor01',
+                    act='closed'),
+                observable_property='isOpen')
+        ]
+
+        query = list(solution
+            .query(terms.observedProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isHostedBy_a_door(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.isHostedBy(
+                hosted='door_sensor01',
+                platform='door01')
+        ]
+
+        query = list(solution
+            .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_host_door_is_the_observation_featureOfInterest(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                act=terms.ActID(device='door_sensor01', act='open'),
+                feature_of_interest='door01'),
+            terms.hasFeatureOfInterest(
+                act=terms.ActID(device='door_sensor01', act='closed'),
+                feature_of_interest='door01')
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isOpen_is_a_door_property(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasProperty(
+                feature_of_interest='door01',
+                property='isOpen')
+        ]
+
+        query = list(solution
+            .query(terms.hasProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_open_and_close_observation_hasResult_true_and_false(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasResult(
+                act=terms.ActID(device='door_sensor01', act='open'),
+                result="true"),
+            terms.hasResult(
+                act=terms.ActID(device='door_sensor01', act='closed'),
+                result="false")
+        ]
+
+        query = list(solution
+            .query(terms.hasResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
