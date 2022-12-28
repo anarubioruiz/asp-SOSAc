@@ -7,3 +7,9 @@
 Datasets:
 - https://courses.media.mit.edu/2004fall/mas622j/04.projects/home/
 - http://casas.wsu.edu/datasets/
+
+## Dependencies
+`$ pip install clingo`
+`$ pip install clorm`
+`$ pip install clingraph`
+`$ sudo apt-get install graphviz`
