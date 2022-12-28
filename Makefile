@@ -4,6 +4,9 @@ test-unit:
 run:
 	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp 0
 
+run-minimal:
+	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp scenarios/minimal.lp 0
+
 run-casas:
 	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp scenarios/casas.lp 0
 
