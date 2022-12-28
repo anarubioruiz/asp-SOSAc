@@ -82,7 +82,7 @@ class Act(TestCase, ScottClingo):
         facts = FactBase([
             terms.hasResult(
                 act=terms.ActID(device='ANY', act='ANY'),
-                result='open')
+                result='open_ob')
         ])
 
         self.load_knowledge(facts)
@@ -90,7 +90,7 @@ class Act(TestCase, ScottClingo):
 
         expected = [
             terms.isResultOf(
-                result='open',
+                result='open_ob',
                 act=terms.ActID(device='ANY', act='ANY'))
         ]
 
@@ -635,7 +635,7 @@ class Result(TestCase, ScottClingo):
 
         facts = FactBase([
             terms.isResultOf(
-                result='open',
+                result='open_ob',
                 act=terms.ActID(device='ANY', act='ANY'))
         ])
 
@@ -658,7 +658,7 @@ class Result(TestCase, ScottClingo):
         query = acts_query + results_query
         expected = [
             terms.Act(id=terms.ActID(device='ANY', act='ANY')),
-            terms.Result(id='open')
+            terms.Result(id='open_ob')
         ]
 
         self.assertCountEqual(expected, query)
@@ -670,7 +670,7 @@ class Result(TestCase, ScottClingo):
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='ANY', act='ANY'),
-                result='open')
+                result='open_ob')
         ]
 
         query = list(solution

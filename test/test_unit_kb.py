@@ -165,7 +165,7 @@ class Sensor(TestCase, ScottClingo):
         self.facts = FactBase([
             terms.klass_makesObservation(
                 klass='_motionSensor_',
-                observation_klass='movement'
+                observation_klass='motion_ob'
             ),
             terms.Device(
                 id='motion_sensor01',
@@ -210,7 +210,7 @@ class Sensor(TestCase, ScottClingo):
                 feature_of_interest='kitchen',
                 act=terms.ActID(
                     device='motion_sensor01',
-                    act='movement')
+                    act='motion_ob')
                 ),
         ]
 
@@ -225,12 +225,12 @@ class Sensor(TestCase, ScottClingo):
         facts = FactBase([
             terms.klass_makesObservation(
                 klass='_brokenWindowSensor_',
-                observation_klass='isBroken'),
+                observation_klass='broken_ob'),
             terms.Device(
                 id='window_sensor01',
                 klass='_brokenWindowSensor_'),
             terms.klass_hasFeatureOfInterest(
-                id=('_brokenWindowSensor_', 'isBroken'),
+                id=('_brokenWindowSensor_', 'broken_ob'),
                 property='host'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
@@ -250,7 +250,7 @@ class Sensor(TestCase, ScottClingo):
                 feature_of_interest='kitchen_window',
                 act=terms.ActID(
                     device='window_sensor01',
-                    act='isBroken')
+                    act='broken_ob')
                 ),
         ]
 
@@ -391,12 +391,12 @@ class Actuator(TestCase, ScottClingo):
         facts = FactBase([
             terms.klass_makesActuation(
                 klass='_blindMotor_',
-                actuation_klass='open'),
+                actuation_klass='open_ob'),
             terms.Device(
                 id='bm_motor01',
                 klass='_blindMotor_'),
             terms.klass_hasFeatureOfInterest(
-                id=('_blindMotor_', 'open'),
+                id=('_blindMotor_', 'open_ob'),
                 property='host'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
@@ -416,7 +416,7 @@ class Actuator(TestCase, ScottClingo):
                 feature_of_interest='window01_blind',
                 act=terms.ActID(
                     device='bm_motor01',
-                    act='open')
+                    act='open_ob')
                 ),
         ]
 
@@ -533,7 +533,7 @@ class MotionSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_makesObservation_of_the_movement_klass(self):
+    def test_makesObservation_of_the_motion_ob_klass(self):
         solution = self.get_solution()
 
         expected = [
@@ -541,7 +541,7 @@ class MotionSensor(TestCase, ScottClingo):
                 sensor='motion_sensor01',
                 observation=terms.ActID(
                     device='motion_sensor01',
-                    act='movement')
+                    act='motion_ob')
                 )
         ]
 
@@ -552,14 +552,14 @@ class MotionSensor(TestCase, ScottClingo):
 
         self.assertEqual(expected, query)
 
-    def test_movement_observation_observedProperty_is_motion(self):
+    def test_motion_ob_observation_observedProperty_is_motion(self):
         solution = self.get_solution()
 
         expected = [
             terms.observedProperty(
                 observation=terms.ActID(
                     device='motion_sensor01',
-                    act='movement'),
+                    act='motion_ob'),
                 observable_property='motion')
         ]
 
@@ -591,7 +591,7 @@ class MotionSensor(TestCase, ScottClingo):
 
         expected = [
             terms.hasFeatureOfInterest(
-                act=terms.ActID(device='motion_sensor01', act='movement'),
+                act=terms.ActID(device='motion_sensor01', act='motion_ob'),
                 feature_of_interest='kitchen')
         ]
 
@@ -618,12 +618,12 @@ class MotionSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_movement_observation_hasResult_true(self):
+    def test_motion_ob_observation_hasResult_true(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
-                act=terms.ActID(device='motion_sensor01', act='movement'),
+                act=terms.ActID(device='motion_sensor01', act='motion_ob'),
                 result="true")
         ]
 
@@ -687,7 +687,7 @@ class BrokenWindowSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_makesObservation_of_the_isBroken_klass(self):
+    def test_makesObservation_of_the_broken_ob_klass(self):
         solution = self.get_solution()
 
         expected = [
@@ -695,7 +695,7 @@ class BrokenWindowSensor(TestCase, ScottClingo):
                 sensor='broken_window_sensor01',
                 observation=terms.ActID(
                     device='broken_window_sensor01',
-                    act='isBroken')
+                    act='broken_ob')
                 )
         ]
 
@@ -706,14 +706,14 @@ class BrokenWindowSensor(TestCase, ScottClingo):
 
         self.assertEqual(expected, query)
 
-    def test_isBroken_observation_observedProperty_is_broken(self):
+    def test_broken_ob_observation_observedProperty_is_broken(self):
         solution = self.get_solution()
 
         expected = [
             terms.observedProperty(
                 observation=terms.ActID(
                     device='broken_window_sensor01',
-                    act='isBroken'),
+                    act='broken_ob'),
                 observable_property='broken')
         ]
 
@@ -745,7 +745,7 @@ class BrokenWindowSensor(TestCase, ScottClingo):
 
         expected = [
             terms.hasFeatureOfInterest(
-                act=terms.ActID(device='broken_window_sensor01', act='isBroken'),
+                act=terms.ActID(device='broken_window_sensor01', act='broken_ob'),
                 feature_of_interest='window01')
         ]
 
@@ -772,12 +772,12 @@ class BrokenWindowSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_isBroken_observation_hasResult_isBroken(self):
+    def test_broken_ob_observation_hasResult_broken_ob(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
-                act=terms.ActID(device='broken_window_sensor01', act='isBroken'),
+                act=terms.ActID(device='broken_window_sensor01', act='broken_ob'),
                 result='true')
         ]
 
@@ -1093,13 +1093,13 @@ class DoorSensor(TestCase, ScottClingo):
 
         self.assertEqual(len(query), 1)
 
-    def test_observes_isOpen(self):
+    def test_observes_open(self):
         solution = self.get_solution()
 
         expected = [
             terms.observes(
                 sensor='door_sensor01',
-                observable_property='isOpen')
+                observable_property='open')
         ]
 
         query = list(solution
@@ -1109,7 +1109,7 @@ class DoorSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_makesObservation_of_the_open_and_closed_klasses(self):
+    def test_makesObservation_of_the_open_ob_and_closed_ob_klasses(self):
         solution = self.get_solution()
 
         expected = [
@@ -1117,13 +1117,13 @@ class DoorSensor(TestCase, ScottClingo):
                 sensor='door_sensor01',
                 observation=terms.ActID(
                     device='door_sensor01',
-                    act='open')
+                    act='open_ob')
             ),
             terms.makesObservation(
                 sensor='door_sensor01',
                 observation=terms.ActID(
                     device='door_sensor01',
-                    act='closed')
+                    act='closed_ob')
             ),
         ]
 
@@ -1134,20 +1134,20 @@ class DoorSensor(TestCase, ScottClingo):
 
         self.assertEqual(expected, query)
 
-    def test_open_and_close_observations_observedProperty_is_isOpen(self):
+    def test_open_ob_and_close_observations_observedProperty_is_open(self):
         solution = self.get_solution()
 
         expected = [
             terms.observedProperty(
                 observation=terms.ActID(
                     device='door_sensor01',
-                    act='open'),
-                observable_property='isOpen'),
+                    act='open_ob'),
+                observable_property='open'),
             terms.observedProperty(
                 observation=terms.ActID(
                     device='door_sensor01',
-                    act='closed'),
-                observable_property='isOpen')
+                    act='closed_ob'),
+                observable_property='open')
         ]
 
         query = list(solution
@@ -1178,10 +1178,10 @@ class DoorSensor(TestCase, ScottClingo):
 
         expected = [
             terms.hasFeatureOfInterest(
-                act=terms.ActID(device='door_sensor01', act='open'),
+                act=terms.ActID(device='door_sensor01', act='open_ob'),
                 feature_of_interest='door01'),
             terms.hasFeatureOfInterest(
-                act=terms.ActID(device='door_sensor01', act='closed'),
+                act=terms.ActID(device='door_sensor01', act='closed_ob'),
                 feature_of_interest='door01')
         ]
 
@@ -1192,13 +1192,13 @@ class DoorSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_isOpen_is_a_door_property(self):
+    def test_open_is_a_door_property(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasProperty(
                 feature_of_interest='door01',
-                property='isOpen')
+                property='open')
         ]
 
         query = list(solution
@@ -1208,15 +1208,15 @@ class DoorSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_open_and_close_observation_hasResult_true_and_false(self):
+    def test_open_ob_and_close_observation_hasResult_true_and_false(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
-                act=terms.ActID(device='door_sensor01', act='open'),
+                act=terms.ActID(device='door_sensor01', act='open_ob'),
                 result="true"),
             terms.hasResult(
-                act=terms.ActID(device='door_sensor01', act='closed'),
+                act=terms.ActID(device='door_sensor01', act='closed_ob'),
                 result="false")
         ]
 
@@ -1276,7 +1276,7 @@ class LightSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_makesObservation_of_the_lightEnergy_klass(self):
+    def test_makesObservation_of_the_illuminance_ob_klass(self):
         solution = self.get_solution()
 
         expected = [
@@ -1284,7 +1284,7 @@ class LightSensor(TestCase, ScottClingo):
                 sensor='light_sensor01',
                 observation=terms.ActID(
                     device='light_sensor01',
-                    act='lightEnergy')
+                    act='illuminance_ob')
                 )
         ]
 
@@ -1295,14 +1295,14 @@ class LightSensor(TestCase, ScottClingo):
 
         self.assertEqual(expected, query)
 
-    def test_lightEnergy_observation_observedProperty_is_illuminance(self):
+    def test_illuminance_ob_observation_observedProperty_is_illuminance(self):
         solution = self.get_solution()
 
         expected = [
             terms.observedProperty(
                 observation=terms.ActID(
                     device='light_sensor01',
-                    act='lightEnergy'),
+                    act='illuminance_ob'),
                 observable_property='illuminance')
         ]
 
@@ -1334,7 +1334,7 @@ class LightSensor(TestCase, ScottClingo):
 
         expected = [
             terms.hasFeatureOfInterest(
-                act=terms.ActID(device='light_sensor01', act='lightEnergy'),
+                act=terms.ActID(device='light_sensor01', act='illuminance_ob'),
                 feature_of_interest='kitchen')
         ]
 
@@ -1361,12 +1361,161 @@ class LightSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_lightEnergy_observation_hasResult_true(self):
+    def test_illuminance_ob_observation_hasResult_true(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
-                act=terms.ActID(device='light_sensor01', act='lightEnergy'),
+                act=terms.ActID(device='light_sensor01', act='illuminance_ob'),
+                result='number')
+        ]
+
+        query = list(solution
+            .query(terms.hasResult)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+class TemperatureSensor(TestCase, ScottClingo):
+    def setUp(self):
+        self.clingo_setup(
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+            'src/kb/sensor.lp',
+            'src/kb/observation.lp',
+        )
+
+        facts = FactBase([
+            terms.Device(
+                id='temp_sensor01',
+                klass='_temperatureSensor_'),
+            terms.x_is_the_y_of_z(
+                value='kitchen',
+                property='location',
+                entity='temp_sensor01')
+        ])
+
+        self.load_knowledge(facts)
+
+    def test_is_a_sensor(self):
+        solution = self.get_solution()
+
+        query = list(solution
+            .query(terms.Sensor)
+            .where(terms.Sensor.id == 'temp_sensor01')
+            .all()
+        )
+
+        self.assertEqual(len(query), 1)
+
+    def test_observes_temperature(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.observes(
+                sensor='temp_sensor01',
+                observable_property='temperature')
+        ]
+
+        query = list(solution
+            .query(terms.observes)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_makesObservation_of_the_temperature_ob_klass(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.makesObservation(
+                sensor='temp_sensor01',
+                observation=terms.ActID(
+                    device='temp_sensor01',
+                    act='temperature_ob')
+                )
+        ]
+
+        query = list(solution
+            .query(terms.makesObservation)
+            .all()
+        )
+
+        self.assertEqual(expected, query)
+
+    def test_temperature_ob_observedProperty_is_temperature(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.observedProperty(
+                observation=terms.ActID(
+                    device='temp_sensor01',
+                    act='temperature_ob'),
+                observable_property='temperature')
+        ]
+
+        query = list(solution
+            .query(terms.observedProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_isHostedBy_its_location_by_default(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.isHostedBy(
+                hosted='temp_sensor01',
+                platform='kitchen')
+        ]
+
+        query = list(solution
+            .query(terms.isHostedBy)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_location_is_the_observation_featureOfInterest(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                act=terms.ActID(device='temp_sensor01', act='temperature_ob'),
+                feature_of_interest='kitchen')
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_temperature_is_a_location_property(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasProperty(
+                feature_of_interest='kitchen',
+                property='temperature')
+        ]
+
+        query = list(solution
+            .query(terms.hasProperty)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_temperature_ob_hasResult_true(self):
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasResult(
+                act=terms.ActID(device='temp_sensor01', act='temperature_ob'),
                 result='number')
         ]
 

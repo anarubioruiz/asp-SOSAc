@@ -1,39 +1,40 @@
 % ---- MOVEMENT
-observation(movement).
-hasResult(movement, "true").
+observation(motion_ob).
+hasResult(motion_ob, "true").
 
 klass_observesProperty(SENSOR_KLASS, motion)
-    :- klass_makesObservation(SENSOR_KLASS, movement).
-
-observation(noMovement).
-hasResult(noMovement, "false").
-
-klass_observesProperty(SENSOR_KLASS, motion)
-    :- klass_makesObservation(SENSOR_KLASS, noMovement).
+    :- klass_makesObservation(SENSOR_KLASS, motion_ob).
 
 % ---- SOMETHING IS BROKEN
-observation(isBroken).
-hasResult(isBroken, "true").
+observation(broken_ob).
+hasResult(broken_ob, "true").
 
 klass_observesProperty(SENSOR_KLASS, broken)
-    :- klass_makesObservation(SENSOR_KLASS, isBroken).
+    :- klass_makesObservation(SENSOR_KLASS, broken_ob).
 
 % ---- SOMETHING IS OPEN OR CLOSED
-observation(open).
-hasResult(open, "true").
+observation(open_ob).
+hasResult(open_ob, "true").
 
-klass_observesProperty(SENSOR_KLASS, isOpen)
-    :- klass_makesObservation(SENSOR_KLASS, open).
+klass_observesProperty(SENSOR_KLASS, open)
+    :- klass_makesObservation(SENSOR_KLASS, open_ob).
 
-observation(closed).
-hasResult(closed, "false").
+observation(closed_ob).
+hasResult(closed_ob, "false").
 
-klass_observesProperty(SENSOR_KLASS, isOpen)
-    :- klass_makesObservation(SENSOR_KLASS, closed).
+klass_observesProperty(SENSOR_KLASS, open)
+    :- klass_makesObservation(SENSOR_KLASS, closed_ob).
 
-% ---- LIGHT ENERGY
-observation(lightEnergy).
-hasResult(lightEnergy, "number").
+% ---- ILLUMINANCE
+observation(illuminance_ob).
+hasResult(illuminance_ob, "number").
 
 klass_observesProperty(SENSOR_KLASS, illuminance)
-    :- klass_makesObservation(SENSOR_KLASS, lightEnergy).
+    :- klass_makesObservation(SENSOR_KLASS, illuminance_ob).
+
+% ---- TEMPERATURE
+observation(temperature_ob).
+hasResult(temperature_ob, "number").
+
+klass_observesProperty(SENSOR_KLASS, temperature)
+    :- klass_makesObservation(SENSOR_KLASS, temperature_ob).

@@ -26,7 +26,7 @@ class Evaluation(ScottClingo):
         self.size_from = int(size_from)
         self.size_offset = int(size_offset)
         self.num_cases = int(num_cases)
-        self.file = open(filename, 'w')
+        self.file = open_ob(filename, 'w')
 
         self.current_size = 0
         self.current_scenario = []

@@ -81,8 +81,8 @@ attr(edge, ((SENSOR, OBSERVATION_KLASS), FEATURE), label, "hasFeatureOfInterest"
 
 
 
-klass_makesObservation(_motionSensor_,movement).
-klass_makesObservation(_brokenWindowSensor_,isBroken).
+klass_makesObservation(_motionSensor_,motion_ob).
+klass_makesObservation(_brokenWindowSensor_,broken_ob).
 klass_observesProperty(_motionSensor_,motion).
 klass_observesProperty(_brokenWindowSensor_,broken).
 klass_makesActuation(_smartBulb_,illuminate).
@@ -91,25 +91,25 @@ klass_actsOnProperty(_smartBulb_,illuminated).
 klass_actsOnProperty(_alarmSiren_,security).
 x_is_the_y_of_z(kitchen,location,ms1).
 isHostedBy(ms1,kitchen).
-makesObservation(ms1,actID(ms1,movement)).
+makesObservation(ms1,actID(ms1,motion_ob)).
 sensor(ms1).
 device(ms1,_motionSensor_).
-observedProperty(actID(ms1,movement),motion).
+observedProperty(actID(ms1,motion_ob),motion).
 observes(ms1,motion).
-hasFeatureOfInterest(actID(ms1,movement),kitchen).
+hasFeatureOfInterest(actID(ms1,motion_ob),kitchen).
 hasProperty(kitchen,motion).
-hasResult(movement,"there's movement").
-hasResult(noMovement,"there's no movement").
-hasResult(isBroken,"is broken").
+hasResult(motion_ob,"there's motion_ob").
+hasResult(noMovement,"there's no motion_ob").
+hasResult(broken_ob,"is broken").
 hasResult(illuminate,"illuminating").
 hasResult(notIlluminate,"not illuminating").
 hasResult(warnOfDanger,"danger alert").
-hasResult(actID(ms1,movement),"there's movement").
+hasResult(actID(ms1,motion_ob),"there's motion_ob").
 klass_hasFeatureOfInterest(_alarmSiren_,home).
 featureOfInterest(kitchen).
-isFeatureOfInterestOf(kitchen,actID(ms1,movement)).
-result("there's movement").
-result("there's no movement").
+isFeatureOfInterestOf(kitchen,actID(ms1,motion_ob)).
+result("there's motion_ob").
+result("there's no motion_ob").
 result("is broken").
 result("illuminating").
 result("not illuminating").
@@ -117,24 +117,24 @@ result("danger alert").
 isResultOf("danger alert",warnOfDanger).
 isResultOf("not illuminating",notIlluminate).
 isResultOf("illuminating",illuminate).
-isResultOf("is broken",isBroken).
-isResultOf("there's no movement",noMovement).
-isResultOf("there's movement",movement).
-isResultOf("there's movement",actID(ms1,movement)).
-act(movement).
+isResultOf("is broken",broken_ob).
+isResultOf("there's no motion_ob",noMovement).
+isResultOf("there's motion_ob",motion_ob).
+isResultOf("there's motion_ob",actID(ms1,motion_ob)).
+act(motion_ob).
 act(noMovement).
-act(isBroken).
+act(broken_ob).
 act(illuminate).
 act(notIlluminate).
 act(warnOfDanger).
-act(actID(ms1,movement)).
+act(actID(ms1,motion_ob)).
 observableProperty(motion).
-observation(movement).
+observation(motion_ob).
 observation(noMovement).
-observation(isBroken).
-observation(actID(ms1,movement)).
+observation(broken_ob).
+observation(actID(ms1,motion_ob)).
 isObservedBy(motion,ms1).
-madeBySensor(actID(ms1,movement),ms1).
+madeBySensor(actID(ms1,motion_ob),ms1).
 actuation(illuminate).
 actuation(notIlluminate).
 actuation(warnOfDanger).
