@@ -30,3 +30,10 @@ hasResult(closed, "false").
 
 klass_observesProperty(SENSOR_KLASS, isOpen)
     :- klass_makesObservation(SENSOR_KLASS, closed).
+
+% ---- LIGHT ENERGY
+observation(lightEnergy).
+hasResult(lightEnergy, "number").
+
+klass_observesProperty(SENSOR_KLASS, illuminance)
+    :- klass_makesObservation(SENSOR_KLASS, lightEnergy).

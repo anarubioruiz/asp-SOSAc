@@ -10,3 +10,6 @@ klass_makesObservation(_doorSensor_, open).
 klass_makesObservation(_doorSensor_, closed).
 klass_hasFeatureOfInterest((_doorSensor_, open), host).
 klass_hasFeatureOfInterest((_doorSensor_, closed), host).
+
+% ---- LIGHT SENSOR
+klass_makesObservation(_lightSensor_, lightEnergy).
