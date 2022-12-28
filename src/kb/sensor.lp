@@ -1,5 +1,6 @@
 % ---- MOTION SENSOR
 klass_makesObservation(_motionSensor_, motion_ob).
+klass_makesObservation(_motionSensor_, not_motion_ob).
 
 %  ---- BROKEN WINDOW SENSOR
 klass_makesObservation(_brokenWindowSensor_, broken_ob).

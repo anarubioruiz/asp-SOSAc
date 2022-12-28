@@ -5,6 +5,12 @@ hasResult(motion_ob, "true").
 klass_observesProperty(SENSOR_KLASS, motion)
     :- klass_makesObservation(SENSOR_KLASS, motion_ob).
 
+observation(not_motion_ob).
+hasResult(not_motion_ob, "false").
+
+klass_observesProperty(SENSOR_KLASS, motion)
+    :- klass_makesObservation(SENSOR_KLASS, not_motion_ob).
+
 % ---- SOMETHING IS BROKEN
 observation(broken_ob).
 hasResult(broken_ob, "true").

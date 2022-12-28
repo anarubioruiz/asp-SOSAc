@@ -533,7 +533,7 @@ class MotionSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_makesObservation_of_the_motion_ob_klass(self):
+    def test_makesObservation_of_motion_and_not_motion_obs_klasses(self):
         solution = self.get_solution()
 
         expected = [
@@ -542,7 +542,13 @@ class MotionSensor(TestCase, ScottClingo):
                 observation=terms.ActID(
                     device='motion_sensor01',
                     act='motion_ob')
-                )
+            ),
+            terms.makesObservation(
+                sensor='motion_sensor01',
+                observation=terms.ActID(
+                    device='motion_sensor01',
+                    act='not_motion_ob')
+            )
         ]
 
         query = list(solution
@@ -552,7 +558,7 @@ class MotionSensor(TestCase, ScottClingo):
 
         self.assertEqual(expected, query)
 
-    def test_motion_ob_observation_observedProperty_is_motion(self):
+    def test_motion_and_not_motion__obs_observedProperty_is_motion(self):
         solution = self.get_solution()
 
         expected = [
@@ -560,6 +566,11 @@ class MotionSensor(TestCase, ScottClingo):
                 observation=terms.ActID(
                     device='motion_sensor01',
                     act='motion_ob'),
+                observable_property='motion'),
+            terms.observedProperty(
+                observation=terms.ActID(
+                    device='motion_sensor01',
+                    act='not_motion_ob'),
                 observable_property='motion')
         ]
 
@@ -586,12 +597,15 @@ class MotionSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_location_is_the_observation_featureOfInterest(self):
+    def test_location_is_the_observations_featureOfInterest(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasFeatureOfInterest(
                 act=terms.ActID(device='motion_sensor01', act='motion_ob'),
+                feature_of_interest='kitchen'),
+            terms.hasFeatureOfInterest(
+                act=terms.ActID(device='motion_sensor01', act='not_motion_ob'),
                 feature_of_interest='kitchen')
         ]
 
@@ -618,13 +632,16 @@ class MotionSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_motion_ob_observation_hasResult_true(self):
+    def test_motion_and_not_motion_obs_hasResult_true_and_false(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='motion_sensor01', act='motion_ob'),
-                result="true")
+                result="true"),
+            terms.hasResult(
+                act=terms.ActID(device='motion_sensor01', act='not_motion_ob'),
+                result="false")
         ]
 
         query = list(solution
