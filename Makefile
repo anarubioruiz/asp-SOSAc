@@ -1,21 +1,25 @@
+clean:
+	rm scenarios/*output.*
+
 test-unit:
 	pytest-3 test/test_unit_sosa.py test/test_unit_kb.py
 
 run:
 	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp 0
 
-run-minimal:
-	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp scenarios/minimal.lp 0
+run-%:
+	$(MAKE) $*.output run-graphs
 
-run-casas:
-	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp scenarios/casas.lp 0
+%.output:
+	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp scenarios/$*.lp 0 -V0 --out-atomf=%s. | head -n 1 > scenarios/output.lp
 
-run-sampler:
-	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp scenarios/sampler.lp 0
+run-graphs:
+	clingo src/graphs.lp scenarios/output.lp 0 --outf=2 | clingraph --out=render --type=digraph --dir scenarios/ --name-format='graph_output'
 
-gen_graphs:
-	clingo src/graphs.lp 0 --outf=2 | clingraph --out=render --type=digraph --dir graphs
+SIZE_FROM=1
+SIZE_OFFSET=5
+NUM_CASES=10
+OUTPUT_FILE=evaluation.csv
 
 run-eval:
-	cd src/; \
-	python3 eval_performance.py 1 5 10 evaluation.csv
+	python3 src/eval_performance.py ${SIZE_FROM} ${SIZE_OFFSET} ${NUM_CASES} ${OUTPUT_FILE}

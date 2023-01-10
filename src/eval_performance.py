@@ -26,7 +26,7 @@ class Evaluation(ScottClingo):
         self.size_from = int(size_from)
         self.size_offset = int(size_offset)
         self.num_cases = int(num_cases)
-        self.file = open_ob(filename, 'w')
+        self.file = open(filename, 'w')
 
         self.current_size = 0
         self.current_scenario = []
@@ -40,12 +40,12 @@ class Evaluation(ScottClingo):
 
     def setUp(self):
         self.clingo_setup(
-            'sosa_engine.lp',
-            'engine.lp',
-            'kb/sensor.lp',
-            'kb/observation.lp',
-            'kb/actuator.lp',
-            'kb/actuation.lp'
+            'src/sosa_engine.lp',
+            'src/engine.lp',
+            'src/kb/sensor.lp',
+            'src/kb/observation.lp',
+            'src/kb/actuator.lp',
+            'src/kb/actuation.lp'
         )
 
     def evaluate(self):
