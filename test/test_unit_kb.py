@@ -261,6 +261,45 @@ class Sensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
+    def test_featureOfInterest_is_the_sensor_interest_in_any_case(self):
+        facts = FactBase([
+            terms.klass_makesObservation(
+                klass='_exampleSensor_',
+                observation_klass='any'),
+            terms.Device(
+                id='sensor01',
+                klass='_exampleSensor_'),
+            terms.klass_hasFeatureOfInterest(
+                id=('_exampleSensor_', 'any'),
+                property='host'),
+            terms.x_is_the_y_of_z(
+                value='wall',
+                property='host',
+                entity='sensor01'),
+            terms.x_is_the_interest_of_z(
+                interest='window',
+                entity='sensor01')
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                feature_of_interest='window',
+                act=terms.ActID(
+                    device='sensor01',
+                    act='any')
+                ),
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
     def test_featureOfInterest_is_home_if_its_property_in_klass_featureOfInterest(self):
         facts = FactBase([
             terms.klass_makesObservation(
@@ -454,6 +493,45 @@ class Actuator(TestCase, ScottClingo):
         expected = [
             terms.hasFeatureOfInterest(
                 feature_of_interest='home',
+                act=terms.ActID(
+                    device='actuator01',
+                    act='any')
+                ),
+        ]
+
+        query = list(solution
+            .query(terms.hasFeatureOfInterest)
+            .all()
+        )
+
+        self.assertCountEqual(expected, query)
+
+    def test_featureOfInterest_is_the_actuator_interest_in_any_case(self):
+        facts = FactBase([
+            terms.klass_makesActuation(
+                klass='_exampleActuator_',
+                actuation_klass='any'),
+            terms.Device(
+                id='actuator01',
+                klass='_exampleActuator_'),
+            terms.klass_hasFeatureOfInterest(
+                id=('_exampleActuator_', 'any'),
+                property='host'),
+            terms.x_is_the_y_of_z(
+                value='wall',
+                property='host',
+                entity='actuator01'),
+            terms.x_is_the_interest_of_z(
+                interest='window',
+                entity='actuator01')
+        ])
+
+        self.load_knowledge(facts)
+        solution = self.get_solution()
+
+        expected = [
+            terms.hasFeatureOfInterest(
+                feature_of_interest='window',
                 act=terms.ActID(
                     device='actuator01',
                     act='any')
@@ -1057,7 +1135,7 @@ class AlarmSiren(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_warnOfDanger_actuation_hasResult_dangerAlert(self):
+    def test_warnOfDanger_actuation_hasResult_true(self):
         solution = self.get_solution()
 
         expected = [

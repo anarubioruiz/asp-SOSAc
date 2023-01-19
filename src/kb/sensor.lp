@@ -17,3 +17,4 @@ klass_makesObservation(_lightSensor_, illuminance_ob).
 
 % ---- TEMPERATURE SENSOR
 klass_makesObservation(_temperatureSensor_, temperature_ob).
+klass_makesObservation(_infraredTemperatureSensor_, temperature_ob).

@@ -10,6 +10,7 @@ class ScottClingo:
         self.ctrl = Control(unifier=[
             terms.Device,
             terms.x_is_the_y_of_z,
+            terms.x_is_the_interest_of_z,
 
             terms.klass_observesProperty,
             terms.klass_makesObservation,

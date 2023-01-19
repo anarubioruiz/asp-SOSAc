@@ -14,6 +14,10 @@ class x_is_the_y_of_z(Predicate):
     property = ConstantField
     entity = ConstantField
 
+class x_is_the_interest_of_z(Predicate):
+    interest = ConstantField
+    entity = ConstantField
+
 class klass_observesProperty(Predicate):
     klass = ConstantField
     observable_property = ConstantField
