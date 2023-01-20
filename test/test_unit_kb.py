@@ -716,16 +716,21 @@ class MotionSensor(TestCase, ScottClingo):
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='motion_sensor01', act='motion_ob'),
-                result="true"),
+                result="boolean"),
             terms.hasResult(
                 act=terms.ActID(device='motion_sensor01', act='not_motion_ob'),
-                result="false")
+                result="boolean"),
+            terms.hasSimpleResult(
+                act=terms.ActID(device='motion_sensor01', act='motion_ob'),
+                result="true"),
+            terms.hasSimpleResult(
+                act=terms.ActID(device='motion_sensor01', act='not_motion_ob'),
+                result="false"),
         ]
 
-        query = list(solution
-            .query(terms.hasResult)
-            .all()
-        )
+        result_query = list(solution.query(terms.hasResult).all())
+        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        query = result_query + simple_result_query
 
         self.assertCountEqual(expected, query)
 
@@ -867,19 +872,21 @@ class BrokenWindowSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_broken_ob_observation_hasResult_broken_ob(self):
+    def test_broken_observation_hasResult_boolean_true(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='broken_window_sensor01', act='broken_ob'),
-                result='true')
+                result='boolean'),
+            terms.hasSimpleResult(
+                act=terms.ActID(device='broken_window_sensor01', act='broken_ob'),
+                result='true'),
         ]
 
-        query = list(solution
-            .query(terms.hasResult)
-            .all()
-        )
+        result_query = list(solution.query(terms.hasResult).all())
+        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        query = result_query + simple_result_query
 
         self.assertCountEqual(expected, query)
 
@@ -1001,19 +1008,21 @@ class SmartBulb(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_illuminate_actuation_hasResult_true(self):
+    def test_illuminate_actuation_hasResult_boolean_true(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
-                result='true')
+                result='boolean'),
+            terms.hasSimpleResult(
+                act=terms.ActID(device='smart_bulb01', act='illuminate'),
+                result='true'),
         ]
 
-        query = list(solution
-            .query(terms.hasResult)
-            .all()
-        )
+        result_query = list(solution.query(terms.hasResult).all())
+        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        query = result_query + simple_result_query
 
         self.assertCountEqual(expected, query)
 
@@ -1135,19 +1144,21 @@ class AlarmSiren(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_warnOfDanger_actuation_hasResult_true(self):
+    def test_warnOfDanger_actuation_hasResult_boolean_true(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
+                result='boolean'),
+            terms.hasSimpleResult(
+                act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
                 result='true')
         ]
 
-        query = list(solution
-            .query(terms.hasResult)
-            .all()
-        )
+        result_query = list(solution.query(terms.hasResult).all())
+        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        query = simple_result_query + result_query
 
         self.assertCountEqual(expected, query)
 
@@ -1303,22 +1314,27 @@ class DoorSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_open_ob_and_close_observation_hasResult_true_and_false(self):
+    def test_open_and_close_observations_hasResult_boolean_true_and_false(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasResult(
                 act=terms.ActID(device='door_sensor01', act='open_ob'),
-                result="true"),
+                result="boolean"),
             terms.hasResult(
                 act=terms.ActID(device='door_sensor01', act='closed_ob'),
-                result="false")
+                result="boolean"),
+            terms.hasSimpleResult(
+                act=terms.ActID(device='door_sensor01', act='open_ob'),
+                result="true"),
+            terms.hasSimpleResult(
+                act=terms.ActID(device='door_sensor01', act='closed_ob'),
+                result="false"),
         ]
 
-        query = list(solution
-            .query(terms.hasResult)
-            .all()
-        )
+        result_query = list(solution.query(terms.hasResult).all())
+        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        query = result_query + simple_result_query
 
         self.assertCountEqual(expected, query)
 

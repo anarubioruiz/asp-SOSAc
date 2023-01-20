@@ -72,7 +72,7 @@ class ActuatableProperty(Predicate):
     id = ConstantField
 
 class Result(Predicate):
-    id = StringField
+    id = ConstantField
 
 class Platform(Predicate):
     id = ConstantField
@@ -122,12 +122,12 @@ class isFeatureOfInterestOf(Predicate):
     act = ActID.Field
 
 class isResultOf(Predicate):
-    result = StringField
+    result = ConstantField
     act = ActID.Field
 
 class hasResult(Predicate):
     act = ActID.Field
-    result = StringField
+    result = ConstantField
 
 class hasSimpleResult(Predicate):
     act = ActID.Field
