@@ -4,8 +4,8 @@ clean:
 test-unit:
 	pytest-3 test/test_unit_sosa.py test/test_unit_kb.py
 
-run:
-	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp 0
+run-example:
+	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp src/example/commonsense.lp -c time=night -c remove_device=sb01 --verbose=3 --stats=2
 
 run-%:
 	$(MAKE) $*.output run-graphs
