@@ -5,16 +5,21 @@ klass_makesActuation(_windowBlindMotor_, illuminate).
 
 time(day) :- not time(night).
 
+% Priorities
+% 1 - HIGH
+% 2 - MEDIUM
+% 3 - LOW
+% 4 - VERY LOW
+
 actuation_priority(_smartBulb_, illuminate, 2) :- time(day).
 actuation_priority(_smartBulb_, illuminate, 1) :- time(night).
 
 actuation_priority(_windowBlindMotor_, illuminate, 1) :- time(day).
-actuation_priority(_windowBlindMotor_, illuminate, 11) :- time(night).
+actuation_priority(_windowBlindMotor_, illuminate, 4) :- time(night).
 
-actuation_priority(_smartTV_, illuminate, 10).
+actuation_priority(_smartTV_, illuminate, 3).
 
-{ use(ACTUATOR, ACTUATION) : device(ACTUATOR, ACTUATOR_KLASS),
-                             makesActuation(ACTUATOR, ACTUATION),
+{ use(ACTUATOR, ACTUATION) : makesActuation(ACTUATOR, ACTUATION),
                              hasFeatureOfInterest(ACTUATION, ENTITY),
                              actsOnProperty(ACTUATION, PROPERTY),
                              hasSimpleResult(ACTUATION, VALUE) } = 1 :- objetive(ENTITY, PROPERTY, VALUE).
@@ -37,4 +42,4 @@ time(time).
 remove_device(remove_device).
 use(ACTUATOR) :- use(ACTUATOR, _).
 
-#show use/1.
+#show use/2.
