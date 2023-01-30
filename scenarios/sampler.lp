@@ -3,9 +3,9 @@
 device(motion_sensor01, _motionSensor_).
 x_is_the_y_of_z(room02, location, motion_sensor01).
 
-device(broken_window_sensor01, _brokenWindowSensor_).
-x_is_the_y_of_z(room01, location, broken_window_sensor01).
-x_is_the_y_of_z(window01, host, broken_window_sensor01).
+device(bw_sensor01, _brokenWindowSensor_).
+x_is_the_y_of_z(room01, location, bw_sensor01).
+x_is_the_y_of_z(window01, host, bw_sensor01).
 
 device(door_sensor01, _doorSensor_).
 x_is_the_y_of_z(room01, location, door_sensor01).

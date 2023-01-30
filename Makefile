@@ -7,7 +7,7 @@ test-unit:
 run-example:
 	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp src/example/commonsense.lp -c time=night -c remove_device=sb01
 
-run-%:
+%.out:
 	$(MAKE) $*.output run-graphs
 
 %.output:
