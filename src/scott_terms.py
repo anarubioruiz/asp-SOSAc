@@ -18,23 +18,23 @@ class x_is_the_interest_of_z(Predicate):
     interest = ConstantField
     entity = ConstantField
 
-class klass_observesProperty(Predicate):
+class k_observesProperty(Predicate):
     klass = ConstantField
     observable_property = ConstantField
 
-class klass_makesObservation(Predicate):
+class k_makesObservation(Predicate):
     klass = ConstantField
     observation_klass = ConstantField
 
-class klass_actsOnProperty(Predicate):
+class k_actsOnProperty(Predicate):
     klass = ConstantField
     actuatable_property = ConstantField
 
-class klass_makesActuation(Predicate):
+class k_makesActuation(Predicate):
     klass = ConstantField
     actuation_klass = ConstantField
 
-class klass_hasFeatureOfInterest(Predicate):
+class k_hasFeatureOfInterest(Predicate):
     class _id(Predicate):
         device_klass = ConstantField
         activity_klass = ConstantField
@@ -72,7 +72,7 @@ class ActuatableProperty(Predicate):
     id = ConstantField
 
 class Result(Predicate):
-    id = ConstantField
+    id = StringField
 
 class Platform(Predicate):
     id = ConstantField
@@ -122,12 +122,12 @@ class isFeatureOfInterestOf(Predicate):
     act = ActID.Field
 
 class isResultOf(Predicate):
-    result = ConstantField
+    result = StringField
     act = ActID.Field
 
 class hasResult(Predicate):
     act = ActID.Field
-    result = ConstantField
+    result = StringField
 
 class hasSimpleResult(Predicate):
     act = ActID.Field

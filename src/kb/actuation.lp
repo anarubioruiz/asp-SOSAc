@@ -1,22 +1,22 @@
 % ---- ILLUMINATE
-actuation(illuminate).
-hasResult(illuminate, boolean).
-hasSimpleResult(illuminate, "true").
+k_actuation(illuminate).
+k_hasResult(illuminate, "boolean").
+k_hasSimpleResult(illuminate, "true").
 
-klass_actsOnProperty(ACTUATOR_KLASS, illuminated)
-    :- klass_makesActuation(ACTUATOR_KLASS, illuminate).
+k_actsOnProperty(ACTUATOR_KLASS, illuminated)
+    :- k_makesActuation(ACTUATOR_KLASS, illuminate).
 
-actuation(notIlluminate).
-hasResult(notIlluminate, boolean).
-hasSimpleResult(notIlluminate, "false").
+k_actuation(notIlluminate).
+k_hasResult(notIlluminate, "boolean").
+k_hasSimpleResult(notIlluminate, "false").
 
-klass_actsOnProperty(ACTUATOR_KLASS, illuminated)
-    :- klass_makesActuation(ACTUATOR_KLASS, notIlluminate).
+k_actsOnProperty(ACTUATOR_KLASS, illuminated)
+    :- k_makesActuation(ACTUATOR_KLASS, notIlluminate).
 
 % ---- WARN OF DANGER
-actuation(warnOfDanger).
-hasResult(warnOfDanger, boolean).
-hasSimpleResult(warnOfDanger, "true").
+k_actuation(warnOfDanger).
+k_hasResult(warnOfDanger, "boolean").
+k_hasSimpleResult(warnOfDanger, "true").
 
-klass_actsOnProperty(ACTUATOR_KLASS, in_alert)
-    :- klass_makesActuation(ACTUATOR_KLASS, warnOfDanger).
+k_actsOnProperty(ACTUATOR_KLASS, in_alert)
+    :- k_makesActuation(ACTUATOR_KLASS, warnOfDanger).

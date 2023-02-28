@@ -136,13 +136,13 @@ class Device(TestCase, ScottClingo):
 
     def test_property_value_must_exist_for_the_not_home_property_in_klass_hasFeatureOfInterest(self):
         facts = FactBase([
-            terms.klass_makesActuation(
+            terms.k_makesActuation(
                 klass='_exampleDevice_',
                 actuation_klass='any'),
             terms.Device(
                 id='actuator01',
                 klass='_exampleDevice_'),
-            terms.klass_hasFeatureOfInterest(
+            terms.k_hasFeatureOfInterest(
                 id=('_exampleDevice_', 'any'),
                 property='host')
         ])
@@ -163,7 +163,7 @@ class Sensor(TestCase, ScottClingo):
         )
 
         self.facts = FactBase([
-            terms.klass_makesObservation(
+            terms.k_makesObservation(
                 klass='_motionSensor_',
                 observation_klass='motion_ob'
             ),
@@ -180,13 +180,13 @@ class Sensor(TestCase, ScottClingo):
         self.load_knowledge(self.facts)
         solution = self.get_solution()
 
-        klass_property_query = list(solution
-            .query(terms.klass_observesProperty)
+        k_property_query = list(solution
+            .query(terms.k_observesProperty)
             .all()
         )
 
-        self.assertEqual(len(klass_property_query), 1)
-        klass_observesProperty = klass_property_query[0]
+        self.assertEqual(len(k_property_query), 1)
+        k_observesProperty = k_property_query[0]
 
         property_query = list(solution
             .query(terms.observedProperty)
@@ -198,7 +198,7 @@ class Sensor(TestCase, ScottClingo):
 
         self.assertEqual(
             observedProperty.observable_property,
-            klass_observesProperty.observable_property
+            k_observesProperty.observable_property
         )
 
     def test_featureOfInterest_is_the_sensor_location_by_default(self):
@@ -223,13 +223,13 @@ class Sensor(TestCase, ScottClingo):
 
     def test_featureOfInterest_is_the_property_in_klass_featureOfInterest(self):
         facts = FactBase([
-            terms.klass_makesObservation(
+            terms.k_makesObservation(
                 klass='_brokenWindowSensor_',
                 observation_klass='broken_ob'),
             terms.Device(
                 id='window_sensor01',
                 klass='_brokenWindowSensor_'),
-            terms.klass_hasFeatureOfInterest(
+            terms.k_hasFeatureOfInterest(
                 id=('_brokenWindowSensor_', 'broken_ob'),
                 property='host'),
             terms.x_is_the_y_of_z(
@@ -263,13 +263,13 @@ class Sensor(TestCase, ScottClingo):
 
     def test_featureOfInterest_is_the_sensor_interest_in_any_case(self):
         facts = FactBase([
-            terms.klass_makesObservation(
+            terms.k_makesObservation(
                 klass='_exampleSensor_',
                 observation_klass='any'),
             terms.Device(
                 id='sensor01',
                 klass='_exampleSensor_'),
-            terms.klass_hasFeatureOfInterest(
+            terms.k_hasFeatureOfInterest(
                 id=('_exampleSensor_', 'any'),
                 property='host'),
             terms.x_is_the_y_of_z(
@@ -302,13 +302,13 @@ class Sensor(TestCase, ScottClingo):
 
     def test_featureOfInterest_is_home_if_its_property_in_klass_featureOfInterest(self):
         facts = FactBase([
-            terms.klass_makesObservation(
+            terms.k_makesObservation(
                 klass='_exampleSensor_',
                 observation_klass='any'),
             terms.Device(
                 id='sensor01',
                 klass='_exampleSensor_'),
-            terms.klass_hasFeatureOfInterest(
+            terms.k_hasFeatureOfInterest(
                 id=('_exampleSensor_', 'any'),
                 property='home'),
             terms.x_is_the_y_of_z(
@@ -367,7 +367,7 @@ class Actuator(TestCase, ScottClingo):
         )
 
         self.facts = FactBase([
-            terms.klass_makesActuation(
+            terms.k_makesActuation(
                 klass='_smartBulb_',
                 actuation_klass='illuminate'
             ),
@@ -385,13 +385,13 @@ class Actuator(TestCase, ScottClingo):
         self.load_knowledge(self.facts)
         solution = self.get_solution()
 
-        klass_property_query = list(solution
-            .query(terms.klass_actsOnProperty)
+        k_property_query = list(solution
+            .query(terms.k_actsOnProperty)
             .all()
         )
 
-        self.assertEqual(len(klass_property_query), 1)
-        klass_actsOnProperty = klass_property_query[0]
+        self.assertEqual(len(k_property_query), 1)
+        k_actsOnProperty = k_property_query[0]
 
         property_query = list(solution
             .query(terms.actsOnProperty)
@@ -403,7 +403,7 @@ class Actuator(TestCase, ScottClingo):
 
         self.assertEqual(
             actsOnProperty.actuatable_property,
-            klass_actsOnProperty.actuatable_property
+            k_actsOnProperty.actuatable_property
         )
 
     def test_featureOfInterest_is_the_actuator_location_by_default(self):
@@ -428,13 +428,13 @@ class Actuator(TestCase, ScottClingo):
 
     def test_featureOfInterest_is_the_property_in_klass_featureOfInterest(self):
         facts = FactBase([
-            terms.klass_makesActuation(
+            terms.k_makesActuation(
                 klass='_blindMotor_',
                 actuation_klass='open_ob'),
             terms.Device(
                 id='bm_motor01',
                 klass='_blindMotor_'),
-            terms.klass_hasFeatureOfInterest(
+            terms.k_hasFeatureOfInterest(
                 id=('_blindMotor_', 'open_ob'),
                 property='host'),
             terms.x_is_the_y_of_z(
@@ -468,13 +468,13 @@ class Actuator(TestCase, ScottClingo):
 
     def test_featureOfInterest_is_home_if_its_property_in_klass_featureOfInterest(self):
         facts = FactBase([
-            terms.klass_makesActuation(
+            terms.k_makesActuation(
                 klass='_exampleActuator_',
                 actuation_klass='any'),
             terms.Device(
                 id='actuator01',
                 klass='_exampleActuator_'),
-            terms.klass_hasFeatureOfInterest(
+            terms.k_hasFeatureOfInterest(
                 id=('_exampleActuator_', 'any'),
                 property='home'),
             terms.x_is_the_y_of_z(
@@ -508,13 +508,13 @@ class Actuator(TestCase, ScottClingo):
 
     def test_featureOfInterest_is_the_actuator_interest_in_any_case(self):
         facts = FactBase([
-            terms.klass_makesActuation(
+            terms.k_makesActuation(
                 klass='_exampleActuator_',
                 actuation_klass='any'),
             terms.Device(
                 id='actuator01',
                 klass='_exampleActuator_'),
-            terms.klass_hasFeatureOfInterest(
+            terms.k_hasFeatureOfInterest(
                 id=('_exampleActuator_', 'any'),
                 property='host'),
             terms.x_is_the_y_of_z(

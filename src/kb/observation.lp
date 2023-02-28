@@ -1,51 +1,51 @@
 % ---- MOVEMENT
-observation(motion_ob).
-hasResult(motion_ob, boolean).
-hasSimpleResult(motion_ob, "true").
+k_observation(motion_ob).
+k_hasResult(motion_ob, "boolean").
+k_hasSimpleResult(motion_ob, "true").
 
-klass_observesProperty(SENSOR_KLASS, motion)
-    :- klass_makesObservation(SENSOR_KLASS, motion_ob).
+k_observesProperty(SENSOR_KLASS, motion)
+    :- k_makesObservation(SENSOR_KLASS, motion_ob).
 
-observation(not_motion_ob).
-hasResult(not_motion_ob, boolean).
-hasSimpleResult(not_motion_ob, "false").
+k_observation(not_motion_ob).
+k_hasResult(not_motion_ob, "boolean").
+k_hasSimpleResult(not_motion_ob, "false").
 
-klass_observesProperty(SENSOR_KLASS, motion)
-    :- klass_makesObservation(SENSOR_KLASS, not_motion_ob).
+k_observesProperty(SENSOR_KLASS, motion)
+    :- k_makesObservation(SENSOR_KLASS, not_motion_ob).
 
 % ---- SOMETHING IS BROKEN
-observation(broken_ob).
-hasResult(broken_ob, boolean).
-hasSimpleResult(broken_ob, "true").
+k_observation(broken_ob).
+k_hasResult(broken_ob, "boolean").
+k_hasSimpleResult(broken_ob, "true").
 
-klass_observesProperty(SENSOR_KLASS, broken)
-    :- klass_makesObservation(SENSOR_KLASS, broken_ob).
+k_observesProperty(SENSOR_KLASS, broken)
+    :- k_makesObservation(SENSOR_KLASS, broken_ob).
 
 % ---- SOMETHING IS OPEN OR CLOSED
-observation(open_ob).
-hasResult(open_ob, boolean).
-hasSimpleResult(open_ob, "true").
+k_observation(open_ob).
+k_hasResult(open_ob, "boolean").
+k_hasSimpleResult(open_ob, "true").
 
-klass_observesProperty(SENSOR_KLASS, open)
-    :- klass_makesObservation(SENSOR_KLASS, open_ob).
+k_observesProperty(SENSOR_KLASS, open)
+    :- k_makesObservation(SENSOR_KLASS, open_ob).
 
-observation(closed_ob).
-hasResult(closed_ob, boolean).
-hasSimpleResult(closed_ob, "false").
+k_observation(closed_ob).
+k_hasResult(closed_ob, "boolean").
+k_hasSimpleResult(closed_ob, "false").
 
-klass_observesProperty(SENSOR_KLASS, open)
-    :- klass_makesObservation(SENSOR_KLASS, closed_ob).
+k_observesProperty(SENSOR_KLASS, open)
+    :- k_makesObservation(SENSOR_KLASS, closed_ob).
 
 % ---- ILLUMINANCE
-observation(illuminance_ob).
-hasResult(illuminance_ob, number).
+k_observation(illuminance_ob).
+k_hasResult(illuminance_ob, "number").
 
-klass_observesProperty(SENSOR_KLASS, illuminance)
-    :- klass_makesObservation(SENSOR_KLASS, illuminance_ob).
+k_observesProperty(SENSOR_KLASS, illuminance)
+    :- k_makesObservation(SENSOR_KLASS, illuminance_ob).
 
 % ---- TEMPERATURE
-observation(temperature_ob).
-hasResult(temperature_ob, number).
+k_observation(temperature_ob).
+k_hasResult(temperature_ob, "number").
 
-klass_observesProperty(SENSOR_KLASS, temperature)
-    :- klass_makesObservation(SENSOR_KLASS, temperature_ob).
+k_observesProperty(SENSOR_KLASS, temperature)
+    :- k_makesObservation(SENSOR_KLASS, temperature_ob).
