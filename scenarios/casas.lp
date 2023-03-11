@@ -20,8 +20,8 @@ x_is_the_y_of_z(kitchen, location, m003).
 device(ls003, _lightSensor_).
 x_is_the_y_of_z(kitchen, location, ls003).
 
-device(m016, _motionSensor_).
-x_is_the_y_of_z(kitchen, location, m016).  % IN AREA
+device(ma016, _motionSensor_).
+x_is_the_y_of_z(kitchen, location, ma016).  % IN AREA
 device(ls016, _lightSensor_).
 x_is_the_y_of_z(kitchen, location, ls016).
 
@@ -44,8 +44,8 @@ x_is_the_y_of_z(living_room, location, m005).
 device(ls005, _lightSensor_).
 x_is_the_y_of_z(living_room, location, ls005).
 
-device(m013, _motionSensor_).
-x_is_the_y_of_z(living_room, location, m013).  % IN AREA
+device(ma013, _motionSensor_).
+x_is_the_y_of_z(living_room, location, ma013).  % IN AREA
 device(ls013, _lightSensor_).
 x_is_the_y_of_z(living_room, location, ls013).
 
@@ -80,8 +80,8 @@ x_is_the_y_of_z(entrance_door, host, d002).
 
 %  --- BATHROOM
 
-device(m015, _motionSensor_).
-x_is_the_y_of_z(bathroom, location, m015).  % IN AREA
+device(ma015, _motionSensor_).
+x_is_the_y_of_z(bathroom, location, ma015).  % IN AREA
 device(ls015, _lightSensor_).
 x_is_the_y_of_z(bathroom, location, ls015).
 
@@ -108,7 +108,7 @@ x_is_the_y_of_z(bedroom, location, m012).
 device(ls012, _lightSensor_).
 x_is_the_y_of_z(bedroom, location, ls012).
 
-device(m014, _motionSensor_).
-x_is_the_y_of_z(bedroom, location, m014).  % IN AREA
+device(ma014, _motionSensor_).
+x_is_the_y_of_z(bedroom, location, ma014).  % IN AREA
 device(ls014, _lightSensor_).
 x_is_the_y_of_z(bedroom, location, ls014).
