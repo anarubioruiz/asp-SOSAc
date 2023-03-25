@@ -25,15 +25,17 @@ DEVICES_WITH_HOST = [
 
 
 class Evaluation(ScottClingo):
-    def __init__(self, size_from, size_offset, num_cases, filename):
+    def __init__(self, size_from, size_offset, num_cases, iterations, filename):
+        self.filename = filename
+        self.iterations = int(iterations)
         self.size_from = int(size_from)
         self.size_offset = int(size_offset)
         self.num_cases = int(num_cases)
         self.current_scenario = []
         self.current_size = 0
 
-        self.file = open(filename, 'w')
-        self.file.write('ROOMS; DEVICES; SIZE; TIME; LOAD_TIME; GROUND_TIME; SOLUTION_TIME\n')
+        with open(filename, 'w') as f:
+            f.write('ROOMS; DEVICES; SIZE; TIME; LOAD_TIME; GROUND_TIME; SOLUTION_TIME\n')
 
         self.setUp()
         self.evaluate()
@@ -52,34 +54,36 @@ class Evaluation(ScottClingo):
         print('Evaluating performance...')
 
         for i in range(self.num_cases):
+            print(f'----- Case {i+1}/{self.num_cases}')
+
             size = self.size_from + i * self.size_offset
             self.genScenario(size)
             facts = FactBase(self.current_scenario)
             self.current_size = size
 
-            start_time = time.time()
+            for i in range(self.iterations):
+                print(f'Iteration {i+1}/{self.iterations}')
+                start_time = time.time()
 
-            self.ctrl.add_facts(facts)
-            finished_load_time = time.time()
-            self.ctrl.ground([("base", [])])
-            finished_ground_time = time.time()
+                self.ctrl.add_facts(facts)
+                finished_load_time = time.time()
+                self.ctrl.ground([("base", [])])
+                finished_ground_time = time.time()
 
-            solution = self.get_solution(
-                print_solution=False
-            )
+                solution = self.get_solution(
+                    print_solution=False
+                )
 
-            end_time = time.time()
+                end_time = time.time()
 
-            self.saveResult(
-                size,
-                len(solution),
-                start_time,
-                finished_load_time,
-                finished_ground_time,
-                end_time
-            )
-
-        self.file.close()
+                self.saveResult(
+                    size,
+                    len(solution),
+                    start_time,
+                    finished_load_time,
+                    finished_ground_time,
+                    end_time
+                )
 
     def genScenario(self, size):
         for i in range(self.current_size, size):
@@ -110,7 +114,8 @@ class Evaluation(ScottClingo):
         solution_time = end_time - finished_ground_time
 
         input = f'{size}; {NUM_DEVICES*size}; {length}; {exec_time}; {load_time}; {ground_time}; {solution_time}\n'
-        self.file.writelines(input)
+        with open(self.filename, 'a') as f:
+            f.writelines(input)
 
 
 Evaluation(*sys.argv[1:])
