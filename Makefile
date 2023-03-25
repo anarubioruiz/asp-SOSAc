@@ -16,9 +16,9 @@ run-example:
 run-graphs:
 	clingo src/graphs.lp scenarios/output.lp 0 --outf=2 | clingraph --out=render --type=digraph --dir scenarios/ --name-format='graph_output'
 
-SIZE_FROM=1000
-SIZE_OFFSET=100
-NUM_CASES=10
+SIZE_FROM=1
+SIZE_OFFSET=0
+NUM_CASES=1
 OUTPUT_FILE=evaluation.csv
 
 run-eval:

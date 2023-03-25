@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import time
+import shutil
 
 from clorm import FactBase
 
@@ -15,6 +17,7 @@ KB_NAMES = [
     '_alarmSiren_'
 ]
 
+EVAL_SCENARIOS_DIR = 'eval_scenarios'
 NUM_DEVICES = len(KB_NAMES)
 DEVICES_WITH_HOST = [
     '_brokenWindowSensor_'
@@ -26,14 +29,11 @@ class Evaluation(ScottClingo):
         self.size_from = int(size_from)
         self.size_offset = int(size_offset)
         self.num_cases = int(num_cases)
-        self.file = open(filename, 'w')
-
-        self.current_size = 0
         self.current_scenario = []
+        self.current_size = 0
 
-        self.file.write('FROM SIZE, OFFSET\n')
-        self.file.write(f'{self.size_from}, {self.size_offset}\n\n')
-        self.file.write('ROOMS, DEVICES, SIZE, TIME\n')
+        self.file = open(filename, 'w')
+        self.file.write('ROOMS; DEVICES; SIZE; TIME; LOAD_TIME; GROUND_TIME; SOLUTION_TIME\n')
 
         self.setUp()
         self.evaluate()
@@ -59,14 +59,25 @@ class Evaluation(ScottClingo):
 
             start_time = time.time()
 
-            self.load_knowledge(facts)
+            self.ctrl.add_facts(facts)
+            finished_load_time = time.time()
+            self.ctrl.ground([("base", [])])
+            finished_ground_time = time.time()
+
             solution = self.get_solution(
                 print_solution=False
             )
 
-            exec_time = time.time() - start_time
+            end_time = time.time()
 
-            self.saveResult(size, exec_time, len(solution))
+            self.saveResult(
+                size,
+                len(solution),
+                start_time,
+                finished_load_time,
+                finished_ground_time,
+                end_time
+            )
 
         self.file.close()
 
@@ -92,8 +103,13 @@ class Evaluation(ScottClingo):
                             entity=f'{instance}_{i}')
                     ])
 
-    def saveResult(self, size, exec_time, length):
-        input = f'{size}, {NUM_DEVICES*size}, {length}, {exec_time}\n'
+    def saveResult(self, size, length, start_time, finished_load_time, finished_ground_time, end_time):
+        exec_time = end_time - start_time
+        load_time = finished_load_time - start_time
+        ground_time = finished_ground_time - finished_load_time
+        solution_time = end_time - finished_ground_time
+
+        input = f'{size}; {NUM_DEVICES*size}; {length}; {exec_time}; {load_time}; {ground_time}; {solution_time}\n'
         self.file.writelines(input)
 
 
