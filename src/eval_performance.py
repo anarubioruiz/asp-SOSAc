@@ -40,7 +40,7 @@ class Evaluation(ScottClingo):
 
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/sensor.lp',
             'src/kb/observation.lp',

@@ -8,7 +8,7 @@ import scott_terms as terms
 class Device(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
         )
 
@@ -155,7 +155,7 @@ class Device(TestCase, ScottClingo):
 class Sensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/observation.lp'
         )
@@ -359,7 +359,7 @@ class Sensor(TestCase, ScottClingo):
 class Actuator(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/actuation.lp'
         )
@@ -563,7 +563,7 @@ class Actuator(TestCase, ScottClingo):
 class MotionSensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/sensor.lp',
             'src/kb/observation.lp',
@@ -735,7 +735,7 @@ class MotionSensor(TestCase, ScottClingo):
 class BrokenWindowSensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/sensor.lp',
             'src/kb/observation.lp',
@@ -891,7 +891,7 @@ class BrokenWindowSensor(TestCase, ScottClingo):
 class SmartBulb(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/actuator.lp',
             'src/kb/actuation.lp',
@@ -1027,7 +1027,7 @@ class SmartBulb(TestCase, ScottClingo):
 class AlarmSiren(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/actuator.lp',
             'src/kb/actuation.lp',
@@ -1163,7 +1163,7 @@ class AlarmSiren(TestCase, ScottClingo):
 class DoorSensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/sensor.lp',
             'src/kb/observation.lp',
@@ -1339,7 +1339,7 @@ class DoorSensor(TestCase, ScottClingo):
 class LightSensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/sensor.lp',
             'src/kb/observation.lp',
@@ -1488,7 +1488,7 @@ class LightSensor(TestCase, ScottClingo):
 class TemperatureSensor(TestCase, ScottClingo):
     def setUp(self):
         self.clingo_setup(
-            'src/sosa_engine.lp',
+            'src/sosac_engine.lp',
             'src/engine.lp',
             'src/kb/sensor.lp',
             'src/kb/observation.lp',

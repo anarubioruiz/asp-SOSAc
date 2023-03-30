@@ -7,7 +7,7 @@ import scott_terms as terms
 
 class Act(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
     # sosa:hasFeatureOfInterest - Domain: scott:Act, Range: sosa:FeatureOfInterest
     def test_Act_hasFeatureOfInterest_FeatureOfInterest(self):
@@ -104,7 +104,7 @@ class Act(TestCase, ScottClingo):
 
 class FeatureOfInterest(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
             terms.isFeatureOfInterestOf(
@@ -155,7 +155,7 @@ class FeatureOfInterest(TestCase, ScottClingo):
 
 class Sensor(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
     # sosa:observes - Domain: sosa:Sensor, Range: sosa:ObservableProperty
     def test_sensor_observes_ObservableProperty(self):
@@ -266,7 +266,7 @@ class Sensor(TestCase, ScottClingo):
 
 class ObservableProperty(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
             terms.isObservedBy(
@@ -317,7 +317,7 @@ class ObservableProperty(TestCase, ScottClingo):
 
 class Observation(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
     # sosa:Observation sub class of scott:Act
     def test_Observations_are_Acts(self):
@@ -437,7 +437,7 @@ class Observation(TestCase, ScottClingo):
 
 class Actuator(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
             terms.makesActuation(
@@ -488,7 +488,7 @@ class Actuator(TestCase, ScottClingo):
 
 class ActuatableProperty(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
             terms.isActedOnBy(
@@ -540,7 +540,7 @@ class ActuatableProperty(TestCase, ScottClingo):
 
 class Actuation(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
     # sosa:Actuation sub class of scott:Act
     def test_Actuations_are_Acts(self):
@@ -631,7 +631,7 @@ class Actuation(TestCase, ScottClingo):
 
 class Result(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
             terms.isResultOf(
@@ -683,7 +683,7 @@ class Result(TestCase, ScottClingo):
 
 class Platform(TestCase, ScottClingo):
     def setUp(self):
-        self.clingo_setup('src/sosa_engine.lp')
+        self.clingo_setup('src/sosac_engine.lp')
 
     # sosa:hosts - Domain: sosa:Platform, Range: --
     def test_Platform_hosts(self):

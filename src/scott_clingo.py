@@ -52,7 +52,7 @@ class ScottClingo:
 
         if not files:
             self.ctrl.load("src/engine.lp")
-            self.ctrl.load("src/sosa_engine.lp")
+            self.ctrl.load("src/sosac_engine.lp")
             return
 
         for f in files:

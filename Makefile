@@ -7,13 +7,13 @@ test-unit:
 	pytest-3 test/test_unit_sosa.py test/test_unit_kb.py
 
 run-example:
-	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp examples/commonsense.lp -c time=night -c remove_device=sb01
+	clingo src/engine.lp src/sosac_engine.lp src/kb/*.lp examples/commonsense.lp -c time=night -c remove_device=sb01
 
 %.lp:
 	$(MAKE) $*.output $*.graphs
 
 %.output:
-	clingo src/engine.lp src/sosa_engine.lp src/kb/*.lp scenarios/$*.lp 0 -V0 --out-atomf=%s. | head -n 1 > scenarios/$*.output.lp
+	clingo src/engine.lp src/sosac_engine.lp src/kb/*.lp scenarios/$*.lp 0 -V0 --out-atomf=%s. | head -n 1 > scenarios/$*.output.lp
 
 %.graphs:
 	clingo src/graphs.lp scenarios/$*.output.lp 0 --outf=2 | clingraph --out=render --type=digraph --dir scenarios/ --name-format='$*.graph'
