@@ -21,7 +21,7 @@ class Plotter:
 
     def plot_time_growth(self):
         estimation = {
-            'SIZE': [i*850000+1 for i in range(25, 35)],
+            'SIZE': [i*850000+114 for i in range(25, 35)],
         }
         line_plot_data = self.data.append(pd.DataFrame(estimation))
 
@@ -29,16 +29,19 @@ class Plotter:
         line_plot_data['ESTIMATION'] = 2.4 * 10**(-9) * line_plot_data.index**(1.7)
 
         plot = self.fig.add_subplot(self.spec[0])
+
         plot.plot(
             line_plot_data.index,
             line_plot_data['ESTIMATION'],
             '--',
+            linewidth='3',
             color='C1',
             label='Estimation')
 
         plot.plot(
             line_plot_data.index,
             line_plot_data['TIME']['mean'],
+            linewidth='3',
             color='C0',
             label='Data')
 
@@ -52,8 +55,6 @@ class Plotter:
         plot = self.fig.add_subplot(self.spec[1])
         bar_plot_data = data.groupby('SIZE').agg(['mean'])
         bar_plot_data = bar_plot_data.loc[[114, 850114, 1700114, 20400114]]
-
-        print(bar_plot_data)
 
         plot.bar(
             bar_plot_data.index.astype(str),
