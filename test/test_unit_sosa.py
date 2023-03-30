@@ -1,15 +1,15 @@
 from unittest import TestCase, skip
 from clorm import FactBase
 
-from scott_clingo import ScottClingo
-import scott_terms as terms
+from sosac_clingo import SosaCClingo
+import sosac_terms as terms
 
 
-class Act(TestCase, ScottClingo):
+class Act(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
-    # sosa:hasFeatureOfInterest - Domain: scott:Act, Range: sosa:FeatureOfInterest
+    # sosa:hasFeatureOfInterest - Domain: sosac:Act, Range: sosa:FeatureOfInterest
     def test_Act_hasFeatureOfInterest_FeatureOfInterest(self):
         facts = FactBase([
             terms.hasFeatureOfInterest(
@@ -61,7 +61,7 @@ class Act(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-    # scott:Act max 1 sosa:hasFeatureOfInterest
+    # sosac:Act max 1 sosa:hasFeatureOfInterest
     def test_no_more_than_1_hasFeatureOfInterest(self):
         facts = FactBase([
             terms.hasFeatureOfInterest(
@@ -102,7 +102,7 @@ class Act(TestCase, ScottClingo):
         self.assertEqual(expected, query)
 
 
-class FeatureOfInterest(TestCase, ScottClingo):
+class FeatureOfInterest(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -114,7 +114,7 @@ class FeatureOfInterest(TestCase, ScottClingo):
 
         self.load_knowledge(facts)
 
-    # sosa:isFeatureOfInterestOf - Domain: sosa:FeatureOfInterest, Range: scott:Act
+    # sosa:isFeatureOfInterestOf - Domain: sosa:FeatureOfInterest, Range: sosac:Act
     def test_FeatureOfInterest_isFeatureOfInterestOf_Act(self):
         solution = self.get_solution()
 
@@ -153,7 +153,7 @@ class FeatureOfInterest(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class Sensor(TestCase, ScottClingo):
+class Sensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -264,7 +264,7 @@ class Sensor(TestCase, ScottClingo):
         self.assertEqual(expected, query)
 
 
-class ObservableProperty(TestCase, ScottClingo):
+class ObservableProperty(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -315,11 +315,11 @@ class ObservableProperty(TestCase, ScottClingo):
 
         self.assertEqual(expected, query)
 
-class Observation(TestCase, ScottClingo):
+class Observation(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
-    # sosa:Observation sub class of scott:Act
+    # sosa:Observation sub class of sosac:Act
     def test_Observations_are_Acts(self):
         facts = FactBase([
             terms.Observation(id=terms.ActID(device='ANY', act='ANY'))
@@ -435,7 +435,7 @@ class Observation(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class Actuator(TestCase, ScottClingo):
+class Actuator(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -486,7 +486,7 @@ class Actuator(TestCase, ScottClingo):
 
         self.assertEqual(expected, query)
 
-class ActuatableProperty(TestCase, ScottClingo):
+class ActuatableProperty(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -538,11 +538,11 @@ class ActuatableProperty(TestCase, ScottClingo):
         self.assertEqual(expected, query)
 
 
-class Actuation(TestCase, ScottClingo):
+class Actuation(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
-    # sosa:Actuation sub class of scott:Act
+    # sosa:Actuation sub class of sosac:Act
     def test_Actuations_are_Acts(self):
         facts = FactBase([
             terms.Actuation(id=terms.ActID(device='ANY', act='ANY'))
@@ -629,7 +629,7 @@ class Actuation(TestCase, ScottClingo):
         self.assertEqual(solution, None)
 
 
-class Result(TestCase, ScottClingo):
+class Result(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -641,7 +641,7 @@ class Result(TestCase, ScottClingo):
 
         self.load_knowledge(facts)
 
-    # sosa:isResultOf - Domain: sosa:Result, Range: scott:Act
+    # sosa:isResultOf - Domain: sosa:Result, Range: sosac:Act
     def test_Result_isResultOf_Act(self):
         solution = self.get_solution()
 
@@ -681,7 +681,7 @@ class Result(TestCase, ScottClingo):
         self.assertEqual(expected, query)
 
 
-class Platform(TestCase, ScottClingo):
+class Platform(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 

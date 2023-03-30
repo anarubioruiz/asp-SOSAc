@@ -1,11 +1,11 @@
 from unittest import TestCase, skip
 from clorm import FactBase
 
-from scott_clingo import ScottClingo
-import scott_terms as terms
+from sosac_clingo import SosaCClingo
+import sosac_terms as terms
 
 
-class Device(TestCase, ScottClingo):
+class Device(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -152,7 +152,7 @@ class Device(TestCase, ScottClingo):
 
         self.assertEqual(solution, None)
 
-class Sensor(TestCase, ScottClingo):
+class Sensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -356,7 +356,7 @@ class Sensor(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class Actuator(TestCase, ScottClingo):
+class Actuator(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -560,7 +560,7 @@ class Actuator(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class MotionSensor(TestCase, ScottClingo):
+class MotionSensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -732,7 +732,7 @@ class MotionSensor(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class BrokenWindowSensor(TestCase, ScottClingo):
+class BrokenWindowSensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -888,7 +888,7 @@ class BrokenWindowSensor(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class SmartBulb(TestCase, ScottClingo):
+class SmartBulb(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -1024,7 +1024,7 @@ class SmartBulb(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class AlarmSiren(TestCase, ScottClingo):
+class AlarmSiren(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -1160,7 +1160,7 @@ class AlarmSiren(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class DoorSensor(TestCase, ScottClingo):
+class DoorSensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -1336,7 +1336,7 @@ class DoorSensor(TestCase, ScottClingo):
         self.assertCountEqual(expected, query)
 
 
-class LightSensor(TestCase, ScottClingo):
+class LightSensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -1485,7 +1485,7 @@ class LightSensor(TestCase, ScottClingo):
 
         self.assertCountEqual(expected, query)
 
-class TemperatureSensor(TestCase, ScottClingo):
+class TemperatureSensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',

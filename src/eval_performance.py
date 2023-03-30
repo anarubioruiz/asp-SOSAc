@@ -5,8 +5,8 @@ import time
 
 from clorm import FactBase
 
-from scott_clingo import ScottClingo
-import scott_terms as terms
+from sosac_clingo import SosaCClingo
+import sosac_terms as terms
 
 KB_NAMES = [
     '_motionSensor_',
@@ -22,7 +22,7 @@ DEVICES_WITH_HOST = [
 ]
 
 
-class Evaluation(ScottClingo):
+class Evaluation(SosaCClingo):
     def __init__(self, size_from, size_offset, num_cases, iterations, filename):
         self.filename = filename
         self.iterations = int(iterations)

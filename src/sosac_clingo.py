@@ -2,10 +2,10 @@ from clorm import monkey
 monkey.patch() # must call this before importing clingo
 from clingo import Control
 
-import scott_terms as terms
+import sosac_terms as terms
 
 
-class ScottClingo:
+class SosaCClingo:
     def clingo_setup(self, *files):
         self.ctrl = Control(unifier=[
             terms.Device,
