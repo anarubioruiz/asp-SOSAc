@@ -1,5 +1,4 @@
 # SOSA<sub>c</sub> ASP engine
-To Do: Description
 
 ### Related publication
 *Not published yet*
@@ -15,9 +14,9 @@ This repository has the implementation of the ASP engine for generating SOSA<sub
 In the root directory, the Makefile has the rules for running the engine, the examples, and so on.
 
 ## Try it yourself
-To Do: setup/installation
+You need to install the following Python libraries and deb packages:
 
-```
+```bash
 $ pip install clingo
 $ pip install clorm
 $ pip install clingraph
@@ -25,13 +24,24 @@ $ sudo apt-get install graphviz
 ```
 
 ### Generate SOSA<sub>c</sub> knowledge for a scenario
-To Do: scenarios execution - `make <scenario>.output`, `make <scenario.graphs>` and `make <scenario>.lp`
+To start the knowledge generation process for any of the use cases addressed in the paper (*minimal*, *sampler* or *casas*), execute:
+`make <scenario>.out`. This command will create 1) a file scenarios/output.lp with the ASP atoms conforming the SOSA<sub>c</sub> instance of the usecase, and 2) a file scenarios/graph_output.pdf with a grap representing the knowledge generated. The command `make <scenario>.lp` only generates the knowledge file.
 
 ### Run the commonsense example
-To Do: commonsense example execution - `make run-example`
+To run the commonsense example addressed in the paper, run:
 
+```bash
+make run-example
+```
 ### Evaluate the performance
-To Do: run the performance evaluation - `make run-eval`
+You can conduct your own performance evaluation with:
+
+```bash
+make run-eval
+```
 
 ### Test the engine
-To Do: testing - `make test-unit`
+
+```bash
+make test-unit
+```
