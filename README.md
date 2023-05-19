@@ -24,8 +24,8 @@ $ sudo apt-get install graphviz
 ```
 
 ### Generate SOSA<sub>c</sub> knowledge for a scenario
-To start the knowledge generation process for any of the use cases addressed in the paper (*minimal*, *sampler* or *casas*), execute:
-`make <scenario>.out`. This command will create 1) a file scenarios/output.lp with the ASP atoms conforming the SOSA<sub>c</sub> instance of the usecase, and 2) a file scenarios/graph_output.pdf with a grap representing the knowledge generated. The command `make <scenario>.lp` only generates the knowledge file.
+To start the knowledge generation process for any of the use cases addressed in the paper (_minimal_, _sampler_ or _casas_), execute:
+`make <scenario>.out`. This command will create 1) a file _scenarios/output.lp_ with the ASP atoms conforming the SOSA<sub>c</sub> instance of the usecase, and 2) a file _scenarios/graph_output.pdf_ with a grap representing the knowledge generated. The command `make <scenario>.lp` only generates the knowledge file.
 
 ### Run the commonsense example
 To run the commonsense example addressed in the paper, run:
@@ -39,6 +39,7 @@ You can conduct your own performance evaluation with:
 ```bash
 make run-eval
 ```
+The evaluation data discussed in the paper van be found at _docs/evaluation.csv_
 
 ### Test the engine
 
