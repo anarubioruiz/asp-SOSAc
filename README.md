@@ -39,7 +39,7 @@ You can conduct your own performance evaluation with:
 ```bash
 make run-eval
 ```
-The evaluation data discussed in the paper van be found at _docs/evaluation.csv_
+The evaluation data discussed in the paper can be found at _docs/evaluation.csv_
 
 ### Test the engine
 
