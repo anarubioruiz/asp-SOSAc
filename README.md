@@ -1,4 +1,4 @@
-# SOSA<sub>c</sub> ASP engine
+# SOSA<sub>c</sub>-Reasoner
 
 ## What can you find in this repo?
 This repository contains the implementation of the ASP engine for generating SOSA<sub>c</sub> knowledge. It comprises the following:
