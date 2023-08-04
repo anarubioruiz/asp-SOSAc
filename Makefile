@@ -29,6 +29,9 @@ SOSAC_INFERENCE_RUN=clingo src/engine.lp src/sosac_engine.lp src/kb/*.lp
 run-example:
 	$(SOSAC_INFERENCE_RUN) examples/commonsense.lp -c time=night -c remove_device=sb01
 
+test-unit:
+	pytest-3 test/test_unit_sosa.py test/test_unit_kb.py
+
 SIZE_FROM=1
 SIZE_OFFSET=100
 NUM_CASES=10
@@ -38,6 +41,3 @@ OUTPUT_FILE=docs/from$(SIZE_FROM)offset$(SIZE_OFFSET)-$(NUM_CASES)cases$(ITERATI
 run-eval: # make run-eval SIZE_FROM=1 SIZE_OFFSET=100 NUM_CASES=10 ITERATIONS=5
 	python3 src/eval_performance.py \
 	${SIZE_FROM} ${SIZE_OFFSET} ${NUM_CASES} ${ITERATIONS} ${OUTPUT_FILE}
-
-test-unit:
-	pytest-3 test/test_unit_sosa.py test/test_unit_kb.py
