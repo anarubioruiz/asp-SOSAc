@@ -30,13 +30,13 @@ run-example:
 	$(SOSAC_INFERENCE_RUN) examples/commonsense.lp -c time=night -c remove_device=sb01
 
 test-unit:
-	pytest-3 test/test_unit_sosa.py test/test_unit_kb.py
+	pytest test/test_unit_sosa.py test/test_unit_kb.py
 
 SIZE_FROM=1
 SIZE_OFFSET=100
 NUM_CASES=10
 ITERATIONS=5
-OUTPUT_FILE=docs/from$(SIZE_FROM)offset$(SIZE_OFFSET)-$(NUM_CASES)cases$(ITERATIONS)times-evaluation.csv
+OUTPUT_FILE=docs/from$(SIZE_FROM)-offset$(SIZE_OFFSET)-$(NUM_CASES)cases$(ITERATIONS)times-evaluation.csv
 
 run-eval: # make run-eval SIZE_FROM=1 SIZE_OFFSET=100 NUM_CASES=10 ITERATIONS=5
 	python3 src/eval_performance.py \
