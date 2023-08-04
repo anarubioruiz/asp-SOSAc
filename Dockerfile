@@ -4,19 +4,16 @@ FROM ubuntu:20.04
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Set environment variables
-ENV DEBIAN_FRONTEND=noninteractive
+# No asking for user input
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    software-properties-common \
+    # software-properties-common \
     python3.9 \
     python3-pip \
     python3-pytest \
-    graphviz \
-    && add-apt-repository ppa:deadsnakes/ppa \
-    && apt-get update \
-    && apt-get install -y python3.9-dev
+    graphviz
 
 # Install clingo
 RUN apt-get install -y gringo
@@ -28,8 +25,7 @@ RUN python3.9 -m pip install --upgrade pip
 RUN python3.9 -m pip install \
     clingo \
     clorm \
-    clingraph \
-    graphviz
+    clingraph
 
 # Copy the current directory contents into the container at /app
 COPY . /app
