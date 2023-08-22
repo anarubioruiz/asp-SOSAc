@@ -29,13 +29,13 @@ actuation_priority(_smartTV_, illuminate, 3).
                   actuation_priority(ACTUATOR_KLASS, ACTUATION_KLASS, X) }.
 
 device(wb01, _windowBlindMotor_) :- not remove_device(wb01).
-x_is_the_y_of_z(room01, location, wb01).
+bot_containsElement(room01, wb01).
 
 device(sb01, _smartBulb_) :- not remove_device(sb01).
-x_is_the_y_of_z(room01, location, sb01).
+bot_containsElement(room01, sb01).
 
 device(tv01, _smartTV_) :- not remove_device(tv01).
-x_is_the_y_of_z(room01, location, tv01).
+bot_containsElement(room01, tv01).
 
 % UTILS:
 time(time).
