@@ -8,13 +8,13 @@ docker-build:
 
 DOCKER_RUN=docker run -v $(shell pwd):/app -p 80:80 sosac-reasoner
 
-docker-run:  # make docker-run CMD="make minimal.lp"
+docker-run:  # make docker-run CMD="make actuator.lp"
 	$(DOCKER_RUN) $(CMD)
 
 # -----------------------------------------
 
 GRAPH_GEN_RUN=clingo src/graphs.lp
-SOSAC_INFERENCE_RUN=clingo src/engine.lp src/sosac_engine.lp src/kb/*.lp src/translations.lp
+SOSAC_INFERENCE_RUN=clingo src/engine.lp src/sosac_engine.lp src/kb/*.lp
 
 %.lp:
 	$(MAKE) $*.output.lp $*.graph.pdf

@@ -12,7 +12,7 @@ e) the Python program `eval_performance.py`, for running a performance evaluatio
 f) the `kb/` directory, containing knowledge about how devices work.
 
 - The `scenarios/` directory, with deployment descriptions used for validating the engine. Each scenario consists of a `.lp` file:
-a) the `minimal.lp` scenario, composed of a single room and a single device (useful for easily understanding the generated knowledge for a device);
+a) `actuator.lp` and `sensor.lp` scenarios, composed of a single room and a single device (useful for easily understanding the generated knowledge for a device);
 b) the `sampler.lp` scenario, which has one device of each type deployed in three different rooms (allows seeing one example of every device type modelled in the available knowledge);
 c) the `casas.lp` scenario, a realistic scenario derived from one of the datasets from the Center for Advanced Studies in Adaptive Systems (CASAS); and
 d) the `temp_sensors.lp` scenario, featuring two different types of temperature
@@ -48,7 +48,7 @@ $ make docker-run CMD="<command>"
 ```
 
 ### Generate SOSA<sup>c</sup> knowledge for a scenario
-To execute the SOSA<sup>c</sup>-Reasoner for any of the use cases you can find at `scenarios/` (minimal, sampler, casas), execute `make <scenario_name>.lp`. This command will create:
+To execute the SOSA<sup>c</sup>-Reasoner for any of the use cases you can find at `scenarios/` (sensor, actuator, sampler, casas), execute `make <scenario_name>.lp`. This command will create:
 
 1. a file `scenarios/<scenario_name>.output.lp` with the ASP atoms forming the SOSA<sup>c</sup> instance of the use case, and
 2. a file `scenarios/<scenario_name>.graph.pdf` with a graph representing the generated knowledge.

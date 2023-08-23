@@ -920,7 +920,7 @@ class SmartBulb(TestCase, SosaCClingo):
 
         self.assertEqual(len(query), 1)
 
-    def test_makesActuation_of_the_illuminate_klass(self):
+    def test_makesActuation_of_illuminate_and_notIlluminate_klasses(self):
         solution = self.get_solution()
 
         expected = [
@@ -929,7 +929,13 @@ class SmartBulb(TestCase, SosaCClingo):
                 actuation=terms.ActID(
                     device='smart_bulb01',
                     act='illuminate')
-                )
+                ),
+            terms.makesActuation(
+                actuator='smart_bulb01',
+                actuation=terms.ActID(
+                    device='smart_bulb01',
+                    act='notIlluminate')
+                ),
         ]
 
         query = list(solution
@@ -939,7 +945,7 @@ class SmartBulb(TestCase, SosaCClingo):
 
         self.assertEqual(expected, query)
 
-    def test_illuminate_actuation_actsOnProperty_illuminated(self):
+    def test_illuminate_and_notIlluminate_actuations_actsOnProperty_illuminated(self):
         solution = self.get_solution()
 
         expected = [
@@ -947,6 +953,11 @@ class SmartBulb(TestCase, SosaCClingo):
                 actuation=terms.ActID(
                     device='smart_bulb01',
                     act='illuminate'),
+                actuatable_property='illuminated'),
+            terms.actsOnProperty(
+                actuation=terms.ActID(
+                    device='smart_bulb01',
+                    act='notIlluminate'),
                 actuatable_property='illuminated')
         ]
 
@@ -973,12 +984,15 @@ class SmartBulb(TestCase, SosaCClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_location_is_the_actuation_featureOfInterest(self):
+    def test_location_is_the_actuations_featureOfInterest(self):
         solution = self.get_solution()
 
         expected = [
             terms.hasFeatureOfInterest(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
+                feature_of_interest='kitchen'),
+            terms.hasFeatureOfInterest(
+                act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
                 feature_of_interest='kitchen')
         ]
 
@@ -1005,7 +1019,7 @@ class SmartBulb(TestCase, SosaCClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_illuminate_actuation_hasResult_boolean_true(self):
+    def test_illuminate_and_notilluminate_actuation_results(self):
         solution = self.get_solution()
 
         expected = [
@@ -1015,6 +1029,12 @@ class SmartBulb(TestCase, SosaCClingo):
             terms.hasSimpleResult(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 result='true'),
+            terms.hasResult(
+                act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
+                result='boolean'),
+            terms.hasSimpleResult(
+                act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
+                result='false'),
         ]
 
         result_query = list(solution.query(terms.hasResult).all())
