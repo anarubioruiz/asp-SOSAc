@@ -120,7 +120,7 @@ class sosac_isFeatureOfInterestOf(Predicate):
     feature_of_interest = ConstantField
     act = ActID.Field
 
-class isResultOf(Predicate):
+class sosac_isResultOf(Predicate):
     result = StringField
     act = ActID.Field
 

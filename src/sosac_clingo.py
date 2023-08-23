@@ -43,7 +43,7 @@ class SosaCClingo:
             terms.sosac_hasFeatureOfInterest,
             terms.sosac_isFeatureOfInterestOf,
             terms.hasResult,
-            terms.isResultOf,
+            terms.sosac_isResultOf,
             terms.hasSimpleResult,
             terms.hosts,
             terms.isHostedBy,

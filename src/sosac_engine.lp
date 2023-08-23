@@ -6,7 +6,7 @@ sosac_isFeatureOfInterestOf(FEATURE, ACT) :- sosac_hasFeatureOfInterest(ACT, FEA
 :- sosac_hasFeatureOfInterest(OBSERVATION, FEATURE_1), sosac_hasFeatureOfInterest(OBSERVATION, FEATURE_2), FEATURE_1 != FEATURE_2.
 
 sosac_result(RESULT) :- hasResult(_, RESULT).
-isResultOf(RESULT, ACT) :- hasResult(ACT, RESULT).
+sosac_isResultOf(RESULT, ACT) :- hasResult(ACT, RESULT).
 
 % ---- FeatureOfInterest
 
@@ -63,8 +63,8 @@ sosac_makesActuation(ACTUATOR, ACTUATION) :- sosac_madeByActuator(ACTUATION, ACT
 
 % ---- Result
 
-act(ACT) :- isResultOf(_, ACT).
-hasResult(ACT, RESULT) :- isResultOf(RESULT, ACT).
+act(ACT) :- sosac_isResultOf(_, ACT).
+hasResult(ACT, RESULT) :- sosac_isResultOf(RESULT, ACT).
 
 % ---- Platform
 
