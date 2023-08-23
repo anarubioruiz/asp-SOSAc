@@ -56,7 +56,7 @@ actsOnProperty(ACTUATION, ACTUATABLE_PROPERTY) :- isActedOnBy(ACTUATABLE_PROPERT
 
 act(OBSERVATION) :- actuation(OBSERVATION).
 
-actuator(ACTUATOR) :- madeByActuator(_, ACTUATOR).
+sosac_actuator(ACTUATOR) :- madeByActuator(_, ACTUATOR).
 makesActuation(ACTUATOR, ACTUATION) :- madeByActuator(ACTUATION, ACTUATOR).
 
 :- madeByActuator(ACTUATION, ACTUATOR_1), madeByActuator(ACTUATION, ACTUATOR_2), ACTUATOR_1 != ACTUATOR_2.

@@ -61,7 +61,7 @@ class sosac_observableProperty(Predicate):
 class sosac_observation(Predicate):
     id = ActID.Field
 
-class Actuator(Predicate):
+class sosac_actuator(Predicate):
     id = ConstantField
 
 class Actuation(Predicate):

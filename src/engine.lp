@@ -84,7 +84,7 @@ hasSimpleResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
 
 % ---- ACTUATOR INSTANCES
 
-actuator(ACTUATOR) :- makesActuation(ACTUATOR, _).
+sosac_actuator(ACTUATOR) :- makesActuation(ACTUATOR, _).
 
 makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS))
     :- sosac_device(ACTUATOR, ACTUATOR_KLASS),

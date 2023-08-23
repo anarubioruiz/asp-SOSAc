@@ -24,7 +24,7 @@ class SosaCClingo:
             terms.sosac_observableProperty,
             terms.sosac_observation,
             terms.Act,
-            terms.Actuator,
+            terms.sosac_actuator,
             terms.Actuation,
             terms.ActuatableProperty,
             terms.sosac_featureOfInterest,

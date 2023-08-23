@@ -452,7 +452,7 @@ class Actuator(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         actuators_query = list(solution
-            .query(terms.Actuator)
+            .query(terms.sosac_actuator)
             .all()
         )
 
@@ -463,7 +463,7 @@ class Actuator(TestCase, SosaCClingo):
 
         query = actuators_query + actuations_query
         expected = [
-            terms.Actuator(id='smart_bulb01'),
+            terms.sosac_actuator(id='smart_bulb01'),
             terms.Actuation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 
@@ -571,7 +571,7 @@ class Actuation(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         actuators_query = list(solution
-            .query(terms.Actuator)
+            .query(terms.sosac_actuator)
             .all()
         )
 
@@ -582,7 +582,7 @@ class Actuation(TestCase, SosaCClingo):
 
         query = actuators_query + actuations_query
         expected = [
-            terms.Actuator(id='smart_bulb01'),
+            terms.sosac_actuator(id='smart_bulb01'),
             terms.Actuation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 

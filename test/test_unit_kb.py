@@ -356,7 +356,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         self.assertCountEqual(expected, query)
 
 
-class Actuator(TestCase, SosaCClingo):
+class sosac_actuator(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -913,8 +913,8 @@ class SmartBulb(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.Actuator)
-            .where(terms.Actuator.id == 'smart_bulb01')
+            .query(terms.sosac_actuator)
+            .where(terms.sosac_actuator.id == 'smart_bulb01')
             .all()
         )
 
@@ -1069,8 +1069,8 @@ class AlarmSiren(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.Actuator)
-            .where(terms.Actuator.id == 'alarm_siren01')
+            .query(terms.sosac_actuator)
+            .where(terms.sosac_actuator.id == 'alarm_siren01')
             .all()
         )
 
