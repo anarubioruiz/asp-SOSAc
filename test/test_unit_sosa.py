@@ -525,13 +525,13 @@ class sosac_actuatableProperty(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.actsOnProperty(
+            terms.sosac_actsOnProperty(
                 actuation=terms.ActID(device='ANY', act='ANY'),
                 actuatable_property='lighting')
         ]
 
         query = list(solution
-            .query(terms.actsOnProperty)
+            .query(terms.sosac_actsOnProperty)
             .all()
         )
 

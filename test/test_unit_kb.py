@@ -391,15 +391,15 @@ class sosac_actuator(TestCase, SosaCClingo):
         sosakc_actsOnProperty = sosakc_property_query[0]
 
         property_query = list(solution
-            .query(terms.actsOnProperty)
+            .query(terms.sosac_actsOnProperty)
             .all()
         )
 
         self.assertEqual(len(property_query), 1)
-        actsOnProperty = property_query[0]
+        sosac_actsOnProperty = property_query[0]
 
         self.assertEqual(
-            actsOnProperty.actuatable_property,
+            sosac_actsOnProperty.actuatable_property,
             sosakc_actsOnProperty.actuatable_property
         )
 
@@ -949,12 +949,12 @@ class SmartBulb(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.actsOnProperty(
+            terms.sosac_actsOnProperty(
                 actuation=terms.ActID(
                     device='smart_bulb01',
                     act='illuminate'),
                 actuatable_property='illuminated'),
-            terms.actsOnProperty(
+            terms.sosac_actsOnProperty(
                 actuation=terms.ActID(
                     device='smart_bulb01',
                     act='notIlluminate'),
@@ -962,7 +962,7 @@ class SmartBulb(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.actsOnProperty)
+            .query(terms.sosac_actsOnProperty)
             .all()
         )
 
@@ -1099,7 +1099,7 @@ class AlarmSiren(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.actsOnProperty(
+            terms.sosac_actsOnProperty(
                 actuation=terms.ActID(
                     device='alarm_siren01',
                     act='warnOfDanger'),
@@ -1107,7 +1107,7 @@ class AlarmSiren(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.actsOnProperty)
+            .query(terms.sosac_actsOnProperty)
             .all()
         )
 

@@ -108,7 +108,7 @@ class sosac_madeByActuator(Predicate):
     actuation = ActID.Field
     actuator = ConstantField
 
-class actsOnProperty(Predicate):
+class sosac_actsOnProperty(Predicate):
     actuation = ActID.Field
     actuatable_property = ConstantField
 

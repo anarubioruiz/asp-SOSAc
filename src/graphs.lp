@@ -84,18 +84,18 @@ attr(edge, ((SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY), label, "sosac_obs
 
 
 node(ACTUATABLE_PROPERTY, graph_output)
-    :- actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY).
+    :- sosac_actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY).
 attr(node,ACTUATABLE_PROPERTY,label,ACTUATABLE_PROPERTY)
-    :- actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY).
+    :- sosac_actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY).
 
 attr(node, (ACTUATOR, ACTUATION_KLASS), label, LABEL)
-    :- actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY),
+    :- sosac_actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY),
        LABEL = @gen_act_label(ACTUATOR, ACTUATION_KLASS).
 
 edge(((ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY), graph_output)
-    :- actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY).
-attr(edge, ((ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY), label, "actsOnProperty")
-    :- actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY).
+    :- sosac_actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY).
+attr(edge, ((ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY), label, "sosac_actsOnProperty")
+    :- sosac_actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY).
 
 % % ------------------------------------
 

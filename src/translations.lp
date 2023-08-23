@@ -1,4 +1,4 @@
-device(DEVICE, TYPE)
+test_actsOnProperty_is_a_property_of_the_actuator_featureOfInterestdevice(DEVICE, TYPE)
     :- sosac_device(DEVICE, TYPE).
 
 x_is_the_y_of_z(LOCATION, location, DEVICE)
