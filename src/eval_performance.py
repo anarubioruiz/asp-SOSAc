@@ -88,7 +88,7 @@ class Evaluation(SosaCClingo):
             for klass in KB_NAMES:
                 instance = klass.replace('_', '')
                 self.current_scenario.extend([
-                    terms.Device(
+                    terms.sosac_device(
                         id=f'{instance}_{i}',
                         klass=klass),
                     terms.x_is_the_y_of_z(

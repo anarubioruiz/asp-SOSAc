@@ -5,7 +5,7 @@ class ActID(Predicate):
     device = ConstantField
     act = ConstantField
 
-class Device(Predicate):
+class sosac_device(Predicate):
     id = ConstantField
     klass = ConstantField
 
