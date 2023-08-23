@@ -457,14 +457,14 @@ class Actuator(TestCase, SosaCClingo):
         )
 
         actuations_query = list(solution
-            .query(terms.Actuation)
+            .query(terms.sosac_actuation)
             .all()
         )
 
         query = actuators_query + actuations_query
         expected = [
             terms.sosac_actuator(id='smart_bulb01'),
-            terms.Actuation(id=terms.ActID(device='ANY', act='ANY'))
+            terms.sosac_actuation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 
         self.assertCountEqual(expected, query)
@@ -503,7 +503,7 @@ class ActuatableProperty(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         actuations_query = list(solution
-            .query(terms.Actuation)
+            .query(terms.sosac_actuation)
             .all()
         )
 
@@ -514,7 +514,7 @@ class ActuatableProperty(TestCase, SosaCClingo):
 
         query = actuations_query + actuatable_properties_query
         expected = [
-            terms.Actuation(id=terms.ActID(device='ANY', act='ANY')),
+            terms.sosac_actuation(id=terms.ActID(device='ANY', act='ANY')),
             terms.ActuatableProperty(id='lighting')
         ]
 
@@ -538,14 +538,14 @@ class ActuatableProperty(TestCase, SosaCClingo):
         self.assertEqual(expected, query)
 
 
-class Actuation(TestCase, SosaCClingo):
+class sosac_actuation(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
     # sosa:Actuation sub class of sosac:Act
     def test_Actuations_are_Acts(self):
         facts = FactBase([
-            terms.Actuation(id=terms.ActID(device='ANY', act='ANY'))
+            terms.sosac_actuation(id=terms.ActID(device='ANY', act='ANY'))
         ])
 
         self.load_knowledge(facts)
@@ -576,14 +576,14 @@ class Actuation(TestCase, SosaCClingo):
         )
 
         actuations_query = list(solution
-            .query(terms.Actuation)
+            .query(terms.sosac_actuation)
             .all()
         )
 
         query = actuators_query + actuations_query
         expected = [
             terms.sosac_actuator(id='smart_bulb01'),
-            terms.Actuation(id=terms.ActID(device='ANY', act='ANY'))
+            terms.sosac_actuation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 
         self.assertCountEqual(expected, query)
