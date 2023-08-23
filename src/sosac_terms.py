@@ -132,7 +132,7 @@ class sosac_hasSimpleResult(Predicate):
     act = ActID.Field
     result = StringField
 
-class hosts(Predicate):
+class sosac_hosts(Predicate):
     platform = ConstantField
     hosted = ConstantField
 
