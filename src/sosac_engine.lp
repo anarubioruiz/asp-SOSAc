@@ -40,7 +40,7 @@ sosac_observableProperty(OBSERVABLE_PROPERTY) :- observedProperty(_, OBSERVABLE_
 
 % ---- Actuator
 
-actuatableProperty(ACTUATABLE_PROPERTY) :- actsOnProperty(_, ACTUATABLE_PROPERTY).
+sosac_actuatableProperty(ACTUATABLE_PROPERTY) :- actsOnProperty(_, ACTUATABLE_PROPERTY).
 sosac_actuation(ACTUATION) :- makesActuation(_, ACTUATION).
 
 isActedOnBy(ACTUATABLE_PROPERTY, ACTUATOR) :- actsOnProperty(ACTUATOR, ACTUATABLE_PROPERTY).

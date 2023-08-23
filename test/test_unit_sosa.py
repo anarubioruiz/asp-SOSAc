@@ -486,7 +486,7 @@ class Actuator(TestCase, SosaCClingo):
 
         self.assertEqual(expected, query)
 
-class ActuatableProperty(TestCase, SosaCClingo):
+class sosac_actuatableProperty(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -508,14 +508,14 @@ class ActuatableProperty(TestCase, SosaCClingo):
         )
 
         actuatable_properties_query = list(solution
-            .query(terms.ActuatableProperty)
+            .query(terms.sosac_actuatableProperty)
             .all()
         )
 
         query = actuations_query + actuatable_properties_query
         expected = [
             terms.sosac_actuation(id=terms.ActID(device='ANY', act='ANY')),
-            terms.ActuatableProperty(id='lighting')
+            terms.sosac_actuatableProperty(id='lighting')
         ]
 
         self.assertCountEqual(expected, query)

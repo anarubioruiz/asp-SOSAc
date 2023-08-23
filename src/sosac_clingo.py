@@ -26,7 +26,7 @@ class SosaCClingo:
             terms.Act,
             terms.sosac_actuator,
             terms.sosac_actuation,
-            terms.ActuatableProperty,
+            terms.sosac_actuatableProperty,
             terms.sosac_featureOfInterest,
             terms.Result,
             terms.Platform,

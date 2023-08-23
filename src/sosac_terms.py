@@ -67,7 +67,7 @@ class sosac_actuator(Predicate):
 class sosac_actuation(Predicate):
     id = ActID.Field
 
-class ActuatableProperty(Predicate):
+class sosac_actuatableProperty(Predicate):
     id = ConstantField
 
 class Result(Predicate):
