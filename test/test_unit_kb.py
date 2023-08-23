@@ -612,13 +612,13 @@ class MotionSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.makesObservation(
+            terms.sosac_makesObservation(
                 sensor='motion_sensor01',
                 observation=terms.ActID(
                     device='motion_sensor01',
                     act='motion_ob')
             ),
-            terms.makesObservation(
+            terms.sosac_makesObservation(
                 sensor='motion_sensor01',
                 observation=terms.ActID(
                     device='motion_sensor01',
@@ -627,7 +627,7 @@ class MotionSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.makesObservation)
+            .query(terms.sosac_makesObservation)
             .all()
         )
 
@@ -788,7 +788,7 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.makesObservation(
+            terms.sosac_makesObservation(
                 sensor='broken_window_sensor01',
                 observation=terms.ActID(
                     device='broken_window_sensor01',
@@ -797,7 +797,7 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.makesObservation)
+            .query(terms.sosac_makesObservation)
             .all()
         )
 
@@ -1236,13 +1236,13 @@ class DoorSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.makesObservation(
+            terms.sosac_makesObservation(
                 sensor='door_sensor01',
                 observation=terms.ActID(
                     device='door_sensor01',
                     act='open_ob')
             ),
-            terms.makesObservation(
+            terms.sosac_makesObservation(
                 sensor='door_sensor01',
                 observation=terms.ActID(
                     device='door_sensor01',
@@ -1251,7 +1251,7 @@ class DoorSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.makesObservation)
+            .query(terms.sosac_makesObservation)
             .all()
         )
 
@@ -1408,7 +1408,7 @@ class LightSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.makesObservation(
+            terms.sosac_makesObservation(
                 sensor='light_sensor01',
                 observation=terms.ActID(
                     device='light_sensor01',
@@ -1417,7 +1417,7 @@ class LightSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.makesObservation)
+            .query(terms.sosac_makesObservation)
             .all()
         )
 
@@ -1557,7 +1557,7 @@ class TemperatureSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.makesObservation(
+            terms.sosac_makesObservation(
                 sensor='temp_sensor01',
                 observation=terms.ActID(
                     device='temp_sensor01',
@@ -1566,7 +1566,7 @@ class TemperatureSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.makesObservation)
+            .query(terms.sosac_makesObservation)
             .all()
         )
 

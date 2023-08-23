@@ -30,15 +30,15 @@ isHostedBy(DEVICE, SPECIFIED_HOST)
 
 % ---- SENSOR INSTANCES
 
-sosac_sensor(SENSOR) :- makesObservation(SENSOR, _).
+sosac_sensor(SENSOR) :- sosac_makesObservation(SENSOR, _).
 
-makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS))
+sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS))
     :- sosac_device(SENSOR, SENSOR_KLASS),
        sosakc_makesObservation(SENSOR_KLASS, OBSERVATION_KLASS).
 
 observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY)
     :- sosac_device(SENSOR, SENSOR_KLASS),
-       makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
+       sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_observesProperty(SENSOR_KLASS, OBSERVABLE_PROPERTY).
 
 sosac_observes(SENSOR, OBSERVABLE_PROPERTY)
@@ -46,18 +46,18 @@ sosac_observes(SENSOR, OBSERVABLE_PROPERTY)
 
 hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), ENTITY)
     :- sosac_device(SENSOR, SENSOR_KLASS),
-       makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
+       sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        x_is_the_interest_of_z(ENTITY, SENSOR).
 
 hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), home)
     :- sosac_device(SENSOR, SENSOR_KLASS),
-       makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
+       sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_hasFeatureOfInterest((SENSOR_KLASS, OBSERVATION_KLASS), home),
        not x_is_the_interest_of_z(_, SENSOR).
 
 hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE)
     :- sosac_device(SENSOR, SENSOR_KLASS),
-       makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
+       sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_hasFeatureOfInterest((SENSOR_KLASS, OBSERVATION_KLASS), PROPERTY),
        x_is_the_y_of_z(FEATURE, PROPERTY, SENSOR),
        not x_is_the_interest_of_z(_, SENSOR),
@@ -65,7 +65,7 @@ hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE)
 
 hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), LOCATION)
     :- sosac_device(SENSOR, SENSOR_KLASS),
-       makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
+       sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        not sosakc_hasFeatureOfInterest((SENSOR_KLASS, OBSERVATION_KLASS), _),
        x_is_the_y_of_z(LOCATION, location, SENSOR),
        not x_is_the_interest_of_z(_, SENSOR).
@@ -75,11 +75,11 @@ hasProperty(FEATURE, OBSERVABLE_PROPERTY)
        hasFeatureOfInterest(OBSERVATION, FEATURE).
 
 hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
-    :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
+    :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_hasResult(OBSERVATION_KLASS, RESULT).
 
 hasSimpleResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
-    :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
+    :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_hasSimpleResult(OBSERVATION_KLASS, RESULT).
 
 % ---- ACTUATOR INSTANCES

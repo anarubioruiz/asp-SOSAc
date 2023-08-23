@@ -34,20 +34,20 @@ attr(edge, (DEVICE, LOCATION), label, "isLocatedIn")
 % % ------------------------------------
 
 node((SENSOR, OBSERVATION_KLASS), graph_output)
-    :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
+    :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
 attr(node, (SENSOR, OBSERVATION_KLASS), label, LABEL)
-    :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
+    :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        LABEL = @gen_act_label(SENSOR, OBSERVATION_KLASS).
 
 node(SENSOR, graph_output)
-    :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
+    :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
 attr(node,SENSOR,label,SENSOR)
-    :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
+    :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
 
 edge((SENSOR, (SENSOR, OBSERVATION_KLASS)), graph_output)
-    :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
-attr(edge, (SENSOR, (SENSOR, OBSERVATION_KLASS)), label, "makesObservation")
-    :- makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
+    :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
+attr(edge, (SENSOR, (SENSOR, OBSERVATION_KLASS)), label, "sosac_makesObservation")
+    :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)).
 
 
 node((ACTUATOR, ACTUATION_KLASS), graph_output)

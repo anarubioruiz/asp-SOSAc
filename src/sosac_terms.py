@@ -84,7 +84,7 @@ class sosac_observes(Predicate):
     sensor = ConstantField
     observable_property = ConstantField
 
-class makesObservation(Predicate):
+class sosac_makesObservation(Predicate):
     sensor = ConstantField
     observation = ActID.Field
 
