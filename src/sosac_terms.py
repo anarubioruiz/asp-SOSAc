@@ -80,7 +80,7 @@ class sosac_isObservedBy(Predicate):
     observable_property = ConstantField
     sensor = ConstantField
 
-class observes(Predicate):
+class sosac_observes(Predicate):
     sensor = ConstantField
     observable_property = ConstantField
 

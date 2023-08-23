@@ -160,7 +160,7 @@ class sosac_sensor(TestCase, SosaCClingo):
     # sosa:observes - Domain: sosa:Sensor, Range: sosa:ObservableProperty
     def test_sensor_observes_ObservableProperty(self):
         facts = FactBase([
-            terms.observes(
+            terms.sosac_observes(
                 sensor='temp_sensor01',
                 observable_property='temperature')
         ])
@@ -189,7 +189,7 @@ class sosac_sensor(TestCase, SosaCClingo):
     # sosa:observes inverse property of sosa:isObservedBy
     def test_observes_inverse_of_isObservedBy(self):
         facts = FactBase([
-            terms.observes(
+            terms.sosac_observes(
                 sensor='temp_sensor01',
                 observable_property='temperature')
         ])
@@ -303,13 +303,13 @@ class sosac_observableProperty(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observes(
+            terms.sosac_observes(
                 sensor='temp_sensor01',
                 observable_property='temperature')
         ]
 
         query = list(solution
-            .query(terms.observes)
+            .query(terms.sosac_observes)
             .all()
         )
 

@@ -101,7 +101,7 @@ attr(edge, ((ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY), label, "actsOnPro
 
 edge((SENSOR, OBSERVABLE_PROPERTY), graph_output)
     :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
-attr(edge, (SENSOR, OBSERVABLE_PROPERTY), label, "observes")
+attr(edge, (SENSOR, OBSERVABLE_PROPERTY), label, "sosac_observes")
     :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
 
 % % ------------------------------------

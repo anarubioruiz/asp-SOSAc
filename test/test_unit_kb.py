@@ -596,13 +596,13 @@ class MotionSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observes(
+            terms.sosac_observes(
                 sensor='motion_sensor01',
                 observable_property='motion')
         ]
 
         query = list(solution
-            .query(terms.observes)
+            .query(terms.sosac_observes)
             .all()
         )
 
@@ -772,13 +772,13 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observes(
+            terms.sosac_observes(
                 sensor='broken_window_sensor01',
                 observable_property='broken')
         ]
 
         query = list(solution
-            .query(terms.observes)
+            .query(terms.sosac_observes)
             .all()
         )
 
@@ -1220,13 +1220,13 @@ class DoorSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observes(
+            terms.sosac_observes(
                 sensor='door_sensor01',
                 observable_property='open')
         ]
 
         query = list(solution
-            .query(terms.observes)
+            .query(terms.sosac_observes)
             .all()
         )
 
@@ -1392,13 +1392,13 @@ class LightSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observes(
+            terms.sosac_observes(
                 sensor='light_sensor01',
                 observable_property='illuminance')
         ]
 
         query = list(solution
-            .query(terms.observes)
+            .query(terms.sosac_observes)
             .all()
         )
 
@@ -1541,13 +1541,13 @@ class TemperatureSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observes(
+            terms.sosac_observes(
                 sensor='temp_sensor01',
                 observable_property='temperature')
         ]
 
         query = list(solution
-            .query(terms.observes)
+            .query(terms.sosac_observes)
             .all()
         )
 

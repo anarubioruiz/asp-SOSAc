@@ -41,7 +41,7 @@ observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY)
        makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_observesProperty(SENSOR_KLASS, OBSERVABLE_PROPERTY).
 
-observes(SENSOR, OBSERVABLE_PROPERTY)
+sosac_observes(SENSOR, OBSERVABLE_PROPERTY)
     :- observedProperty(actID(SENSOR, _), OBSERVABLE_PROPERTY).
 
 hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), ENTITY)
