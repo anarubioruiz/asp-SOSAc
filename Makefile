@@ -14,7 +14,7 @@ docker-run:  # make docker-run CMD="make actuator.lp"
 # -----------------------------------------
 
 GRAPH_GEN_RUN=clingo src/graphs.lp
-SOSAC_INFERENCE_RUN=clingo src/engine.lp src/sosac_engine.lp src/kb/*.lp
+SOSAC_INFERENCE_RUN=clingo src/engine.lp src/sosac_engine.lp src/kb/*.lp src/translations.lp src/filters.lp
 
 %.lp:
 	$(MAKE) $*.output.lp $*.graph.pdf

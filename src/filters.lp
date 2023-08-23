@@ -1,0 +1,13 @@
+#show sosac_device/2.
+#show bot_containsElement/2.
+#show bot_hasSubElement/2.
+#show sosac_hasFeatureOfInterest/2.
+#show sosac_hasResult/2.
+#show sosac_observedProperty/2.
+#show sosac_actsOnProperty/2.
+#show sosac_makesObservation/2.
+#show sosac_makesActuation/2.
+#show sosac_hosts/2.
+#show sosac_hasProperty/2.
+#show sosac_hasSimpleResult/2.
+#show sosac_observes/2.
