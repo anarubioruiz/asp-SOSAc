@@ -30,7 +30,7 @@ isHostedBy(DEVICE, SPECIFIED_HOST)
 
 % ---- SENSOR INSTANCES
 
-sensor(SENSOR) :- makesObservation(SENSOR, _).
+sosac_sensor(SENSOR) :- makesObservation(SENSOR, _).
 
 makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS))
     :- sosac_device(SENSOR, SENSOR_KLASS),

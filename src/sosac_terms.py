@@ -52,7 +52,7 @@ class Act(Predicate):
 class FeatureOfInterest(Predicate):
     id = ConstantField
 
-class Sensor(Predicate):
+class sosac_sensor(Predicate):
     id = ConstantField
 
 class ObservableProperty(Predicate):

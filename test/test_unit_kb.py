@@ -152,7 +152,7 @@ class sosac_device(TestCase, SosaCClingo):
 
         self.assertEqual(solution, None)
 
-class Sensor(TestCase, SosaCClingo):
+class sosac_sensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -585,8 +585,8 @@ class MotionSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.Sensor)
-            .where(terms.Sensor.id == 'motion_sensor01')
+            .query(terms.sosac_sensor)
+            .where(terms.sosac_sensor.id == 'motion_sensor01')
             .all()
         )
 
@@ -761,8 +761,8 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.Sensor)
-            .where(terms.Sensor.id == 'broken_window_sensor01')
+            .query(terms.sosac_sensor)
+            .where(terms.sosac_sensor.id == 'broken_window_sensor01')
             .all()
         )
 
@@ -1209,8 +1209,8 @@ class DoorSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.Sensor)
-            .where(terms.Sensor.id == 'door_sensor01')
+            .query(terms.sosac_sensor)
+            .where(terms.sosac_sensor.id == 'door_sensor01')
             .all()
         )
 
@@ -1381,8 +1381,8 @@ class LightSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.Sensor)
-            .where(terms.Sensor.id == 'light_sensor01')
+            .query(terms.sosac_sensor)
+            .where(terms.sosac_sensor.id == 'light_sensor01')
             .all()
         )
 
@@ -1530,8 +1530,8 @@ class TemperatureSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.Sensor)
-            .where(terms.Sensor.id == 'temp_sensor01')
+            .query(terms.sosac_sensor)
+            .where(terms.sosac_sensor.id == 'temp_sensor01')
             .all()
         )
 

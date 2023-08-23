@@ -153,7 +153,7 @@ class FeatureOfInterest(TestCase, SosaCClingo):
         self.assertCountEqual(expected, query)
 
 
-class Sensor(TestCase, SosaCClingo):
+class sosac_sensor(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -169,7 +169,7 @@ class Sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         sensors_query = list(solution
-            .query(terms.Sensor)
+            .query(terms.sosac_sensor)
             .all()
         )
 
@@ -180,7 +180,7 @@ class Sensor(TestCase, SosaCClingo):
 
         query = sensors_query + observable_properties_query
         expected = [
-            terms.Sensor(id='temp_sensor01'),
+            terms.sosac_sensor(id='temp_sensor01'),
             terms.ObservableProperty(id='temperature')
         ]
 
@@ -222,7 +222,7 @@ class Sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         sensors_query = list(solution
-            .query(terms.Sensor)
+            .query(terms.sosac_sensor)
             .all()
         )
 
@@ -233,7 +233,7 @@ class Sensor(TestCase, SosaCClingo):
 
         query = sensors_query + observations_query
         expected = [
-            terms.Sensor(id='temp_sensor01'),
+            terms.sosac_sensor(id='temp_sensor01'),
             terms.Observation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 
@@ -281,7 +281,7 @@ class ObservableProperty(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         sensors_query = list(solution
-            .query(terms.Sensor)
+            .query(terms.sosac_sensor)
             .all()
         )
 
@@ -292,7 +292,7 @@ class ObservableProperty(TestCase, SosaCClingo):
 
         query = sensors_query + observable_properties_query
         expected = [
-            terms.Sensor(id='temp_sensor01'),
+            terms.sosac_sensor(id='temp_sensor01'),
             terms.ObservableProperty(id='temperature')
         ]
 
@@ -348,7 +348,7 @@ class Observation(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         sensors_query = list(solution
-            .query(terms.Sensor)
+            .query(terms.sosac_sensor)
             .all()
         )
 
@@ -359,7 +359,7 @@ class Observation(TestCase, SosaCClingo):
 
         query = sensors_query + observations_query
         expected = [
-            terms.Sensor(id='temp_sensor01'),
+            terms.sosac_sensor(id='temp_sensor01'),
             terms.Observation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 

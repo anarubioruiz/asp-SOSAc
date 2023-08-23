@@ -23,7 +23,7 @@ madeBySensor(OBSERVATION, SENSOR) :- makesObservation(SENSOR, OBSERVATION).
 
 % ---- ObservedProperty
 
-sensor(SENSOR) :- isObservedBy(_, SENSOR).
+sosac_sensor(SENSOR) :- isObservedBy(_, SENSOR).
 observes(SENSOR, OBSERVABLE_PROPERTY) :- isObservedBy(OBSERVABLE_PROPERTY, SENSOR).
 observation(OBSERVATION) :- observedProperty(OBSERVATION, _).
 
@@ -31,7 +31,7 @@ observation(OBSERVATION) :- observedProperty(OBSERVATION, _).
 
 act(OBSERVATION) :- observation(OBSERVATION).
 
-sensor(SENSOR) :- madeBySensor(_, SENSOR).
+sosac_sensor(SENSOR) :- madeBySensor(_, SENSOR).
 makesObservation(SENSOR, OBSERVATION) :- madeBySensor(OBSERVATION, SENSOR).
 
 :- madeBySensor(OBSERVATION, SENSOR_1), madeBySensor(OBSERVATION, SENSOR_2), SENSOR_1 != SENSOR_2.
