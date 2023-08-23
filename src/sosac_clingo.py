@@ -44,7 +44,7 @@ class SosaCClingo:
             terms.sosac_isFeatureOfInterestOf,
             terms.sosac_hasResult,
             terms.sosac_isResultOf,
-            terms.hasSimpleResult,
+            terms.sosac_hasSimpleResult,
             terms.hosts,
             terms.isHostedBy,
             terms.hasProperty

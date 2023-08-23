@@ -22,7 +22,7 @@ actuation_priority(_smartTV_, illuminate, 3).
 { use(ACTUATOR, ACTUATION) : sosac_makesActuation(ACTUATOR, ACTUATION),
                              sosac_hasFeatureOfInterest(ACTUATION, ENTITY),
                              sosac_actsOnProperty(ACTUATION, PROPERTY),
-                             hasSimpleResult(ACTUATION, VALUE) } = 1 :- objetive(ENTITY, PROPERTY, VALUE).
+                             sosac_hasSimpleResult(ACTUATION, VALUE) } = 1 :- objetive(ENTITY, PROPERTY, VALUE).
 
 #minimize { X@1 : use(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
                   sosac_device(ACTUATOR, ACTUATOR_KLASS),

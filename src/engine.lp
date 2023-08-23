@@ -78,7 +78,7 @@ sosac_hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
     :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_hasResult(OBSERVATION_KLASS, RESULT).
 
-hasSimpleResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
+sosac_hasSimpleResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
     :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_hasSimpleResult(OBSERVATION_KLASS, RESULT).
 
@@ -129,6 +129,6 @@ sosac_hasResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
     :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        sosakc_hasResult(ACTUATION_KLASS, RESULT).
 
-hasSimpleResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
+sosac_hasSimpleResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
     :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        sosakc_hasSimpleResult(ACTUATION_KLASS, RESULT).

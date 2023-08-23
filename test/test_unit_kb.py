@@ -717,16 +717,16 @@ class MotionSensor(TestCase, SosaCClingo):
             terms.sosac_hasResult(
                 act=terms.ActID(device='motion_sensor01', act='not_motion_ob'),
                 result="boolean"),
-            terms.hasSimpleResult(
+            terms.sosac_hasSimpleResult(
                 act=terms.ActID(device='motion_sensor01', act='motion_ob'),
                 result="true"),
-            terms.hasSimpleResult(
+            terms.sosac_hasSimpleResult(
                 act=terms.ActID(device='motion_sensor01', act='not_motion_ob'),
                 result="false"),
         ]
 
         result_query = list(solution.query(terms.sosac_hasResult).all())
-        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        simple_result_query = list(solution.query(terms.sosac_hasSimpleResult).all())
         query = result_query + simple_result_query
 
         self.assertCountEqual(expected, query)
@@ -876,13 +876,13 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
             terms.sosac_hasResult(
                 act=terms.ActID(device='broken_window_sensor01', act='broken_ob'),
                 result='boolean'),
-            terms.hasSimpleResult(
+            terms.sosac_hasSimpleResult(
                 act=terms.ActID(device='broken_window_sensor01', act='broken_ob'),
                 result='true'),
         ]
 
         result_query = list(solution.query(terms.sosac_hasResult).all())
-        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        simple_result_query = list(solution.query(terms.sosac_hasSimpleResult).all())
         query = result_query + simple_result_query
 
         self.assertCountEqual(expected, query)
@@ -1026,19 +1026,19 @@ class SmartBulb(TestCase, SosaCClingo):
             terms.sosac_hasResult(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 result='boolean'),
-            terms.hasSimpleResult(
+            terms.sosac_hasSimpleResult(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 result='true'),
             terms.sosac_hasResult(
                 act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
                 result='boolean'),
-            terms.hasSimpleResult(
+            terms.sosac_hasSimpleResult(
                 act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
                 result='false'),
         ]
 
         result_query = list(solution.query(terms.sosac_hasResult).all())
-        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        simple_result_query = list(solution.query(terms.sosac_hasSimpleResult).all())
         query = result_query + simple_result_query
 
         self.assertCountEqual(expected, query)
@@ -1168,13 +1168,13 @@ class AlarmSiren(TestCase, SosaCClingo):
             terms.sosac_hasResult(
                 act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
                 result='boolean'),
-            terms.hasSimpleResult(
+            terms.sosac_hasSimpleResult(
                 act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
                 result='true')
         ]
 
         result_query = list(solution.query(terms.sosac_hasResult).all())
-        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        simple_result_query = list(solution.query(terms.sosac_hasSimpleResult).all())
         query = simple_result_query + result_query
 
         self.assertCountEqual(expected, query)
@@ -1341,16 +1341,16 @@ class DoorSensor(TestCase, SosaCClingo):
             terms.sosac_hasResult(
                 act=terms.ActID(device='door_sensor01', act='closed_ob'),
                 result="boolean"),
-            terms.hasSimpleResult(
+            terms.sosac_hasSimpleResult(
                 act=terms.ActID(device='door_sensor01', act='open_ob'),
                 result="true"),
-            terms.hasSimpleResult(
+            terms.sosac_hasSimpleResult(
                 act=terms.ActID(device='door_sensor01', act='closed_ob'),
                 result="false"),
         ]
 
         result_query = list(solution.query(terms.sosac_hasResult).all())
-        simple_result_query = list(solution.query(terms.hasSimpleResult).all())
+        simple_result_query = list(solution.query(terms.sosac_hasSimpleResult).all())
         query = result_query + simple_result_query
 
         self.assertCountEqual(expected, query)

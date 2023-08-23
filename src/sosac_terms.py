@@ -128,7 +128,7 @@ class sosac_hasResult(Predicate):
     act = ActID.Field
     result = StringField
 
-class hasSimpleResult(Predicate):
+class sosac_hasSimpleResult(Predicate):
     act = ActID.Field
     result = StringField
 
