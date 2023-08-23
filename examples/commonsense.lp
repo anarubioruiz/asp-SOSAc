@@ -25,16 +25,16 @@ actuation_priority(_smartTV_, illuminate, 3).
                              hasSimpleResult(ACTUATION, VALUE) } = 1 :- objetive(ENTITY, PROPERTY, VALUE).
 
 #minimize { X@1 : use(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
-                  device(ACTUATOR, ACTUATOR_KLASS),
+                  sosac_device(ACTUATOR, ACTUATOR_KLASS),
                   actuation_priority(ACTUATOR_KLASS, ACTUATION_KLASS, X) }.
 
-device(wb01, _windowBlindMotor_) :- not remove_device(wb01).
+sosac_device(wb01, _windowBlindMotor_) :- not remove_device(wb01).
 bot_containsElement(room01, wb01).
 
-device(sb01, _smartBulb_) :- not remove_device(sb01).
+sosac_device(sb01, _smartBulb_) :- not remove_device(sb01).
 bot_containsElement(room01, sb01).
 
-device(tv01, _smartTV_) :- not remove_device(tv01).
+sosac_device(tv01, _smartTV_) :- not remove_device(tv01).
 bot_containsElement(room01, tv01).
 
 % UTILS:
