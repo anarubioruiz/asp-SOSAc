@@ -227,14 +227,14 @@ class sosac_sensor(TestCase, SosaCClingo):
         )
 
         observations_query = list(solution
-            .query(terms.Observation)
+            .query(terms.sosac_observation)
             .all()
         )
 
         query = sensors_query + observations_query
         expected = [
             terms.sosac_sensor(id='temp_sensor01'),
-            terms.Observation(id=terms.ActID(device='ANY', act='ANY'))
+            terms.sosac_observation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 
         self.assertCountEqual(expected, query)
@@ -315,14 +315,14 @@ class sosac_observableProperty(TestCase, SosaCClingo):
 
         self.assertEqual(expected, query)
 
-class Observation(TestCase, SosaCClingo):
+class sosac_observation(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
     # sosa:Observation sub class of sosac:Act
     def test_Observations_are_Acts(self):
         facts = FactBase([
-            terms.Observation(id=terms.ActID(device='ANY', act='ANY'))
+            terms.sosac_observation(id=terms.ActID(device='ANY', act='ANY'))
         ])
 
         self.load_knowledge(facts)
@@ -353,14 +353,14 @@ class Observation(TestCase, SosaCClingo):
         )
 
         observations_query = list(solution
-            .query(terms.Observation)
+            .query(terms.sosac_observation)
             .all()
         )
 
         query = sensors_query + observations_query
         expected = [
             terms.sosac_sensor(id='temp_sensor01'),
-            terms.Observation(id=terms.ActID(device='ANY', act='ANY'))
+            terms.sosac_observation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 
         self.assertCountEqual(expected, query)
@@ -422,14 +422,14 @@ class Observation(TestCase, SosaCClingo):
         )
 
         observations_query = list(solution
-            .query(terms.Observation)
+            .query(terms.sosac_observation)
             .all()
         )
 
         query = observable_properties_query + observations_query
         expected = [
             terms.sosac_observableProperty(id='occupancy'),
-            terms.Observation(id=terms.ActID(device='ANY', act='ANY'))
+            terms.sosac_observation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 
         self.assertCountEqual(expected, query)

@@ -22,7 +22,7 @@ class SosaCClingo:
 
             terms.sosac_sensor,
             terms.sosac_observableProperty,
-            terms.Observation,
+            terms.sosac_observation,
             terms.Act,
             terms.Actuator,
             terms.Actuation,
