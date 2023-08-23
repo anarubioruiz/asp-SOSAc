@@ -69,18 +69,18 @@ attr(edge, (ACTUATOR, (ACTUATOR, ACTUATION_KLASS)), label, "makesActuation")
 % % ------------------------------------
 
 node(OBSERVABLE_PROPERTY, graph_output)
-    :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
+    :- sosac_observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
 attr(node,OBSERVABLE_PROPERTY,label,OBSERVABLE_PROPERTY)
-    :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
+    :- sosac_observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
 
 attr(node, (SENSOR, OBSERVATION_KLASS), label, LABEL)
-    :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY),
+    :- sosac_observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY),
        LABEL = @gen_act_label(SENSOR, OBSERVATION_KLASS).
 
 edge(((SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY), graph_output)
-    :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
-attr(edge, ((SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY), label, "observedProperty")
-    :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
+    :- sosac_observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
+attr(edge, ((SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY), label, "sosac_observedProperty")
+    :- sosac_observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
 
 
 node(ACTUATABLE_PROPERTY, graph_output)
@@ -100,9 +100,9 @@ attr(edge, ((ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY), label, "actsOnPro
 % % ------------------------------------
 
 edge((SENSOR, OBSERVABLE_PROPERTY), graph_output)
-    :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
+    :- sosac_observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
 attr(edge, (SENSOR, OBSERVABLE_PROPERTY), label, "sosac_observes")
-    :- observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
+    :- sosac_observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY).
 
 % % ------------------------------------
 

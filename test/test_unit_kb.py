@@ -187,15 +187,15 @@ class sosac_sensor(TestCase, SosaCClingo):
         sosakc_observesProperty = sosakc_property_query[0]
 
         property_query = list(solution
-            .query(terms.observedProperty)
+            .query(terms.sosac_observedProperty)
             .all()
         )
 
         self.assertEqual(len(property_query), 1)
-        observedProperty = property_query[0]
+        sosac_observedProperty = property_query[0]
 
         self.assertEqual(
-            observedProperty.observable_property,
+            sosac_observedProperty.observable_property,
             sosakc_observesProperty.observable_property
         )
 
@@ -637,12 +637,12 @@ class MotionSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observedProperty(
+            terms.sosac_observedProperty(
                 observation=terms.ActID(
                     device='motion_sensor01',
                     act='motion_ob'),
                 observable_property='motion'),
-            terms.observedProperty(
+            terms.sosac_observedProperty(
                 observation=terms.ActID(
                     device='motion_sensor01',
                     act='not_motion_ob'),
@@ -650,7 +650,7 @@ class MotionSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.observedProperty)
+            .query(terms.sosac_observedProperty)
             .all()
         )
 
@@ -807,7 +807,7 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observedProperty(
+            terms.sosac_observedProperty(
                 observation=terms.ActID(
                     device='broken_window_sensor01',
                     act='broken_ob'),
@@ -815,7 +815,7 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.observedProperty)
+            .query(terms.sosac_observedProperty)
             .all()
         )
 
@@ -1261,12 +1261,12 @@ class DoorSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observedProperty(
+            terms.sosac_observedProperty(
                 observation=terms.ActID(
                     device='door_sensor01',
                     act='open_ob'),
                 observable_property='open'),
-            terms.observedProperty(
+            terms.sosac_observedProperty(
                 observation=terms.ActID(
                     device='door_sensor01',
                     act='closed_ob'),
@@ -1274,7 +1274,7 @@ class DoorSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.observedProperty)
+            .query(terms.sosac_observedProperty)
             .all()
         )
 
@@ -1427,7 +1427,7 @@ class LightSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observedProperty(
+            terms.sosac_observedProperty(
                 observation=terms.ActID(
                     device='light_sensor01',
                     act='illuminance_ob'),
@@ -1435,7 +1435,7 @@ class LightSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.observedProperty)
+            .query(terms.sosac_observedProperty)
             .all()
         )
 
@@ -1576,7 +1576,7 @@ class TemperatureSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.observedProperty(
+            terms.sosac_observedProperty(
                 observation=terms.ActID(
                     device='temp_sensor01',
                     act='temperature_ob'),
@@ -1584,7 +1584,7 @@ class TemperatureSensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.observedProperty)
+            .query(terms.sosac_observedProperty)
             .all()
         )
 

@@ -408,7 +408,7 @@ class sosac_observation(TestCase, SosaCClingo):
     # sosa:observedProperty - Domain: sosa:Observation, Range: sosa:ObservableProperty
     def test_Observation_observedProperty_ObservableProperty(self):
         facts = FactBase([
-            terms.observedProperty(
+            terms.sosac_observedProperty(
                 observation=terms.ActID(device='ANY', act='ANY'),
                 observable_property='occupancy',)
         ])

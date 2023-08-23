@@ -25,7 +25,7 @@ sosac_madeBySensor(OBSERVATION, SENSOR) :- sosac_makesObservation(SENSOR, OBSERV
 
 sosac_sensor(SENSOR) :- sosac_isObservedBy(_, SENSOR).
 sosac_observes(SENSOR, OBSERVABLE_PROPERTY) :- sosac_isObservedBy(OBSERVABLE_PROPERTY, SENSOR).
-sosac_observation(OBSERVATION) :- observedProperty(OBSERVATION, _).
+sosac_observation(OBSERVATION) :- sosac_observedProperty(OBSERVATION, _).
 
 % ---- Observation
 
@@ -36,7 +36,7 @@ sosac_makesObservation(SENSOR, OBSERVATION) :- sosac_madeBySensor(OBSERVATION, S
 
 :- sosac_madeBySensor(OBSERVATION, SENSOR_1), sosac_madeBySensor(OBSERVATION, SENSOR_2), SENSOR_1 != SENSOR_2.
 
-sosac_observableProperty(OBSERVABLE_PROPERTY) :- observedProperty(_, OBSERVABLE_PROPERTY).
+sosac_observableProperty(OBSERVABLE_PROPERTY) :- sosac_observedProperty(_, OBSERVABLE_PROPERTY).
 
 % ---- Actuator
 

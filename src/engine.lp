@@ -36,13 +36,13 @@ sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS))
     :- sosac_device(SENSOR, SENSOR_KLASS),
        sosakc_makesObservation(SENSOR_KLASS, OBSERVATION_KLASS).
 
-observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY)
+sosac_observedProperty(actID(SENSOR, OBSERVATION_KLASS), OBSERVABLE_PROPERTY)
     :- sosac_device(SENSOR, SENSOR_KLASS),
        sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_observesProperty(SENSOR_KLASS, OBSERVABLE_PROPERTY).
 
 sosac_observes(SENSOR, OBSERVABLE_PROPERTY)
-    :- observedProperty(actID(SENSOR, _), OBSERVABLE_PROPERTY).
+    :- sosac_observedProperty(actID(SENSOR, _), OBSERVABLE_PROPERTY).
 
 hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), ENTITY)
     :- sosac_device(SENSOR, SENSOR_KLASS),
@@ -71,7 +71,7 @@ hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), LOCATION)
        not x_is_the_interest_of_z(_, SENSOR).
 
 hasProperty(FEATURE, OBSERVABLE_PROPERTY)
-    :- observedProperty(OBSERVATION, OBSERVABLE_PROPERTY),
+    :- sosac_observedProperty(OBSERVATION, OBSERVABLE_PROPERTY),
        hasFeatureOfInterest(OBSERVATION, FEATURE).
 
 hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
