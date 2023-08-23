@@ -343,13 +343,13 @@ class sosac_sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='kitchen',
                 property='motion')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 
@@ -547,13 +547,13 @@ class sosac_actuator(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='kitchen',
                 property='illuminated')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 
@@ -695,13 +695,13 @@ class MotionSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='kitchen',
                 property='motion')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 
@@ -857,13 +857,13 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='window01',
                 property='broken')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 
@@ -1007,13 +1007,13 @@ class SmartBulb(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='kitchen',
                 property='illuminated')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 
@@ -1149,13 +1149,13 @@ class AlarmSiren(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='home',
                 property='in_alert')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 
@@ -1319,13 +1319,13 @@ class DoorSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='door01',
                 property='open')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 
@@ -1477,13 +1477,13 @@ class LightSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='kitchen',
                 property='illuminance')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 
@@ -1626,13 +1626,13 @@ class TemperatureSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasProperty(
+            terms.sosac_hasProperty(
                 feature_of_interest='kitchen',
                 property='temperature')
         ]
 
         query = list(solution
-            .query(terms.hasProperty)
+            .query(terms.sosac_hasProperty)
             .all()
         )
 

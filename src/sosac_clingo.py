@@ -47,7 +47,7 @@ class SosaCClingo:
             terms.sosac_hasSimpleResult,
             terms.sosac_hosts,
             terms.sosac_isHostedBy,
-            terms.hasProperty
+            terms.sosac_hasProperty
         ])
 
         if not files:

@@ -140,6 +140,6 @@ class sosac_isHostedBy(Predicate):
     hosted = ConstantField
     platform = ConstantField
 
-class hasProperty(Predicate):
+class sosac_hasProperty(Predicate):
     feature_of_interest = ConstantField
     property = ConstantField

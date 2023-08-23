@@ -70,7 +70,7 @@ sosac_hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), LOCATION)
        x_is_the_y_of_z(LOCATION, location, SENSOR),
        not x_is_the_interest_of_z(_, SENSOR).
 
-hasProperty(FEATURE, OBSERVABLE_PROPERTY)
+sosac_hasProperty(FEATURE, OBSERVABLE_PROPERTY)
     :- sosac_observedProperty(OBSERVATION, OBSERVABLE_PROPERTY),
        sosac_hasFeatureOfInterest(OBSERVATION, FEATURE).
 
@@ -121,7 +121,7 @@ sosac_hasFeatureOfInterest(actID(ACTUATOR, ACTUATION_KLASS), LOCATION)
        x_is_the_y_of_z(LOCATION, location, ACTUATOR),
        not x_is_the_interest_of_z(_, ACTUATOR).
 
-hasProperty(FEATURE, ACTUATABLE_PROPERTY)
+sosac_hasProperty(FEATURE, ACTUATABLE_PROPERTY)
     :- sosac_actsOnProperty(ACTUATION, ACTUATABLE_PROPERTY),
        sosac_hasFeatureOfInterest(ACTUATION, FEATURE).
 
