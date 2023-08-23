@@ -43,13 +43,13 @@ sosac_observableProperty(OBSERVABLE_PROPERTY) :- sosac_observedProperty(_, OBSER
 sosac_actuatableProperty(ACTUATABLE_PROPERTY) :- actsOnProperty(_, ACTUATABLE_PROPERTY).
 sosac_actuation(ACTUATION) :- sosac_makesActuation(_, ACTUATION).
 
-isActedOnBy(ACTUATABLE_PROPERTY, ACTUATOR) :- actsOnProperty(ACTUATOR, ACTUATABLE_PROPERTY).
+sosac_isActedOnBy(ACTUATABLE_PROPERTY, ACTUATOR) :- actsOnProperty(ACTUATOR, ACTUATABLE_PROPERTY).
 madeByActuator(ACTUATION, ACTUATOR) :- sosac_makesActuation(ACTUATOR, ACTUATION).
 
 % ---- ActuatableProperty
 
-sosac_actuation(ACTUATION) :- isActedOnBy(_, ACTUATION).
-actsOnProperty(ACTUATION, ACTUATABLE_PROPERTY) :- isActedOnBy(ACTUATABLE_PROPERTY, ACTUATION).
+sosac_actuation(ACTUATION) :- sosac_isActedOnBy(_, ACTUATION).
+actsOnProperty(ACTUATION, ACTUATABLE_PROPERTY) :- sosac_isActedOnBy(ACTUATABLE_PROPERTY, ACTUATION).
 
 
 % ---- Actuation

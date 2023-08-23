@@ -491,7 +491,7 @@ class sosac_actuatableProperty(TestCase, SosaCClingo):
         self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
-            terms.isActedOnBy(
+            terms.sosac_isActedOnBy(
                 actuatable_property='lighting',
                 actuation=terms.ActID(device='ANY', act='ANY'))
         ])
