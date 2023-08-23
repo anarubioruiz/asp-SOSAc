@@ -1,6 +1,6 @@
 %  ---- Act
 
-featureOfInterest(FEATURE) :- hasFeatureOfInterest(_, FEATURE).
+sosac_featureOfInterest(FEATURE) :- hasFeatureOfInterest(_, FEATURE).
 isFeatureOfInterestOf(FEATURE, ACT) :- hasFeatureOfInterest(ACT, FEATURE).
 
 :- hasFeatureOfInterest(OBSERVATION, FEATURE_1), hasFeatureOfInterest(OBSERVATION, FEATURE_2), FEATURE_1 != FEATURE_2.

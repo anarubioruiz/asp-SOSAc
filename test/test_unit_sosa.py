@@ -26,14 +26,14 @@ class Act(TestCase, SosaCClingo):
         )
 
         features_of_interest_query = list(solution
-            .query(terms.FeatureOfInterest)
+            .query(terms.sosac_featureOfInterest)
             .all()
         )
 
         query = acts_query + features_of_interest_query
         expected = [
             terms.Act(id=terms.ActID(device='ANY', act='ANY')),
-            terms.FeatureOfInterest(id='kitchen')
+            terms.sosac_featureOfInterest(id='kitchen')
         ]
 
         self.assertCountEqual(expected, query)
@@ -102,7 +102,7 @@ class Act(TestCase, SosaCClingo):
         self.assertEqual(expected, query)
 
 
-class FeatureOfInterest(TestCase, SosaCClingo):
+class sosac_featureOfInterest(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -124,14 +124,14 @@ class FeatureOfInterest(TestCase, SosaCClingo):
         )
 
         features_of_interest_query = list(solution
-            .query(terms.FeatureOfInterest)
+            .query(terms.sosac_featureOfInterest)
             .all()
         )
 
         query = acts_query + features_of_interest_query
         expected = [
             terms.Act(id=terms.ActID(device='ANY', act='ANY')),
-            terms.FeatureOfInterest(id='kitchen')
+            terms.sosac_featureOfInterest(id='kitchen')
         ]
 
         self.assertCountEqual(expected, query)

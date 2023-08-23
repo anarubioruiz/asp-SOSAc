@@ -49,7 +49,7 @@ class sosakc_hasFeatureOfInterest(Predicate):
 class Act(Predicate):
     id = ActID.Field
 
-class FeatureOfInterest(Predicate):
+class sosac_featureOfInterest(Predicate):
     id = ConstantField
 
 class sosac_sensor(Predicate):
