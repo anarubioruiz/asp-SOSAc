@@ -5,7 +5,7 @@ isFeatureOfInterestOf(FEATURE, ACT) :- hasFeatureOfInterest(ACT, FEATURE).
 
 :- hasFeatureOfInterest(OBSERVATION, FEATURE_1), hasFeatureOfInterest(OBSERVATION, FEATURE_2), FEATURE_1 != FEATURE_2.
 
-result(RESULT) :- hasResult(_, RESULT).
+sosac_result(RESULT) :- hasResult(_, RESULT).
 isResultOf(RESULT, ACT) :- hasResult(ACT, RESULT).
 
 % ---- FeatureOfInterest

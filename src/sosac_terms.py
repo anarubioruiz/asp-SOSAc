@@ -70,7 +70,7 @@ class sosac_actuation(Predicate):
 class sosac_actuatableProperty(Predicate):
     id = ConstantField
 
-class Result(Predicate):
+class sosac_result(Predicate):
     id = StringField
 
 class Platform(Predicate):

@@ -651,14 +651,14 @@ class Result(TestCase, SosaCClingo):
         )
 
         results_query = list(solution
-            .query(terms.Result)
+            .query(terms.sosac_result)
             .all()
         )
 
         query = acts_query + results_query
         expected = [
             terms.Act(id=terms.ActID(device='ANY', act='ANY')),
-            terms.Result(id='boolean')
+            terms.sosac_result(id='boolean')
         ]
 
         self.assertCountEqual(expected, query)

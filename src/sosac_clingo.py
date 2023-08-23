@@ -28,7 +28,7 @@ class SosaCClingo:
             terms.sosac_actuation,
             terms.sosac_actuatableProperty,
             terms.sosac_featureOfInterest,
-            terms.Result,
+            terms.sosac_result,
             terms.Platform,
 
             terms.isObservedBy,
