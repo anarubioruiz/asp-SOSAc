@@ -76,7 +76,7 @@ class sosac_result(Predicate):
 class sosac_platform(Predicate):
     id = ConstantField
 
-class isObservedBy(Predicate):
+class sosac_isObservedBy(Predicate):
     observable_property = ConstantField
     sensor = ConstantField
 

@@ -198,13 +198,13 @@ class sosac_sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isObservedBy(
+            terms.sosac_isObservedBy(
                 observable_property='temperature',
                 sensor='temp_sensor01')
         ]
 
         query = list(solution
-            .query(terms.isObservedBy)
+            .query(terms.sosac_isObservedBy)
             .all()
         )
 
@@ -269,7 +269,7 @@ class sosac_observableProperty(TestCase, SosaCClingo):
         self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
-            terms.isObservedBy(
+            terms.sosac_isObservedBy(
                 observable_property='temperature',
                 sensor='temp_sensor01')
         ])

@@ -31,7 +31,7 @@ class SosaCClingo:
             terms.sosac_result,
             terms.sosac_platform,
 
-            terms.isObservedBy,
+            terms.sosac_isObservedBy,
             terms.observes,
             terms.makesObservation,
             terms.madeBySensor,
