@@ -924,13 +924,13 @@ class SmartBulb(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.makesActuation(
+            terms.sosac_makesActuation(
                 actuator='smart_bulb01',
                 actuation=terms.ActID(
                     device='smart_bulb01',
                     act='illuminate')
                 ),
-            terms.makesActuation(
+            terms.sosac_makesActuation(
                 actuator='smart_bulb01',
                 actuation=terms.ActID(
                     device='smart_bulb01',
@@ -939,7 +939,7 @@ class SmartBulb(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.makesActuation)
+            .query(terms.sosac_makesActuation)
             .all()
         )
 
@@ -1080,7 +1080,7 @@ class AlarmSiren(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.makesActuation(
+            terms.sosac_makesActuation(
                 actuator='alarm_siren01',
                 actuation=terms.ActID(
                     device='alarm_siren01',
@@ -1089,7 +1089,7 @@ class AlarmSiren(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.makesActuation)
+            .query(terms.sosac_makesActuation)
             .all()
         )
 

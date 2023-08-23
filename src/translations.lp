@@ -14,7 +14,7 @@ sosac_hasResult(ACTIVITY, RESULT)
     :- hasResult(ACTIVITY, RESULT).
 
 sosac_observedProperty(ACTIVITY, PROPERTY)
-    :- sosac_observedProperty(ACTIVITY, PROPERTY).
+    :- observedProperty(ACTIVITY, PROPERTY).
 
 sosac_actsOnProperty(ACTIVITY, PROPERTY)
     :- actsOnProperty(ACTIVITY, PROPERTY).

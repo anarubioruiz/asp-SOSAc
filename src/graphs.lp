@@ -51,20 +51,20 @@ attr(edge, (SENSOR, (SENSOR, OBSERVATION_KLASS)), label, "sosac_makesObservation
 
 
 node((ACTUATOR, ACTUATION_KLASS), graph_output)
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
+    :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
 attr(node, (ACTUATOR, ACTUATION_KLASS), label, LABEL)
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
+    :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        LABEL = @gen_act_label(ACTUATOR, ACTUATION_KLASS).
 
 node(ACTUATOR, graph_output)
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
+    :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
 attr(node,ACTUATOR,label,ACTUATOR)
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
+    :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
 
 edge((ACTUATOR, (ACTUATOR, ACTUATION_KLASS)), graph_output)
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
-attr(edge, (ACTUATOR, (ACTUATOR, ACTUATION_KLASS)), label, "makesActuation")
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
+    :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
+attr(edge, (ACTUATOR, (ACTUATOR, ACTUATION_KLASS)), label, "sosac_makesActuation")
+    :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)).
 
 % % ------------------------------------
 

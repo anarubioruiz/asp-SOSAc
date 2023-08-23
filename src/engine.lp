@@ -84,31 +84,31 @@ hasSimpleResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
 
 % ---- ACTUATOR INSTANCES
 
-sosac_actuator(ACTUATOR) :- makesActuation(ACTUATOR, _).
+sosac_actuator(ACTUATOR) :- sosac_makesActuation(ACTUATOR, _).
 
-makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS))
+sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS))
     :- sosac_device(ACTUATOR, ACTUATOR_KLASS),
        sosakc_makesActuation(ACTUATOR_KLASS, ACTUATION_KLASS).
 
 actsOnProperty(actID(ACTUATOR, ACTUATION_KLASS), ACTUATABLE_PROPERTY)
     :- sosac_device(ACTUATOR, ACTUATOR_KLASS),
-       makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
+       sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        sosakc_actsOnProperty(ACTUATOR_KLASS, ACTUATABLE_PROPERTY).
 
 hasFeatureOfInterest(actID(ACTUATOR, ACTUATION_KLASS), ENTITY)
     :- sosac_device(ACTUATOR, ACTUATOR_KLASS),
-       makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
+       sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        x_is_the_interest_of_z(ENTITY, ACTUATOR).
 
 hasFeatureOfInterest(actID(ACTUATOR, ACTUATION_KLASS), home)
     :- sosac_device(ACTUATOR, ACTUATOR_KLASS),
-       makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
+       sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        sosakc_hasFeatureOfInterest((ACTUATOR_KLASS, ACTUATION_KLASS), home),
        not x_is_the_interest_of_z(_, ACTUATOR).
 
 hasFeatureOfInterest(actID(ACTUATOR, ACTUATION_KLASS), FEATURE)
     :- sosac_device(ACTUATOR, ACTUATOR_KLASS),
-       makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
+       sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        sosakc_hasFeatureOfInterest((ACTUATOR_KLASS, ACTUATION_KLASS), PROPERTY),
        x_is_the_y_of_z(FEATURE, PROPERTY, ACTUATOR),
        not x_is_the_interest_of_z(_, ACTUATOR),
@@ -116,7 +116,7 @@ hasFeatureOfInterest(actID(ACTUATOR, ACTUATION_KLASS), FEATURE)
 
 hasFeatureOfInterest(actID(ACTUATOR, ACTUATION_KLASS), LOCATION)
     :- sosac_device(ACTUATOR, ACTUATOR_KLASS),
-       makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
+       sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        not sosakc_hasFeatureOfInterest((ACTUATOR_KLASS, ACTUATION_KLASS), _),
        x_is_the_y_of_z(LOCATION, location, ACTUATOR),
        not x_is_the_interest_of_z(_, ACTUATOR).
@@ -126,9 +126,9 @@ hasProperty(FEATURE, ACTUATABLE_PROPERTY)
        hasFeatureOfInterest(ACTUATION, FEATURE).
 
 hasResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
+    :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        sosakc_hasResult(ACTUATION_KLASS, RESULT).
 
 hasSimpleResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
-    :- makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
+    :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        sosakc_hasSimpleResult(ACTUATION_KLASS, RESULT).

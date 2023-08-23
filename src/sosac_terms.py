@@ -96,7 +96,7 @@ class sosac_observedProperty(Predicate):
     observation = ActID.Field
     observable_property = ConstantField
 
-class makesActuation(Predicate):
+class sosac_makesActuation(Predicate):
     actuator = ConstantField
     actuation = ActID.Field
 

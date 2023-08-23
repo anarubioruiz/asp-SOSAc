@@ -440,7 +440,7 @@ class Actuator(TestCase, SosaCClingo):
         self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
-            terms.makesActuation(
+            terms.sosac_makesActuation(
                 actuator='smart_bulb01',
                 actuation=terms.ActID(device='ANY', act='ANY'))
         ])
@@ -448,7 +448,7 @@ class Actuator(TestCase, SosaCClingo):
         self.load_knowledge(facts)
 
     # sosa:madeActuation - Domain: sosa:Actuator, Range: sosa:Actuation
-    def test_sensor_makesActuation_actuation(self):
+    def test_sensor_sosac_makesActuation_actuation(self):
         solution = self.get_solution()
 
         actuators_query = list(solution
@@ -470,7 +470,7 @@ class Actuator(TestCase, SosaCClingo):
         self.assertCountEqual(expected, query)
 
     # sosa:madeActuation inverse property of sosa:madeByActuator
-    def test_makesActuation_inverse_of_madeByActuator(self):
+    def test_sosac_makesActuation_inverse_of_madeByActuator(self):
         solution = self.get_solution()
 
         expected = [
@@ -588,8 +588,8 @@ class sosac_actuation(TestCase, SosaCClingo):
 
         self.assertCountEqual(expected, query)
 
-    # sosa:madeByActuator inverse property of sosa:makesActuation
-    def test_madeByActuator_inverse_of_makesActuation(self):
+    # sosa:madeByActuator inverse property of sosa:sosac_makesActuation
+    def test_madeByActuator_inverse_of_sosac_makesActuation(self):
         facts = FactBase([
             terms.madeByActuator(
                 actuation=terms.ActID(device='ANY', act='ANY'),
@@ -600,13 +600,13 @@ class sosac_actuation(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.makesActuation(
+            terms.sosac_makesActuation(
                 actuator='smart_bulb01',
                 actuation=terms.ActID(device='ANY', act='ANY'))
         ]
 
         query = list(solution
-            .query(terms.makesActuation)
+            .query(terms.sosac_makesActuation)
             .all()
         )
 
