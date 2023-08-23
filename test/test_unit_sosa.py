@@ -474,13 +474,13 @@ class Actuator(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.madeByActuator(
+            terms.sosac_madeByActuator(
                 actuation=terms.ActID(device='ANY', act='ANY'),
                 actuator='smart_bulb01')
         ]
 
         query = list(solution
-            .query(terms.madeByActuator)
+            .query(terms.sosac_madeByActuator)
             .all()
         )
 
@@ -562,7 +562,7 @@ class sosac_actuation(TestCase, SosaCClingo):
     # sosa:madeByActuator - Domain: sosa:Actuation, Range: sosa:Actuator
     def test_Actuation_madeByActuator_Actuator(self):
         facts = FactBase([
-            terms.madeByActuator(
+            terms.sosac_madeByActuator(
                 actuation=terms.ActID(device='ANY', act='ANY'),
                 actuator='smart_bulb01',)
         ])
@@ -591,7 +591,7 @@ class sosac_actuation(TestCase, SosaCClingo):
     # sosa:madeByActuator inverse property of sosa:sosac_makesActuation
     def test_madeByActuator_inverse_of_sosac_makesActuation(self):
         facts = FactBase([
-            terms.madeByActuator(
+            terms.sosac_madeByActuator(
                 actuation=terms.ActID(device='ANY', act='ANY'),
                 actuator='smart_bulb01',)
         ])
@@ -615,10 +615,10 @@ class sosac_actuation(TestCase, SosaCClingo):
     # sosa:Actuation max 1 sosa:madeByActuator
     def test_no_more_than_1_madeByActuator(self):
         facts = FactBase([
-            terms.madeByActuator(
+            terms.sosac_madeByActuator(
                 actuation=terms.ActID(device='ANY', act='ANY'),
                 actuator='smart_bulb01'),
-            terms.madeByActuator(
+            terms.sosac_madeByActuator(
                 actuation=terms.ActID(device='ANY', act='ANY'),
                 actuator='smart_bulb02')
         ])

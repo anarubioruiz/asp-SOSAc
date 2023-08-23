@@ -38,7 +38,7 @@ class SosaCClingo:
             terms.sosac_observedProperty,
             terms.sosac_makesActuation,
             terms.sosac_isActedOnBy,
-            terms.madeByActuator,
+            terms.sosac_madeByActuator,
             terms.actsOnProperty,
             terms.hasFeatureOfInterest,
             terms.isFeatureOfInterestOf,
