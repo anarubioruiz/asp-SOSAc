@@ -174,14 +174,14 @@ class sosac_sensor(TestCase, SosaCClingo):
         )
 
         observable_properties_query = list(solution
-            .query(terms.ObservableProperty)
+            .query(terms.sosac_observableProperty)
             .all()
         )
 
         query = sensors_query + observable_properties_query
         expected = [
             terms.sosac_sensor(id='temp_sensor01'),
-            terms.ObservableProperty(id='temperature')
+            terms.sosac_observableProperty(id='temperature')
         ]
 
         self.assertCountEqual(expected, query)
@@ -264,7 +264,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         self.assertEqual(expected, query)
 
 
-class ObservableProperty(TestCase, SosaCClingo):
+class sosac_observableProperty(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -286,14 +286,14 @@ class ObservableProperty(TestCase, SosaCClingo):
         )
 
         observable_properties_query = list(solution
-            .query(terms.ObservableProperty)
+            .query(terms.sosac_observableProperty)
             .all()
         )
 
         query = sensors_query + observable_properties_query
         expected = [
             terms.sosac_sensor(id='temp_sensor01'),
-            terms.ObservableProperty(id='temperature')
+            terms.sosac_observableProperty(id='temperature')
         ]
 
         self.assertCountEqual(expected, query)
@@ -417,7 +417,7 @@ class Observation(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         observable_properties_query = list(solution
-            .query(terms.ObservableProperty)
+            .query(terms.sosac_observableProperty)
             .all()
         )
 
@@ -428,7 +428,7 @@ class Observation(TestCase, SosaCClingo):
 
         query = observable_properties_query + observations_query
         expected = [
-            terms.ObservableProperty(id='occupancy'),
+            terms.sosac_observableProperty(id='occupancy'),
             terms.Observation(id=terms.ActID(device='ANY', act='ANY'))
         ]
 

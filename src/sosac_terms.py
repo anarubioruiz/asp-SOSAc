@@ -55,7 +55,7 @@ class FeatureOfInterest(Predicate):
 class sosac_sensor(Predicate):
     id = ConstantField
 
-class ObservableProperty(Predicate):
+class sosac_observableProperty(Predicate):
     id = ConstantField
 
 class Observation(Predicate):

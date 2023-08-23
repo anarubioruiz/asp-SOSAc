@@ -15,7 +15,7 @@ hasFeatureOfInterest(ACT, FEATURE) :- isFeatureOfInterestOf(FEATURE, ACT).
 
 % ---- Sensor
 
-observableProperty(OBSERVABLE_PROPERTY) :- observes(_, OBSERVABLE_PROPERTY).
+sosac_observableProperty(OBSERVABLE_PROPERTY) :- observes(_, OBSERVABLE_PROPERTY).
 observation(OBSERVATION) :- makesObservation(_, OBSERVATION).
 
 isObservedBy(OBSERVABLE_PROPERTY, SENSOR) :- observes(SENSOR, OBSERVABLE_PROPERTY).
@@ -36,7 +36,7 @@ makesObservation(SENSOR, OBSERVATION) :- madeBySensor(OBSERVATION, SENSOR).
 
 :- madeBySensor(OBSERVATION, SENSOR_1), madeBySensor(OBSERVATION, SENSOR_2), SENSOR_1 != SENSOR_2.
 
-observableProperty(OBSERVABLE_PROPERTY) :- observedProperty(_, OBSERVABLE_PROPERTY).
+sosac_observableProperty(OBSERVABLE_PROPERTY) :- observedProperty(_, OBSERVABLE_PROPERTY).
 
 % ---- Actuator
 

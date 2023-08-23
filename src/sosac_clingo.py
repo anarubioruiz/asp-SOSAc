@@ -21,7 +21,7 @@ class SosaCClingo:
             # CLINGO TERMS ---------
 
             terms.sosac_sensor,
-            terms.ObservableProperty,
+            terms.sosac_observableProperty,
             terms.Observation,
             terms.Act,
             terms.Actuator,
