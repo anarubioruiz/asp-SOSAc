@@ -1,9 +1,9 @@
 %  ---- Act
 
-sosac_featureOfInterest(FEATURE) :- hasFeatureOfInterest(_, FEATURE).
-isFeatureOfInterestOf(FEATURE, ACT) :- hasFeatureOfInterest(ACT, FEATURE).
+sosac_featureOfInterest(FEATURE) :- sosac_hasFeatureOfInterest(_, FEATURE).
+isFeatureOfInterestOf(FEATURE, ACT) :- sosac_hasFeatureOfInterest(ACT, FEATURE).
 
-:- hasFeatureOfInterest(OBSERVATION, FEATURE_1), hasFeatureOfInterest(OBSERVATION, FEATURE_2), FEATURE_1 != FEATURE_2.
+:- sosac_hasFeatureOfInterest(OBSERVATION, FEATURE_1), sosac_hasFeatureOfInterest(OBSERVATION, FEATURE_2), FEATURE_1 != FEATURE_2.
 
 sosac_result(RESULT) :- hasResult(_, RESULT).
 isResultOf(RESULT, ACT) :- hasResult(ACT, RESULT).
@@ -11,7 +11,7 @@ isResultOf(RESULT, ACT) :- hasResult(ACT, RESULT).
 % ---- FeatureOfInterest
 
 act(ACT) :- isFeatureOfInterestOf(_, ACT).
-hasFeatureOfInterest(ACT, FEATURE) :- isFeatureOfInterestOf(FEATURE, ACT).
+sosac_hasFeatureOfInterest(ACT, FEATURE) :- isFeatureOfInterestOf(FEATURE, ACT).
 
 % ---- Sensor
 

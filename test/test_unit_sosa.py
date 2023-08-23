@@ -12,7 +12,7 @@ class Act(TestCase, SosaCClingo):
     # sosa:hasFeatureOfInterest - Domain: sosac:Act, Range: sosa:FeatureOfInterest
     def test_Act_hasFeatureOfInterest_FeatureOfInterest(self):
         facts = FactBase([
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='ANY', act='ANY'),
                 feature_of_interest='kitchen')
         ])
@@ -41,7 +41,7 @@ class Act(TestCase, SosaCClingo):
     # sosa:hasFeatureOfInterest inverse property of sosa:isFeatureOfInterestOf
     def test_hasFeatureOfInterest_inverse_of_isFeatureOfInterestOf(self):
         facts = FactBase([
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='ANY', act='ANY'),
                 feature_of_interest='bathroom')
         ])
@@ -64,10 +64,10 @@ class Act(TestCase, SosaCClingo):
     # sosac:Act max 1 sosa:hasFeatureOfInterest
     def test_no_more_than_1_hasFeatureOfInterest(self):
         facts = FactBase([
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='ANY', act='ANY'),
                 feature_of_interest='kitchen'),
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='ANY', act='ANY'),
                 feature_of_interest='bathroom')
         ])
@@ -141,11 +141,11 @@ class sosac_featureOfInterest(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='ANY', act='ANY'),
                 feature_of_interest='kitchen')
         ]

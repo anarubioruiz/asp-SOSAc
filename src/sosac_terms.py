@@ -112,7 +112,7 @@ class sosac_actsOnProperty(Predicate):
     actuation = ActID.Field
     actuatable_property = ConstantField
 
-class hasFeatureOfInterest(Predicate):
+class sosac_hasFeatureOfInterest(Predicate):
     act = ActID.Field
     feature_of_interest = ConstantField
 

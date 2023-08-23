@@ -20,7 +20,7 @@ actuation_priority(_windowBlindMotor_, illuminate, 4) :- time(night).
 actuation_priority(_smartTV_, illuminate, 3).
 
 { use(ACTUATOR, ACTUATION) : sosac_makesActuation(ACTUATOR, ACTUATION),
-                             hasFeatureOfInterest(ACTUATION, ENTITY),
+                             sosac_hasFeatureOfInterest(ACTUATION, ENTITY),
                              sosac_actsOnProperty(ACTUATION, PROPERTY),
                              hasSimpleResult(ACTUATION, VALUE) } = 1 :- objetive(ENTITY, PROPERTY, VALUE).
 

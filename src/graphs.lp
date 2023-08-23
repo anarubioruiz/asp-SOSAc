@@ -107,14 +107,14 @@ attr(edge, (SENSOR, OBSERVABLE_PROPERTY), label, "sosac_observes")
 % % ------------------------------------
 
 node(FEATURE, graph_output)
-    :- hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE).
+    :- sosac_hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE).
 attr(node,FEATURE,label,FEATURE)
-    :- hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE).
+    :- sosac_hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE).
 
 edge(((SENSOR, OBSERVATION_KLASS), FEATURE), graph_output)
-    :- hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE).
-attr(edge, ((SENSOR, OBSERVATION_KLASS), FEATURE), label, "hasFeatureOfInterest")
-    :- hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE).
+    :- sosac_hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE).
+attr(edge, ((SENSOR, OBSERVATION_KLASS), FEATURE), label, "sosac_hasFeatureOfInterest")
+    :- sosac_hasFeatureOfInterest(actID(SENSOR, OBSERVATION_KLASS), FEATURE).
 
 % % ------------------------------------
 

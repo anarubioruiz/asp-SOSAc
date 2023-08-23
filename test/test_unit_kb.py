@@ -204,7 +204,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 feature_of_interest='kitchen',
                 act=terms.ActID(
                     device='motion_sensor01',
@@ -213,7 +213,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -244,7 +244,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 feature_of_interest='kitchen_window',
                 act=terms.ActID(
                     device='window_sensor01',
@@ -253,7 +253,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -283,7 +283,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 feature_of_interest='window',
                 act=terms.ActID(
                     device='sensor01',
@@ -292,7 +292,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -323,7 +323,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 feature_of_interest='home',
                 act=terms.ActID(
                     device='sensor01',
@@ -332,7 +332,7 @@ class sosac_sensor(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -408,7 +408,7 @@ class sosac_actuator(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 feature_of_interest='kitchen',
                 act=terms.ActID(
                     device='smart_bulb01',
@@ -417,7 +417,7 @@ class sosac_actuator(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -448,7 +448,7 @@ class sosac_actuator(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 feature_of_interest='window01_blind',
                 act=terms.ActID(
                     device='bm_motor01',
@@ -457,7 +457,7 @@ class sosac_actuator(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -488,7 +488,7 @@ class sosac_actuator(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 feature_of_interest='home',
                 act=terms.ActID(
                     device='actuator01',
@@ -497,7 +497,7 @@ class sosac_actuator(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -527,7 +527,7 @@ class sosac_actuator(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 feature_of_interest='window',
                 act=terms.ActID(
                     device='actuator01',
@@ -536,7 +536,7 @@ class sosac_actuator(TestCase, SosaCClingo):
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -676,16 +676,16 @@ class MotionSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='motion_sensor01', act='motion_ob'),
                 feature_of_interest='kitchen'),
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='motion_sensor01', act='not_motion_ob'),
                 feature_of_interest='kitchen')
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -841,13 +841,13 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='broken_window_sensor01', act='broken_ob'),
                 feature_of_interest='window01')
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -988,16 +988,16 @@ class SmartBulb(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 feature_of_interest='kitchen'),
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
                 feature_of_interest='kitchen')
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -1133,13 +1133,13 @@ class AlarmSiren(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
                 feature_of_interest='home')
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -1300,16 +1300,16 @@ class DoorSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='door_sensor01', act='open_ob'),
                 feature_of_interest='door01'),
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='door_sensor01', act='closed_ob'),
                 feature_of_interest='door01')
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -1461,13 +1461,13 @@ class LightSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='light_sensor01', act='illuminance_ob'),
                 feature_of_interest='kitchen')
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
@@ -1610,13 +1610,13 @@ class TemperatureSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasFeatureOfInterest(
+            terms.sosac_hasFeatureOfInterest(
                 act=terms.ActID(device='temp_sensor01', act='temperature_ob'),
                 feature_of_interest='kitchen')
         ]
 
         query = list(solution
-            .query(terms.hasFeatureOfInterest)
+            .query(terms.sosac_hasFeatureOfInterest)
             .all()
         )
 
