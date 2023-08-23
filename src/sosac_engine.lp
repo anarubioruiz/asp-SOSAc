@@ -19,7 +19,7 @@ sosac_observableProperty(OBSERVABLE_PROPERTY) :- sosac_observes(_, OBSERVABLE_PR
 sosac_observation(OBSERVATION) :- sosac_makesObservation(_, OBSERVATION).
 
 sosac_isObservedBy(OBSERVABLE_PROPERTY, SENSOR) :- sosac_observes(SENSOR, OBSERVABLE_PROPERTY).
-madeBySensor(OBSERVATION, SENSOR) :- sosac_makesObservation(SENSOR, OBSERVATION).
+sosac_madeBySensor(OBSERVATION, SENSOR) :- sosac_makesObservation(SENSOR, OBSERVATION).
 
 % ---- ObservedProperty
 
@@ -31,10 +31,10 @@ sosac_observation(OBSERVATION) :- observedProperty(OBSERVATION, _).
 
 act(OBSERVATION) :- sosac_observation(OBSERVATION).
 
-sosac_sensor(SENSOR) :- madeBySensor(_, SENSOR).
-sosac_makesObservation(SENSOR, OBSERVATION) :- madeBySensor(OBSERVATION, SENSOR).
+sosac_sensor(SENSOR) :- sosac_madeBySensor(_, SENSOR).
+sosac_makesObservation(SENSOR, OBSERVATION) :- sosac_madeBySensor(OBSERVATION, SENSOR).
 
-:- madeBySensor(OBSERVATION, SENSOR_1), madeBySensor(OBSERVATION, SENSOR_2), SENSOR_1 != SENSOR_2.
+:- sosac_madeBySensor(OBSERVATION, SENSOR_1), sosac_madeBySensor(OBSERVATION, SENSOR_2), SENSOR_1 != SENSOR_2.
 
 sosac_observableProperty(OBSERVABLE_PROPERTY) :- observedProperty(_, OBSERVABLE_PROPERTY).
 

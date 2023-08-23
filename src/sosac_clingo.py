@@ -34,7 +34,7 @@ class SosaCClingo:
             terms.sosac_isObservedBy,
             terms.sosac_observes,
             terms.sosac_makesObservation,
-            terms.madeBySensor,
+            terms.sosac_madeBySensor,
             terms.observedProperty,
             terms.makesActuation,
             terms.isActedOnBy,

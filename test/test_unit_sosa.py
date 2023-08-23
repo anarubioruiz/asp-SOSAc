@@ -251,13 +251,13 @@ class sosac_sensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.madeBySensor(
+            terms.sosac_madeBySensor(
                 observation=terms.ActID(device='ANY', act='ANY'),
                 sensor='temp_sensor01')
         ]
 
         query = list(solution
-            .query(terms.madeBySensor)
+            .query(terms.sosac_madeBySensor)
             .all()
         )
 
@@ -339,7 +339,7 @@ class sosac_observation(TestCase, SosaCClingo):
     # sosa:madeBySensor - Domain: sosa:Observation, Range: sosa:Sensor
     def test_Observation_madeBySensor_Sensor(self):
         facts = FactBase([
-            terms.madeBySensor(
+            terms.sosac_madeBySensor(
                 observation=terms.ActID(device='ANY', act='ANY'),
                 sensor='temp_sensor01',)
         ])
@@ -368,7 +368,7 @@ class sosac_observation(TestCase, SosaCClingo):
     # sosa:madeBySensor inverse property of sosa:madeObservation
     def test_madeBySensor_inverse_of_makesObservation(self):
         facts = FactBase([
-            terms.madeBySensor(
+            terms.sosac_madeBySensor(
                 observation=terms.ActID(device='ANY', act='ANY'),
                 sensor='temp_sensor01')
         ])
@@ -392,10 +392,10 @@ class sosac_observation(TestCase, SosaCClingo):
     # sosa:Observation max 1 sosa:madeBySensor
     def test_no_more_than_1_madeBySensor(self):
         facts = FactBase([
-            terms.madeBySensor(
+            terms.sosac_madeBySensor(
                 observation=terms.ActID(device='ANY', act='ANY'),
                 sensor='temp_sensor01'),
-            terms.madeBySensor(
+            terms.sosac_madeBySensor(
                 observation=terms.ActID(device='ANY', act='ANY'),
                 sensor='temp_sensor02')
         ])
