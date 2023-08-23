@@ -18,23 +18,23 @@ class x_is_the_interest_of_z(Predicate):
     interest = ConstantField
     entity = ConstantField
 
-class k_observesProperty(Predicate):
+class sosakc_observesProperty(Predicate):
     klass = ConstantField
     observable_property = ConstantField
 
-class k_makesObservation(Predicate):
+class sosakc_makesObservation(Predicate):
     klass = ConstantField
     observation_klass = ConstantField
 
-class k_actsOnProperty(Predicate):
+class sosakc_actsOnProperty(Predicate):
     klass = ConstantField
     actuatable_property = ConstantField
 
-class k_makesActuation(Predicate):
+class sosakc_makesActuation(Predicate):
     klass = ConstantField
     actuation_klass = ConstantField
 
-class k_hasFeatureOfInterest(Predicate):
+class sosakc_hasFeatureOfInterest(Predicate):
     class _id(Predicate):
         device_klass = ConstantField
         activity_klass = ConstantField

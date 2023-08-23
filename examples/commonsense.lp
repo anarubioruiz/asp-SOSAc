@@ -1,7 +1,7 @@
 objetive(room01, illuminated, "true").
 
-k_makesActuation(_smartTV_, illuminate).
-k_makesActuation(_windowBlindMotor_, illuminate).
+sosakc_makesActuation(_smartTV_, illuminate).
+sosakc_makesActuation(_windowBlindMotor_, illuminate).
 
 time(day) :- not time(night).
 

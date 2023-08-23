@@ -12,11 +12,11 @@ class SosaCClingo:
             terms.x_is_the_y_of_z,
             terms.x_is_the_interest_of_z,
 
-            terms.k_observesProperty,
-            terms.k_makesObservation,
-            terms.k_actsOnProperty,
-            terms.k_makesActuation,
-            terms.k_hasFeatureOfInterest,
+            terms.sosakc_observesProperty,
+            terms.sosakc_makesObservation,
+            terms.sosakc_actsOnProperty,
+            terms.sosakc_makesActuation,
+            terms.sosakc_hasFeatureOfInterest,
 
             # CLINGO TERMS ---------
 

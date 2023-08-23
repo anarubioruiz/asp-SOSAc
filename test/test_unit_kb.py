@@ -136,13 +136,13 @@ class sosac_device(TestCase, SosaCClingo):
 
     def test_property_value_must_exist_for_the_not_home_property_in_klass_hasFeatureOfInterest(self):
         facts = FactBase([
-            terms.k_makesActuation(
+            terms.sosakc_makesActuation(
                 klass='_examplesosac_device_',
                 actuation_klass='any'),
             terms.sosac_device(
                 id='actuator01',
                 klass='_examplesosac_device_'),
-            terms.k_hasFeatureOfInterest(
+            terms.sosakc_hasFeatureOfInterest(
                 id=('_examplesosac_device_', 'any'),
                 property='host')
         ])
@@ -161,7 +161,7 @@ class Sensor(TestCase, SosaCClingo):
         )
 
         self.facts = FactBase([
-            terms.k_makesObservation(
+            terms.sosakc_makesObservation(
                 klass='_motionSensor_',
                 observation_klass='motion_ob'
             ),
@@ -178,13 +178,13 @@ class Sensor(TestCase, SosaCClingo):
         self.load_knowledge(self.facts)
         solution = self.get_solution()
 
-        k_property_query = list(solution
-            .query(terms.k_observesProperty)
+        sosakc_property_query = list(solution
+            .query(terms.sosakc_observesProperty)
             .all()
         )
 
-        self.assertEqual(len(k_property_query), 1)
-        k_observesProperty = k_property_query[0]
+        self.assertEqual(len(sosakc_property_query), 1)
+        sosakc_observesProperty = sosakc_property_query[0]
 
         property_query = list(solution
             .query(terms.observedProperty)
@@ -196,7 +196,7 @@ class Sensor(TestCase, SosaCClingo):
 
         self.assertEqual(
             observedProperty.observable_property,
-            k_observesProperty.observable_property
+            sosakc_observesProperty.observable_property
         )
 
     def test_featureOfInterest_is_the_sensor_location_by_default(self):
@@ -221,13 +221,13 @@ class Sensor(TestCase, SosaCClingo):
 
     def test_featureOfInterest_is_the_property_in_klass_featureOfInterest(self):
         facts = FactBase([
-            terms.k_makesObservation(
+            terms.sosakc_makesObservation(
                 klass='_brokenWindowSensor_',
                 observation_klass='broken_ob'),
             terms.sosac_device(
                 id='window_sensor01',
                 klass='_brokenWindowSensor_'),
-            terms.k_hasFeatureOfInterest(
+            terms.sosakc_hasFeatureOfInterest(
                 id=('_brokenWindowSensor_', 'broken_ob'),
                 property='host'),
             terms.x_is_the_y_of_z(
@@ -261,13 +261,13 @@ class Sensor(TestCase, SosaCClingo):
 
     def test_featureOfInterest_is_the_sensor_interest_in_any_case(self):
         facts = FactBase([
-            terms.k_makesObservation(
+            terms.sosakc_makesObservation(
                 klass='_exampleSensor_',
                 observation_klass='any'),
             terms.sosac_device(
                 id='sensor01',
                 klass='_exampleSensor_'),
-            terms.k_hasFeatureOfInterest(
+            terms.sosakc_hasFeatureOfInterest(
                 id=('_exampleSensor_', 'any'),
                 property='host'),
             terms.x_is_the_y_of_z(
@@ -300,13 +300,13 @@ class Sensor(TestCase, SosaCClingo):
 
     def test_featureOfInterest_is_home_if_its_property_in_klass_featureOfInterest(self):
         facts = FactBase([
-            terms.k_makesObservation(
+            terms.sosakc_makesObservation(
                 klass='_exampleSensor_',
                 observation_klass='any'),
             terms.sosac_device(
                 id='sensor01',
                 klass='_exampleSensor_'),
-            terms.k_hasFeatureOfInterest(
+            terms.sosakc_hasFeatureOfInterest(
                 id=('_exampleSensor_', 'any'),
                 property='home'),
             terms.x_is_the_y_of_z(
@@ -365,7 +365,7 @@ class Actuator(TestCase, SosaCClingo):
         )
 
         self.facts = FactBase([
-            terms.k_makesActuation(
+            terms.sosakc_makesActuation(
                 klass='_smartBulb_',
                 actuation_klass='illuminate'
             ),
@@ -382,13 +382,13 @@ class Actuator(TestCase, SosaCClingo):
         self.load_knowledge(self.facts)
         solution = self.get_solution()
 
-        k_property_query = list(solution
-            .query(terms.k_actsOnProperty)
+        sosakc_property_query = list(solution
+            .query(terms.sosakc_actsOnProperty)
             .all()
         )
 
-        self.assertEqual(len(k_property_query), 1)
-        k_actsOnProperty = k_property_query[0]
+        self.assertEqual(len(sosakc_property_query), 1)
+        sosakc_actsOnProperty = sosakc_property_query[0]
 
         property_query = list(solution
             .query(terms.actsOnProperty)
@@ -400,7 +400,7 @@ class Actuator(TestCase, SosaCClingo):
 
         self.assertEqual(
             actsOnProperty.actuatable_property,
-            k_actsOnProperty.actuatable_property
+            sosakc_actsOnProperty.actuatable_property
         )
 
     def test_featureOfInterest_is_the_actuator_location_by_default(self):
@@ -425,13 +425,13 @@ class Actuator(TestCase, SosaCClingo):
 
     def test_featureOfInterest_is_the_property_in_klass_featureOfInterest(self):
         facts = FactBase([
-            terms.k_makesActuation(
+            terms.sosakc_makesActuation(
                 klass='_blindMotor_',
                 actuation_klass='open_ob'),
             terms.sosac_device(
                 id='bm_motor01',
                 klass='_blindMotor_'),
-            terms.k_hasFeatureOfInterest(
+            terms.sosakc_hasFeatureOfInterest(
                 id=('_blindMotor_', 'open_ob'),
                 property='host'),
             terms.x_is_the_y_of_z(
@@ -465,13 +465,13 @@ class Actuator(TestCase, SosaCClingo):
 
     def test_featureOfInterest_is_home_if_its_property_in_klass_featureOfInterest(self):
         facts = FactBase([
-            terms.k_makesActuation(
+            terms.sosakc_makesActuation(
                 klass='_exampleActuator_',
                 actuation_klass='any'),
             terms.sosac_device(
                 id='actuator01',
                 klass='_exampleActuator_'),
-            terms.k_hasFeatureOfInterest(
+            terms.sosakc_hasFeatureOfInterest(
                 id=('_exampleActuator_', 'any'),
                 property='home'),
             terms.x_is_the_y_of_z(
@@ -505,13 +505,13 @@ class Actuator(TestCase, SosaCClingo):
 
     def test_featureOfInterest_is_the_actuator_interest_in_any_case(self):
         facts = FactBase([
-            terms.k_makesActuation(
+            terms.sosakc_makesActuation(
                 klass='_exampleActuator_',
                 actuation_klass='any'),
             terms.sosac_device(
                 id='actuator01',
                 klass='_exampleActuator_'),
-            terms.k_hasFeatureOfInterest(
+            terms.sosakc_hasFeatureOfInterest(
                 id=('_exampleActuator_', 'any'),
                 property='host'),
             terms.x_is_the_y_of_z(
