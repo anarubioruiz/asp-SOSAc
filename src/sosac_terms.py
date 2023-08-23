@@ -73,7 +73,7 @@ class sosac_actuatableProperty(Predicate):
 class sosac_result(Predicate):
     id = StringField
 
-class Platform(Predicate):
+class sosac_platform(Predicate):
     id = ConstantField
 
 class isObservedBy(Predicate):

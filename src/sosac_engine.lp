@@ -68,6 +68,6 @@ hasResult(ACT, RESULT) :- isResultOf(RESULT, ACT).
 
 % ---- Platform
 
-platform(PLATFORM) :- isHostedBy(_, PLATFORM).
+sosac_platform(PLATFORM) :- isHostedBy(_, PLATFORM).
 hosts(PLATFORM, HOSTED) :- isHostedBy(HOSTED, PLATFORM).
 isHostedBy(HOSTED, PLATFORM) :- hosts(PLATFORM, HOSTED).

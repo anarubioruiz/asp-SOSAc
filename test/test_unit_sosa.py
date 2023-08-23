@@ -681,7 +681,7 @@ class Result(TestCase, SosaCClingo):
         self.assertEqual(expected, query)
 
 
-class Platform(TestCase, SosaCClingo):
+class sosac_platform(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup('src/sosac_engine.lp')
 
@@ -696,9 +696,9 @@ class Platform(TestCase, SosaCClingo):
         self.load_knowledge(facts)
         solution = self.get_solution()
 
-        expected = [terms.Platform(id='Joey')]
+        expected = [terms.sosac_platform(id='Joey')]
         query = list(solution
-            .query(terms.Platform)
+            .query(terms.sosac_platform)
             .all()
         )
 

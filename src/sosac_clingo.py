@@ -29,7 +29,7 @@ class SosaCClingo:
             terms.sosac_actuatableProperty,
             terms.sosac_featureOfInterest,
             terms.sosac_result,
-            terms.Platform,
+            terms.sosac_platform,
 
             terms.isObservedBy,
             terms.observes,
