@@ -716,13 +716,13 @@ class sosac_platform(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='smart_watch01',
                 platform='Joey')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -731,7 +731,7 @@ class sosac_platform(TestCase, SosaCClingo):
     # sosa:isHostedBy inverse property of sosa:hosts
     def test_isHostedBy_inverse_of_hosts(self):
         facts = FactBase([
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='smart_watch01',
                 platform='Joey')
         ])

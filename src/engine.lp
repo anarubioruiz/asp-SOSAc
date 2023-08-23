@@ -10,16 +10,16 @@ x_is_the_y_of_z(LOCATION, location, HOST)
        x_is_the_y_of_z(LOCATION, location, DEVICE),
        x_is_the_y_of_z(HOST, host, DEVICE).
 
-isHostedBy(DEVICE, LOCATION)
+sosac_isHostedBy(DEVICE, LOCATION)
     :- sosac_device(DEVICE, _),
        x_is_the_y_of_z(LOCATION, location, DEVICE),
        not x_is_the_y_of_z(_, host, DEVICE).
 
-isHostedBy(DEVICE, SPECIFIED_HOST)
+sosac_isHostedBy(DEVICE, SPECIFIED_HOST)
     :- sosac_device(DEVICE, _),
        x_is_the_y_of_z(SPECIFIED_HOST, host, DEVICE).
 
-isHostedBy(DEVICE, SPECIFIED_HOST)
+sosac_isHostedBy(DEVICE, SPECIFIED_HOST)
     :- sosac_device(DEVICE, _),
        x_is_the_y_of_z(SPECIFIED_HOST, host, DEVICE).
 

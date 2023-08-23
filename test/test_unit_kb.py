@@ -30,13 +30,13 @@ class sosac_device(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='device01',
                 platform='kitchen')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -58,13 +58,13 @@ class sosac_device(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='device01',
                 platform='window01')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -660,13 +660,13 @@ class MotionSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='motion_sensor01',
                 platform='kitchen')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -825,13 +825,13 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='broken_window_sensor01',
                 platform='window01')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -972,13 +972,13 @@ class SmartBulb(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='smart_bulb01',
                 platform='kitchen')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -1117,13 +1117,13 @@ class AlarmSiren(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='alarm_siren01',
                 platform='kitchen')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -1284,13 +1284,13 @@ class DoorSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='door_sensor01',
                 platform='door01')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -1445,13 +1445,13 @@ class LightSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='light_sensor01',
                 platform='kitchen')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 
@@ -1594,13 +1594,13 @@ class TemperatureSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.isHostedBy(
+            terms.sosac_isHostedBy(
                 hosted='temp_sensor01',
                 platform='kitchen')
         ]
 
         query = list(solution
-            .query(terms.isHostedBy)
+            .query(terms.sosac_isHostedBy)
             .all()
         )
 

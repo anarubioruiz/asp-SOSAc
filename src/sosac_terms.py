@@ -136,7 +136,7 @@ class sosac_hosts(Predicate):
     platform = ConstantField
     hosted = ConstantField
 
-class isHostedBy(Predicate):
+class sosac_isHostedBy(Predicate):
     hosted = ConstantField
     platform = ConstantField
 

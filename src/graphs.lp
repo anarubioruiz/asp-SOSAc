@@ -26,10 +26,10 @@ attr(node,LOCATION,label,LOCATION)
 
 edge((DEVICE, LOCATION), graph_output)
     :- x_is_the_y_of_z(LOCATION, location, DEVICE),
-       not isHostedBy(DEVICE, LOCATION).
+       not sosac_isHostedBy(DEVICE, LOCATION).
 attr(edge, (DEVICE, LOCATION), label, "isLocatedIn")
     :- x_is_the_y_of_z(LOCATION, location, DEVICE),
-       not isHostedBy(DEVICE, LOCATION).
+       not sosac_isHostedBy(DEVICE, LOCATION).
 
 % % ------------------------------------
 
@@ -119,14 +119,14 @@ attr(edge, ((SENSOR, OBSERVATION_KLASS), FEATURE), label, "sosac_hasFeatureOfInt
 % % ------------------------------------
 
 node(PLATFORM, graph_output)
-    :- isHostedBy(DEVICE, PLATFORM).
+    :- sosac_isHostedBy(DEVICE, PLATFORM).
 attr(node,PLATFORM,label,PLATFORM)
-    :- isHostedBy(DEVICE, PLATFORM).
+    :- sosac_isHostedBy(DEVICE, PLATFORM).
 
 edge((DEVICE, PLATFORM), graph_output)
-    :- isHostedBy(DEVICE, PLATFORM).
-attr(edge, (DEVICE, PLATFORM), label, "isHostedBy")
-    :- isHostedBy(DEVICE, PLATFORM).
+    :- sosac_isHostedBy(DEVICE, PLATFORM).
+attr(edge, (DEVICE, PLATFORM), label, "sosac_isHostedBy")
+    :- sosac_isHostedBy(DEVICE, PLATFORM).
 
 % % ------------------------------------
 
