@@ -8,7 +8,7 @@ x_is_the_y_of_z(HOST, host, DEVICE)
     :- bot_hasSubElement(HOST, DEVICE), device(DEVICE, _).
 
 sosac_hasFeatureOfInterest(ACTIVITY, FEATURE)
-    :- sosac_hasFeatureOfInterest(ACTIVITY, FEATURE).
+    :- hasFeatureOfInterest(ACTIVITY, FEATURE).
 
 sosac_hasResult(ACTIVITY, RESULT)
     :- hasResult(ACTIVITY, RESULT).

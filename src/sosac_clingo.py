@@ -41,7 +41,7 @@ class SosaCClingo:
             terms.sosac_madeByActuator,
             terms.sosac_actsOnProperty,
             terms.sosac_hasFeatureOfInterest,
-            terms.isFeatureOfInterestOf,
+            terms.sosac_isFeatureOfInterestOf,
             terms.hasResult,
             terms.isResultOf,
             terms.hasSimpleResult,

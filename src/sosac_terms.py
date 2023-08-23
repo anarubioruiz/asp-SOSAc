@@ -116,7 +116,7 @@ class sosac_hasFeatureOfInterest(Predicate):
     act = ActID.Field
     feature_of_interest = ConstantField
 
-class isFeatureOfInterestOf(Predicate):
+class sosac_isFeatureOfInterestOf(Predicate):
     feature_of_interest = ConstantField
     act = ActID.Field
 

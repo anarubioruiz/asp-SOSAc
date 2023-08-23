@@ -50,11 +50,11 @@ class Act(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         query = list(solution
-            .query(terms.isFeatureOfInterestOf)
+            .query(terms.sosac_isFeatureOfInterestOf)
             .all()
         )
         expected = [
-            terms.isFeatureOfInterestOf(
+            terms.sosac_isFeatureOfInterestOf(
                 feature_of_interest='bathroom',
                 act=terms.ActID(device='ANY', act='ANY'))
         ]
@@ -107,14 +107,14 @@ class sosac_featureOfInterest(TestCase, SosaCClingo):
         self.clingo_setup('src/sosac_engine.lp')
 
         facts = FactBase([
-            terms.isFeatureOfInterestOf(
+            terms.sosac_isFeatureOfInterestOf(
                 feature_of_interest='kitchen',
                 act=terms.ActID(device='ANY', act='ANY'))
         ])
 
         self.load_knowledge(facts)
 
-    # sosa:isFeatureOfInterestOf - Domain: sosa:FeatureOfInterest, Range: sosac:Act
+    # sosa:sosac_isFeatureOfInterestOf - Domain: sosa:FeatureOfInterest, Range: sosac:Act
     def test_FeatureOfInterest_isFeatureOfInterestOf_Act(self):
         solution = self.get_solution()
 
