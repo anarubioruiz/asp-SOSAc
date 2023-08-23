@@ -131,10 +131,10 @@ attr(edge, (DEVICE, PLATFORM), label, "isHostedBy")
 % % ------------------------------------
 
 node((RESULT, (SENSOR, OBSERVATION_KLASS)), graph_output)
-    :- hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT).
+    :- sosac_hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT).
 attr(node,(RESULT, (SENSOR, OBSERVATION_KLASS)),label,RESULT)
-    :- hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT).
+    :- sosac_hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT).
 edge(((SENSOR, OBSERVATION_KLASS), (RESULT, (SENSOR, OBSERVATION_KLASS))), graph_output)
-    :- hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT).
-attr(edge, ((SENSOR, OBSERVATION_KLASS), (RESULT, (SENSOR, OBSERVATION_KLASS))), label, "hasResult")
-    :- hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT).
+    :- sosac_hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT).
+attr(edge, ((SENSOR, OBSERVATION_KLASS), (RESULT, (SENSOR, OBSERVATION_KLASS))), label, "sosac_hasResult")
+    :- sosac_hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT).

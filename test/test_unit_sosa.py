@@ -80,7 +80,7 @@ class Act(TestCase, SosaCClingo):
     # sosa:hasResult inverse property of sosa:isResultOf
     def test_hasResult_inverse_of_isResultOf(self):
         facts = FactBase([
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='ANY', act='ANY'),
                 result='open_ob')
         ])
@@ -668,13 +668,13 @@ class Result(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='ANY', act='ANY'),
                 result='boolean')
         ]
 
         query = list(solution
-            .query(terms.hasResult)
+            .query(terms.sosac_hasResult)
             .all()
         )
 

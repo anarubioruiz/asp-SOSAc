@@ -711,10 +711,10 @@ class MotionSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='motion_sensor01', act='motion_ob'),
                 result="boolean"),
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='motion_sensor01', act='not_motion_ob'),
                 result="boolean"),
             terms.hasSimpleResult(
@@ -725,7 +725,7 @@ class MotionSensor(TestCase, SosaCClingo):
                 result="false"),
         ]
 
-        result_query = list(solution.query(terms.hasResult).all())
+        result_query = list(solution.query(terms.sosac_hasResult).all())
         simple_result_query = list(solution.query(terms.hasSimpleResult).all())
         query = result_query + simple_result_query
 
@@ -873,7 +873,7 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='broken_window_sensor01', act='broken_ob'),
                 result='boolean'),
             terms.hasSimpleResult(
@@ -881,7 +881,7 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
                 result='true'),
         ]
 
-        result_query = list(solution.query(terms.hasResult).all())
+        result_query = list(solution.query(terms.sosac_hasResult).all())
         simple_result_query = list(solution.query(terms.hasSimpleResult).all())
         query = result_query + simple_result_query
 
@@ -1023,13 +1023,13 @@ class SmartBulb(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 result='boolean'),
             terms.hasSimpleResult(
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 result='true'),
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
                 result='boolean'),
             terms.hasSimpleResult(
@@ -1037,7 +1037,7 @@ class SmartBulb(TestCase, SosaCClingo):
                 result='false'),
         ]
 
-        result_query = list(solution.query(terms.hasResult).all())
+        result_query = list(solution.query(terms.sosac_hasResult).all())
         simple_result_query = list(solution.query(terms.hasSimpleResult).all())
         query = result_query + simple_result_query
 
@@ -1165,7 +1165,7 @@ class AlarmSiren(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
                 result='boolean'),
             terms.hasSimpleResult(
@@ -1173,7 +1173,7 @@ class AlarmSiren(TestCase, SosaCClingo):
                 result='true')
         ]
 
-        result_query = list(solution.query(terms.hasResult).all())
+        result_query = list(solution.query(terms.sosac_hasResult).all())
         simple_result_query = list(solution.query(terms.hasSimpleResult).all())
         query = simple_result_query + result_query
 
@@ -1335,10 +1335,10 @@ class DoorSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='door_sensor01', act='open_ob'),
                 result="boolean"),
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='door_sensor01', act='closed_ob'),
                 result="boolean"),
             terms.hasSimpleResult(
@@ -1349,7 +1349,7 @@ class DoorSensor(TestCase, SosaCClingo):
                 result="false"),
         ]
 
-        result_query = list(solution.query(terms.hasResult).all())
+        result_query = list(solution.query(terms.sosac_hasResult).all())
         simple_result_query = list(solution.query(terms.hasSimpleResult).all())
         query = result_query + simple_result_query
 
@@ -1493,13 +1493,13 @@ class LightSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='light_sensor01', act='illuminance_ob'),
                 result='number')
         ]
 
         query = list(solution
-            .query(terms.hasResult)
+            .query(terms.sosac_hasResult)
             .all()
         )
 
@@ -1642,13 +1642,13 @@ class TemperatureSensor(TestCase, SosaCClingo):
         solution = self.get_solution()
 
         expected = [
-            terms.hasResult(
+            terms.sosac_hasResult(
                 act=terms.ActID(device='temp_sensor01', act='temperature_ob'),
                 result='number')
         ]
 
         query = list(solution
-            .query(terms.hasResult)
+            .query(terms.sosac_hasResult)
             .all()
         )
 

@@ -74,7 +74,7 @@ hasProperty(FEATURE, OBSERVABLE_PROPERTY)
     :- sosac_observedProperty(OBSERVATION, OBSERVABLE_PROPERTY),
        sosac_hasFeatureOfInterest(OBSERVATION, FEATURE).
 
-hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
+sosac_hasResult(actID(SENSOR, OBSERVATION_KLASS), RESULT)
     :- sosac_makesObservation(SENSOR, actID(SENSOR, OBSERVATION_KLASS)),
        sosakc_hasResult(OBSERVATION_KLASS, RESULT).
 
@@ -125,7 +125,7 @@ hasProperty(FEATURE, ACTUATABLE_PROPERTY)
     :- sosac_actsOnProperty(ACTUATION, ACTUATABLE_PROPERTY),
        sosac_hasFeatureOfInterest(ACTUATION, FEATURE).
 
-hasResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
+sosac_hasResult(actID(ACTUATOR, ACTUATION_KLASS), RESULT)
     :- sosac_makesActuation(ACTUATOR, actID(ACTUATOR, ACTUATION_KLASS)),
        sosakc_hasResult(ACTUATION_KLASS, RESULT).
 

@@ -42,7 +42,7 @@ class SosaCClingo:
             terms.sosac_actsOnProperty,
             terms.sosac_hasFeatureOfInterest,
             terms.sosac_isFeatureOfInterestOf,
-            terms.hasResult,
+            terms.sosac_hasResult,
             terms.sosac_isResultOf,
             terms.hasSimpleResult,
             terms.hosts,
