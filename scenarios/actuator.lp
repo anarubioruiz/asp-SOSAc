@@ -1,2 +1,2 @@
-sosac_device(bulb01, _smartBulb_).
+sosac_Device(bulb01, smartLight).
 bot_containsElement(room01, bulb01).

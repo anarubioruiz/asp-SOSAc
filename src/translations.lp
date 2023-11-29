@@ -5,7 +5,7 @@
 % don't need to be loaded.
 
 x_is_the_y_of_z(LOCATION, location, DEVICE)
-    :- bot_containsElement(LOCATION, DEVICE), sosac_device(DEVICE, _).
+    :- bot_containsElement(LOCATION, DEVICE), sosac_Device(DEVICE, _).
 
 x_is_the_y_of_z(HOST, host, DEVICE)
-    :- bot_hasSubElement(HOST, DEVICE), sosac_device(DEVICE, _).
+    :- bot_hasSubElement(HOST, DEVICE), sosac_Device(DEVICE, _).

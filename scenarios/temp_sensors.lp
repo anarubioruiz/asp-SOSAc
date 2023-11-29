@@ -1,6 +1,6 @@
-sosac_device(cts01, _temperatureSensor_).
+sosac_Device(cts01, temperatureSensor).
 bot_containsElement(room01, cts01).
 
-sosac_device(irts01, _infraredTemperatureSensor_).
+sosac_Device(irts01, infraredTemperatureSensor).
 bot_containsElement(room01, irts01).
 x_is_the_interest_of_z(aquarium, irts01).

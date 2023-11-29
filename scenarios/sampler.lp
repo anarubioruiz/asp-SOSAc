@@ -1,26 +1,26 @@
 %  ---- SENSORS MODELLED
 
-sosac_device(motion_sensor01, _motionSensor_).
+sosac_Device(motion_sensor01, motionSensor).
 bot_containsElement(room02, motion_sensor01).
 
-sosac_device(bw_sensor01, _brokenWindowSensor_).
+sosac_Device(bw_sensor01, brokenWindowSensor).
 bot_containsElement(room01, bw_sensor01).
 bot_hasSubElement(window01, bw_sensor01).
 
-sosac_device(door_sensor01, _doorSensor_).
+sosac_Device(door_sensor01, doorSensor).
 bot_containsElement(room01, door_sensor01).
 bot_hasSubElement(door01, door_sensor01).
 
-sosac_device(light_sensor01, _lightSensor_).
+sosac_Device(light_sensor01, lightSensor).
 bot_containsElement(room03, light_sensor01).
 
-sosac_device(temp_sensor01, _temperatureSensor_).
+sosac_Device(temp_sensor01, temperatureSensor).
 bot_containsElement(room01, temp_sensor01).
 
 % ---- ACTUATORS MODELLED
 
-sosac_device(smart_bulb01, _smartBulb_).
+sosac_Device(smart_bulb01, smartLight).
 bot_containsElement(room03, smart_bulb01).
 
-sosac_device(alarm_siren01, _alarmSiren_).
+sosac_Device(alarm_siren01, alarmSiren).
 bot_containsElement(room02, alarm_siren01).

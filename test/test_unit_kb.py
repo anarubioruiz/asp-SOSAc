@@ -5,7 +5,7 @@ from sosac_clingo import SosaCClingo
 import sosac_terms as terms
 
 
-class sosac_device(TestCase, SosaCClingo):
+class sosac_Device(TestCase, SosaCClingo):
     def setUp(self):
         self.clingo_setup(
             'src/sosac_engine.lp',
@@ -13,7 +13,7 @@ class sosac_device(TestCase, SosaCClingo):
         )
 
         self.facts = FactBase([
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='device01',
                 klass='ANY')
         ])
@@ -137,13 +137,13 @@ class sosac_device(TestCase, SosaCClingo):
     def test_property_value_must_exist_for_the_not_home_property_in_klass_hasFeatureOfInterest(self):
         facts = FactBase([
             terms.sosakc_makesActuation(
-                klass='_examplesosac_device_',
+                klass='_examplesosac_Device_',
                 actuation_klass='any'),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='actuator01',
-                klass='_examplesosac_device_'),
+                klass='_examplesosac_Device_'),
             terms.sosakc_hasFeatureOfInterest(
-                id=('_examplesosac_device_', 'any'),
+                id=('_examplesosac_Device_', 'any'),
                 property='host')
         ])
 
@@ -162,12 +162,12 @@ class sosac_sensor(TestCase, SosaCClingo):
 
         self.facts = FactBase([
             terms.sosakc_makesObservation(
-                klass='_motionSensor_',
+                klass='motionSensor',
                 observation_klass='motion_ob'
             ),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='motion_sensor01',
-                klass='_motionSensor_'),
+                klass='motionSensor'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -222,13 +222,13 @@ class sosac_sensor(TestCase, SosaCClingo):
     def test_featureOfInterest_is_the_property_in_klass_featureOfInterest(self):
         facts = FactBase([
             terms.sosakc_makesObservation(
-                klass='_brokenWindowSensor_',
+                klass='brokenWindowSensor',
                 observation_klass='broken_ob'),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='window_sensor01',
-                klass='_brokenWindowSensor_'),
+                klass='brokenWindowSensor'),
             terms.sosakc_hasFeatureOfInterest(
-                id=('_brokenWindowSensor_', 'broken_ob'),
+                id=('brokenWindowSensor', 'broken_ob'),
                 property='host'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
@@ -264,7 +264,7 @@ class sosac_sensor(TestCase, SosaCClingo):
             terms.sosakc_makesObservation(
                 klass='_exampleSensor_',
                 observation_klass='any'),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='sensor01',
                 klass='_exampleSensor_'),
             terms.sosakc_hasFeatureOfInterest(
@@ -303,7 +303,7 @@ class sosac_sensor(TestCase, SosaCClingo):
             terms.sosakc_makesObservation(
                 klass='_exampleSensor_',
                 observation_klass='any'),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='sensor01',
                 klass='_exampleSensor_'),
             terms.sosakc_hasFeatureOfInterest(
@@ -366,12 +366,12 @@ class sosac_actuator(TestCase, SosaCClingo):
 
         self.facts = FactBase([
             terms.sosakc_makesActuation(
-                klass='_smartBulb_',
+                klass='smartLight',
                 actuation_klass='illuminate'
             ),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='smart_bulb01',
-                klass='_smartBulb_'),
+                klass='smartLight'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -428,7 +428,7 @@ class sosac_actuator(TestCase, SosaCClingo):
             terms.sosakc_makesActuation(
                 klass='_blindMotor_',
                 actuation_klass='open_ob'),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='bm_motor01',
                 klass='_blindMotor_'),
             terms.sosakc_hasFeatureOfInterest(
@@ -468,7 +468,7 @@ class sosac_actuator(TestCase, SosaCClingo):
             terms.sosakc_makesActuation(
                 klass='_exampleActuator_',
                 actuation_klass='any'),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='actuator01',
                 klass='_exampleActuator_'),
             terms.sosakc_hasFeatureOfInterest(
@@ -508,7 +508,7 @@ class sosac_actuator(TestCase, SosaCClingo):
             terms.sosakc_makesActuation(
                 klass='_exampleActuator_',
                 actuation_klass='any'),
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='actuator01',
                 klass='_exampleActuator_'),
             terms.sosakc_hasFeatureOfInterest(
@@ -570,9 +570,9 @@ class MotionSensor(TestCase, SosaCClingo):
         )
 
         facts = FactBase([
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='motion_sensor01',
-                klass='_motionSensor_'),
+                klass='motionSensor'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -742,9 +742,9 @@ class BrokenWindowSensor(TestCase, SosaCClingo):
         )
 
         facts = FactBase([
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='broken_window_sensor01',
-                klass='_brokenWindowSensor_'),
+                klass='brokenWindowSensor'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -898,9 +898,9 @@ class SmartBulb(TestCase, SosaCClingo):
         )
 
         facts = FactBase([
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='smart_bulb01',
-                klass='_smartBulb_'),
+                klass='smartLight'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -920,7 +920,7 @@ class SmartBulb(TestCase, SosaCClingo):
 
         self.assertEqual(len(query), 1)
 
-    def test_makesActuation_of_illuminate_and_notIlluminate_klasses(self):
+    def test_makesActuation_of_illuminate_and_not_illuminate_klasses(self):
         solution = self.get_solution()
 
         expected = [
@@ -934,7 +934,7 @@ class SmartBulb(TestCase, SosaCClingo):
                 actuator='smart_bulb01',
                 actuation=terms.ActID(
                     device='smart_bulb01',
-                    act='notIlluminate')
+                    act='not_illuminate')
                 ),
         ]
 
@@ -945,7 +945,7 @@ class SmartBulb(TestCase, SosaCClingo):
 
         self.assertEqual(expected, query)
 
-    def test_illuminate_and_notIlluminate_actuations_actsOnProperty_illuminated(self):
+    def test_illuminate_and_not_illuminate_actuations_actsOnProperty_illuminated(self):
         solution = self.get_solution()
 
         expected = [
@@ -957,7 +957,7 @@ class SmartBulb(TestCase, SosaCClingo):
             terms.sosac_actsOnProperty(
                 actuation=terms.ActID(
                     device='smart_bulb01',
-                    act='notIlluminate'),
+                    act='not_illuminate'),
                 actuatable_property='illuminated')
         ]
 
@@ -992,7 +992,7 @@ class SmartBulb(TestCase, SosaCClingo):
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 feature_of_interest='kitchen'),
             terms.sosac_hasFeatureOfInterest(
-                act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
+                act=terms.ActID(device='smart_bulb01', act='not_illuminate'),
                 feature_of_interest='kitchen')
         ]
 
@@ -1030,10 +1030,10 @@ class SmartBulb(TestCase, SosaCClingo):
                 act=terms.ActID(device='smart_bulb01', act='illuminate'),
                 result='true'),
             terms.sosac_hasResult(
-                act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
+                act=terms.ActID(device='smart_bulb01', act='not_illuminate'),
                 result='boolean'),
             terms.sosac_hasSimpleResult(
-                act=terms.ActID(device='smart_bulb01', act='notIlluminate'),
+                act=terms.ActID(device='smart_bulb01', act='not_illuminate'),
                 result='false'),
         ]
 
@@ -1054,9 +1054,9 @@ class AlarmSiren(TestCase, SosaCClingo):
         )
 
         facts = FactBase([
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='alarm_siren01',
-                klass='_alarmSiren_'),
+                klass='alarmSiren'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -1076,7 +1076,7 @@ class AlarmSiren(TestCase, SosaCClingo):
 
         self.assertEqual(len(query), 1)
 
-    def test_makesActuation_of_the_warnOfDanger_klass(self):
+    def test_makesActuation_of_the_warn_of_danger_klass(self):
         solution = self.get_solution()
 
         expected = [
@@ -1084,7 +1084,7 @@ class AlarmSiren(TestCase, SosaCClingo):
                 actuator='alarm_siren01',
                 actuation=terms.ActID(
                     device='alarm_siren01',
-                    act='warnOfDanger')
+                    act='warn_of_danger')
                 )
         ]
 
@@ -1095,14 +1095,14 @@ class AlarmSiren(TestCase, SosaCClingo):
 
         self.assertEqual(expected, query)
 
-    def test_warnOfDanger_actuation_actsOnProperty_in_alert(self):
+    def test_warn_of_danger_actuation_actsOnProperty_in_alert(self):
         solution = self.get_solution()
 
         expected = [
             terms.sosac_actsOnProperty(
                 actuation=terms.ActID(
                     device='alarm_siren01',
-                    act='warnOfDanger'),
+                    act='warn_of_danger'),
                 actuatable_property='in_alert')
         ]
 
@@ -1134,7 +1134,7 @@ class AlarmSiren(TestCase, SosaCClingo):
 
         expected = [
             terms.sosac_hasFeatureOfInterest(
-                act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
+                act=terms.ActID(device='alarm_siren01', act='warn_of_danger'),
                 feature_of_interest='home')
         ]
 
@@ -1161,15 +1161,15 @@ class AlarmSiren(TestCase, SosaCClingo):
 
         self.assertCountEqual(expected, query)
 
-    def test_warnOfDanger_actuation_hasResult_boolean_true(self):
+    def test_warn_of_danger_actuation_hasResult_boolean_true(self):
         solution = self.get_solution()
 
         expected = [
             terms.sosac_hasResult(
-                act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
+                act=terms.ActID(device='alarm_siren01', act='warn_of_danger'),
                 result='boolean'),
             terms.sosac_hasSimpleResult(
-                act=terms.ActID(device='alarm_siren01', act='warnOfDanger'),
+                act=terms.ActID(device='alarm_siren01', act='warn_of_danger'),
                 result='true')
         ]
 
@@ -1190,9 +1190,9 @@ class DoorSensor(TestCase, SosaCClingo):
         )
 
         facts = FactBase([
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='door_sensor01',
-                klass='_doorSensor_'),
+                klass='doorSensor'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -1366,9 +1366,9 @@ class LightSensor(TestCase, SosaCClingo):
         )
 
         facts = FactBase([
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='light_sensor01',
-                klass='_lightSensor_'),
+                klass='lightSensor'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',
@@ -1515,9 +1515,9 @@ class TemperatureSensor(TestCase, SosaCClingo):
         )
 
         facts = FactBase([
-            terms.sosac_device(
+            terms.sosac_Device(
                 id='temp_sensor01',
-                klass='_temperatureSensor_'),
+                klass='temperatureSensor'),
             terms.x_is_the_y_of_z(
                 value='kitchen',
                 property='location',

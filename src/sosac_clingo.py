@@ -8,7 +8,7 @@ import sosac_terms as terms
 class SosaCClingo:
     def clingo_setup(self, *files):
         self.ctrl = Control(unifier=[
-            terms.sosac_device,
+            terms.sosac_Device,
             terms.x_is_the_y_of_z,
             terms.x_is_the_interest_of_z,
 

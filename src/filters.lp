@@ -1,4 +1,4 @@
-#show sosac_device/2.
+#show sosac_Device/2.
 #show bot_containsElement/2.
 #show bot_hasSubElement/2.
 #show sosac_hasFeatureOfInterest/2.

@@ -9,16 +9,16 @@ from sosac_clingo import SosaCClingo
 import sosac_terms as terms
 
 KB_NAMES = [
-    '_motionSensor_',
-    '_brokenWindowSensor_',
-    '_smartBulb_',
-    '_alarmSiren_'
+    'motionSensor',
+    'brokenWindowSensor',
+    'smartLight',
+    'alarmSiren'
 ]
 
 EVAL_SCENARIOS_DIR = 'eval_scenarios'
 NUM_DEVICES = len(KB_NAMES)
 DEVICES_WITH_HOST = [
-    '_brokenWindowSensor_'
+    'brokenWindowSensor'
 ]
 
 
@@ -88,7 +88,7 @@ class Evaluation(SosaCClingo):
             for klass in KB_NAMES:
                 instance = klass.replace('_', '')
                 self.current_scenario.extend([
-                    terms.sosac_device(
+                    terms.sosac_Device(
                         id=f'{instance}_{i}',
                         klass=klass),
                     terms.x_is_the_y_of_z(

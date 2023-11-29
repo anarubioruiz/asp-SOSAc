@@ -1,5 +1,8 @@
-sosakc_makesActuation(_smartBulb_, illuminate).
-sosakc_makesActuation(_smartBulb_, notIlluminate).
+sosakc_makesActuation(smartLight, illuminate).
+sosakc_makesActuation(smartLight, not_illuminate).
 
-sosakc_makesActuation(_alarmSiren_, warnOfDanger).
-sosakc_hasFeatureOfInterest((_alarmSiren_, warnOfDanger), home).
+sosakc_makesActuation(windowCover, open_cover).
+sosakc_makesActuation(windowCover, close_cover).
+
+sosakc_makesActuation(alarmSiren, warn_of_danger).
+sosakc_hasFeatureOfInterest((alarmSiren, warn_of_danger), home).

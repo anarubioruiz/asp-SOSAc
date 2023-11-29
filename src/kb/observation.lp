@@ -13,6 +13,21 @@ sosakc_hasSimpleResult(not_motion_ob, "false").
 sosakc_observesProperty(SENSOR_KLASS, motion)
     :- sosakc_makesObservation(SENSOR_KLASS, not_motion_ob).
 
+% ---- OCCUPANCY
+sosakc_observation(occupied_ob).
+sosakc_hasResult(occupied_ob, "boolean").
+sosakc_hasSimpleResult(occupied_ob, "true").
+
+sosakc_observesProperty(SENSOR_KLASS, occupancy)
+    :- sosakc_makesObservation(SENSOR_KLASS, occupied_ob).
+
+sosakc_observation(not_occupancy_ob).
+sosakc_hasResult(not_occupancy_ob, "boolean").
+sosakc_hasSimpleResult(not_occupancy_ob, "false").
+
+sosakc_observesProperty(SENSOR_KLASS, occupancy)
+    :- sosakc_makesObservation(SENSOR_KLASS, not_occupancy_ob).
+
 % ---- SOMETHING IS BROKEN
 sosakc_observation(broken_ob).
 sosakc_hasResult(broken_ob, "boolean").
